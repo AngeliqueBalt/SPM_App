@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/Screens/Teacher/Teacher_Home_Screen.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_students_list_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_profile_screen.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -16,14 +16,15 @@ class NavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const UserAccountsDrawerHeader(
-            accountName: Text("Teacher Name"),
-            accountEmail: Text("teacher@email.com"),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Text(
-                "T",
-                style: TextStyle(fontSize: 40.0),
+            accountName: Text(
+              "Teacher Name",
+              style: TextStyle(
+                fontSize: 25,
               ),
+            ),
+            accountEmail: Text(
+              "teacher@email.com",
+              style: TextStyle(fontSize: 15),
             ),
             decoration: BoxDecoration(
               color: Color(0xFF99C24D),
@@ -41,12 +42,12 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.quiz),
-            title: const Text("Manage Quizzes"),
+            leading: const Icon(Icons.person),
+            title: const Text("Profile"),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const TeacherQuizScreen(),
+                  builder: (context) => const TeacherProfileScreen(),
                 ),
               );
             },
@@ -54,13 +55,7 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text("Logout"),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const LogInScreen(),
-                ),
-              );
-            },
+            onTap: () => context.go('/'),
           )
         ],
       ),

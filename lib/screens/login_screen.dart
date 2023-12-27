@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/Screens/Teacher/Teacher_Home_Screen.dart';
 
-class LogInScreen extends StatelessWidget {
+class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
 
+  @override
+  State<LogInScreen> createState() => _LogInScreenState();
+}
+
+class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +55,7 @@ class LogInScreen extends StatelessWidget {
                     ),
                     prefixIcon:
                         const Icon(Icons.person_outline, color: Colors.grey),
-                    hintText: "Username",
+                    hintText: "Email",
                     hintStyle: const TextStyle(color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey.withOpacity(0.2),
@@ -78,29 +84,22 @@ class LogInScreen extends StatelessWidget {
                 const SizedBox(height: 30),
 
                 // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Forgot Password?",
-                          style: TextStyle(color: Colors.grey[700])),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       Text("Forgot Password?",
+                //           style: TextStyle(color: Colors.grey[700])),
+                //     ],
+                //   ),
+                // ),
 
                 const SizedBox(height: 30),
 
                 // Log in button
                 GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const TeacherHomeScreen(),
-                      ),
-                      (Route route) => false,
-                    );
-                  },
+                  onTap: () => context.go('/dashboard'),
                   child: Container(
                     padding: const EdgeInsets.all(25),
                     margin: const EdgeInsets.symmetric(horizontal: 25),

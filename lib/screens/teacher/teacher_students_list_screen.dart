@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 
 // Teachers can view a list of all the students in a class

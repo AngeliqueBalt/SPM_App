@@ -10,13 +10,18 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_students_li
 // Teachers can view an summary/average progress of whole class over all quizzes
 
 class TeacherClassScreen extends StatelessWidget {
-  const TeacherClassScreen({Key? key}) : super(key: key);
+  final String name;
+
+  const TeacherClassScreen({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Class ..."),
+        title: Text(name),
         backgroundColor: const Color(0xFF99C24D),
         elevation: 0,
         toolbarHeight: 50,
