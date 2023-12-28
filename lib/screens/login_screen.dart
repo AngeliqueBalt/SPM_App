@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_progress_monitor_app/Screens/Teacher/Teacher_Home_Screen.dart';
+import 'package:student_progress_monitor_app/Screens//home_screen.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});

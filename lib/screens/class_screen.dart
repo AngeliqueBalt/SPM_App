@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_students_list_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
 // Teachers can view details about each individual class
 // Teachers can view the students in the class
@@ -9,10 +9,10 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_students_li
 // Teachers can view the quiz history for the class
 // Teachers can view an summary/average progress of whole class over all quizzes
 
-class TeacherClassScreen extends StatelessWidget {
+class ClassScreen extends StatelessWidget {
   final String name;
 
-  const TeacherClassScreen({
+  const ClassScreen({
     Key? key,
     required this.name,
   }) : super(key: key);
@@ -37,7 +37,7 @@ class TeacherClassScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const TeacherStudentListScreen(),
+                      builder: (context) => const StudentListScreen(),
                     ),
                   );
                 },
@@ -49,7 +49,7 @@ class TeacherClassScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const TeacherQuizScreen(),
+                      builder: (context) => const ManageQuizScreen(),
                     ),
                   );
                 },

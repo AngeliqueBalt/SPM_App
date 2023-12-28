@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class TeacherAddNewQuizScreen extends StatefulWidget {
-  const TeacherAddNewQuizScreen({super.key});
+class NewQuizScreen extends StatefulWidget {
+  const NewQuizScreen({super.key});
 
   @override
-  State<TeacherAddNewQuizScreen> createState() =>
-      _TeacherAddNewQuizScreenState();
+  State<NewQuizScreen> createState() => _NewQuizScreenState();
 }
 
-class _TeacherAddNewQuizScreenState extends State<TeacherAddNewQuizScreen> {
+class _NewQuizScreenState extends State<NewQuizScreen> {
   bool btnPressed = false;
   PageController? _controller;
 
+  @override
   void initState() {
     super.initState();
     _controller = PageController(initialPage: 0);

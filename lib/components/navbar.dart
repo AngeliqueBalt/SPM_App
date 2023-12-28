@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_progress_monitor_app/Screens/Teacher/Teacher_Home_Screen.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_profile_screen.dart';
+import 'package:student_progress_monitor_app/screens/home_screen.dart';
+import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -17,13 +17,13 @@ class NavBar extends StatelessWidget {
         children: [
           const UserAccountsDrawerHeader(
             accountName: Text(
-              "Teacher Name",
+              "Name",
               style: TextStyle(
                 fontSize: 25,
               ),
             ),
             accountEmail: Text(
-              "teacher@email.com",
+              "email@school.com",
               style: TextStyle(fontSize: 15),
             ),
             decoration: BoxDecoration(
@@ -36,7 +36,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const TeacherHomeScreen(),
+                  builder: (context) => const HomeScreen(),
                 ),
               );
             },
@@ -47,7 +47,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const TeacherProfileScreen(),
+                  builder: (context) => const ProfileScreen(),
                 ),
               );
             },

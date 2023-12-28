@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 // Teachers can view a list of all the students in a class
 // Teachers can edit the details of a student
@@ -17,8 +18,8 @@ const List _students = [
   'Student H'
 ];
 
-class TeacherStudentListScreen extends StatelessWidget {
-  const TeacherStudentListScreen({super.key});
+class StudentListScreen extends StatelessWidget {
+  const StudentListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +64,41 @@ class TeacherStudentListScreen extends StatelessWidget {
                       label: theClass,
                       color: const Color(0xFF99C24D),
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            // TODO: Create Student Details View
-                            builder: (context) =>
-                                const TeacherStudentListScreen(),
-                          ),
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SizedBox(
+                              height: 300,
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    const Text('Student Profile',
+                                        style: TextStyle(fontSize: 25)),
+                                    const SizedBox(height: 20),
+                                    Text("Full Name: $theClass",
+                                        style: const TextStyle(fontSize: 20)),
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      "Email: email@school",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      "ID Number: 123456789",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    ElevatedButton(
+                                      child: const Text('Close'),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
