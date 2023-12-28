@@ -9,10 +9,10 @@ import 'package:student_progress_monitor_app/screens/teacher/students_list_scree
 // Teachers can view the quiz history for the class
 // Teachers can view an summary/average progress of whole class over all quizzes
 
-class ClassScreen extends StatelessWidget {
+class TeacherClassScreen extends StatelessWidget {
   final String name;
 
-  const ClassScreen({
+  const TeacherClassScreen({
     Key? key,
     required this.name,
   }) : super(key: key);
@@ -21,7 +21,12 @@ class ClassScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(
+          name,
+          style: const TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+        ),
         backgroundColor: const Color(0xFF99C24D),
         elevation: 0,
         toolbarHeight: 50,

@@ -4,7 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/partials/ClassCard.dart';
-import 'package:student_progress_monitor_app/screens/class_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 
 // Opening page of the app for the teachers view
 // They can see a list of the classes they have on that day and a list of all

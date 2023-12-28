@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
-import 'package:student_progress_monitor_app/screens/class_screen.dart';
+import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 
 // TODO: link with Riverpod provider to know when the user is authenticated
 const bool isAuthenticated = true;
+
+const bool isTeacher = false;
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -28,7 +31,11 @@ final GoRouter router = GoRouter(
           path: 'class/:classId',
           builder: (BuildContext context, GoRouterState state) {
             print(state.pathParameters['classId']);
-            return ClassScreen(name: state.pathParameters['classId']!);
+            if (isTeacher) {
+              return TeacherClassScreen(name: state.pathParameters['classId']!);
+            } else {
+              return StudentClassScreen(name: state.pathParameters['classId']!);
+            }
           },
         ),
       ],
