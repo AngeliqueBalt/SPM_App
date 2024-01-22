@@ -10,7 +10,7 @@ import 'package:student_progress_monitor_app/screens/home_screen.dart';
 // TODO: link with Riverpod provider to know when the user is authenticated
 bool isAuthenticated = true;
 
-const bool isTeacher = false;
+const bool isTeacher = true;
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[

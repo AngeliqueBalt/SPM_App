@@ -9,13 +9,17 @@ class NewQuizScreen extends StatefulWidget {
 
 class _NewQuizScreenState extends State<NewQuizScreen> {
   bool btnPressed = false;
-  PageController? _controller;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = PageController(initialPage: 0);
-  }
+  // PageController? _controller;
+
+  bool isPressed = false;
+  final PageController _controller = PageController(initialPage: 0);
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _controller = PageController(initialPage: 0);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,13 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _controller,
+            onPageChanged: (page) {
+              setState(() {
+                isPressed = false;
+              });
+            },
             itemCount: 10,
             itemBuilder: (context, index) {
               return Column(
