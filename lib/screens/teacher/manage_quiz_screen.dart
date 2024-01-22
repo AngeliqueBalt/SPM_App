@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/screens/teacher/new_quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_previous_quizzes_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
 
 // Teachers can make quizzes and assign them to a class(es)
 // Teachers can see all previous quizzes they have made
@@ -42,8 +42,7 @@ class ManageQuizScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const TeacherPreviousQuizzesScreen(),
+                      builder: (context) => const TeacherAllQuizzesScreen(),
                     ),
                   );
                 },

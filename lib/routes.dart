@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
+import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
+import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 
 // TODO: link with Riverpod provider to know when the user is authenticated
-const bool isAuthenticated = true;
+bool isAuthenticated = true;
 
 const bool isTeacher = false;
 
@@ -40,7 +42,17 @@ final GoRouter router = GoRouter(
         ),
       ],
     ),
+
+    // Previous Quizzes
+    GoRoute(
+      path: '/previous-quizzes',
+      builder: (BuildContext context, GoRouterState state) {
+        return const AllQuizzesScreen();
+      },
+    ),
   ],
+
+  // Authentication
   redirect: (context, routerState) {
     bool requiresAuth = routerState.fullPath! != '/login';
 

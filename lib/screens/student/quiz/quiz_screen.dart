@@ -133,8 +133,9 @@ class _QuizScreenState extends State<QuizScreen> {
                                 : () {
                                     _controller.nextPage(
                                         duration:
-                                            const Duration(milliseconds: 500),
+                                            const Duration(milliseconds: 600),
                                         curve: Curves.ease);
+                                    isPressed = false;
                                   }
                             : null,
                         style: ButtonStyle(

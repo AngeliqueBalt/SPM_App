@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
@@ -52,7 +53,13 @@ class StudentClassScreen extends StatelessWidget {
               OptionCard(
                 label: "View All Quizzes",
                 color: const Color(0xFF99C24D),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AllQuizzesScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

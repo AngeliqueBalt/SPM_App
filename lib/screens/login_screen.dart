@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/Screens//home_screen.dart';
 
+import '../routes.dart';
+
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
 
@@ -99,7 +101,13 @@ class _LogInScreenState extends State<LogInScreen> {
 
                 // Log in button
                 GestureDetector(
-                  onTap: () => context.go('/dashboard'),
+                  onTap: () => {
+                    // TODO: Make it that when pressed isAuthenicated is set to true
+                    context.go('/dashboard'),
+                    // setState(() {
+                    //   isAuthenticated == true;
+                    // }),
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(25),
                     margin: const EdgeInsets.symmetric(horizontal: 25),

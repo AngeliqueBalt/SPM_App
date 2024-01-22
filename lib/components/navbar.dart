@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/routes.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
-class NavBar extends StatelessWidget {
+class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
-  // Would pull teacher name and email from server
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
 
+class _NavBarState extends State<NavBar> {
+  // Would pull teacher name and email from server
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -55,7 +60,13 @@ class NavBar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text("Logout"),
-            onTap: () => context.go('/'),
+            onTap: () => {
+              // TODO: Make it that when pressed isAuthenicated is set to false
+              // setState(() {
+              //   isAuthenticated == false;
+              // }),
+              context.go('/'),
+            },
           )
         ],
       ),

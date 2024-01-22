@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/screens/student/previous_quizzes_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 
 class ResultScreen extends StatefulWidget {
   final int score;
+
   const ResultScreen({required this.score, super.key});
 
   @override
@@ -45,15 +47,9 @@ class _ResultScreenState extends State<ResultScreen> {
                     color: Colors.white),
               ),
               const SizedBox(height: 60),
-              // TODO: Make this button route to the home screen
               OutlinedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PreviousQuizzesScreen(),
-                    ),
-                  );
+                  context.pushReplacement('/previous-quizzes');
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
