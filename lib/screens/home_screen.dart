@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 // import 'package:student_progress_monitor_app/Screens/Teacher/teacher_classes_screen.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/partials/ClassCard.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 
-// Opening page of the app for the teachers view
-// They can see a list of the classes they have on that day and a list of all
-// the classes they teach.
+/// Opening page/dashboard for both teachers and students.
+/// View of classes for the day and all classes.
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-// List of classes will be pulled from server
+  // TODO: list of classes will be pulled from database
   final List _classes = const [
     'Class A',
     'Class B',

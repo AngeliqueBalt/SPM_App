@@ -4,6 +4,9 @@ import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 
+/// Students can view the result from the quiz they have just taken.
+/// Students can then return to the list of all previous quizzes they have taken.
+
 class ResultScreen extends StatefulWidget {
   final int score;
 
@@ -47,6 +50,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     color: Colors.white),
               ),
               const SizedBox(height: 60),
+              // redirects to the list of all quizzes
               OutlinedButton(
                 onPressed: () {
                   context.pushReplacement('/all-quizzes');

@@ -3,11 +3,9 @@ import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
-// Teachers can view details about each individual class
-// Teachers can view the students in the class
-// Teachers can assign a new quiz for the class
-// Teachers can view the quiz history for the class
-// Teachers can view an summary/average progress of whole class over all quizzes
+/// This screen is shown when a teacher selects a class from the home screen.
+/// Teachers can view the list of students in the selected class.
+/// Teachers can manage quizzes for the selected class.
 
 class TeacherClassScreen extends StatelessWidget {
   final String name;

@@ -5,6 +5,9 @@ import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
+/// The navigation bar that appears on the left side of the screen.
+/// It contains the user's name, email, and a list of options to navigate to.
+
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
@@ -13,7 +16,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  // Would pull teacher name and email from server
+  // TODO: pull name and email from database
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,6 +24,7 @@ class _NavBarState extends State<NavBar> {
         padding: EdgeInsets.zero,
         children: [
           const UserAccountsDrawerHeader(
+            // TODO: get name from database
             accountName: Text(
               "Name",
               style: TextStyle(
@@ -28,6 +32,7 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             accountEmail: Text(
+              // TODO: get email from database
               "email@school.com",
               style: TextStyle(fontSize: 15),
             ),

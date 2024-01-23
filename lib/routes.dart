@@ -5,13 +5,15 @@ import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 
-// TODO: link with Riverpod provider to know when the user is authenticated
-bool isAuthenticated = true;
+// TODO: make authentication work
+// TODO: make isTeacher work
 
-const bool isTeacher = true;
+bool isAuthenticated = true;
+const bool isTeacher = false;
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/data/questions.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.dart';
 
+/// The most recent quiz assigned to the student.
+/// Students answer questions and are given a score at the end.
+
 // TODO: Score should be saved to the database
 // TODO: Quiz should be saved to the database so that can later be retrieved again
 
@@ -118,6 +121,8 @@ class _QuizScreenState extends State<QuizScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      // goes to next question
+                      // once reaches the end, redirects to result screen
                       OutlinedButton(
                         onPressed: isPressed
                             ? index + 1 == questions.length

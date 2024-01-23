@@ -11,6 +11,10 @@ import 'package:student_progress_monitor_app/screens/teacher/students_list_scree
 // Teachers can view the quiz history for the class
 // Teachers can view an summary/average progress of whole class over all quizzes
 
+/// Students can view each of their classes.
+/// Students can take a quiz that has been assigned to them.
+/// Students can view all previous quizzes they have taken.
+///
 class StudentClassScreen extends StatelessWidget {
   final String name;
 

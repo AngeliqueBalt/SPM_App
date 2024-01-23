@@ -15,8 +15,9 @@ class QuizCard extends StatelessWidget {
     return OptionCard(
       label: name,
       color: const Color(0xFF99C24D),
-      onTap: () => {print(name)},
-      // onTap: () => context.go('/quiz/$name'),
+      // onTap: () => context.go('/overview-quizzes'),
+      // TODO: add routing to view quiz and quiz results summary
+      onTap: () {},
     );
   }
 }

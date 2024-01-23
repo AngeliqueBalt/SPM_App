@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Allows the user to view their profile details.
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -34,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ListView(
               children: [
                 const SizedBox(height: 30),
-                // TODO: Would get the details from the database
+                // TODO: get the details from the database
                 buildTextField("Full Name", "full name", false),
                 const SizedBox(height: 20),
                 buildTextField("Email", "email@school.com", false),

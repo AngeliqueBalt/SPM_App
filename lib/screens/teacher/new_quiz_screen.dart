@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
 
+/// A form to create a new quiz.
+/// Teachers can fill into the form to create a new quiz, giving the question and answer options and mark the correct answer.
+/// After creating the quiz, the teacher can view the quiz overview screen to see the quiz they just created and save the quiz.
+
 class NewQuizScreen extends StatefulWidget {
   const NewQuizScreen({super.key});
 

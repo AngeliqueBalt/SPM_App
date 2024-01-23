@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
-// Teachers can view a list of all the students in a class
-// Teachers can edit the details of a student
-// Teachers can add or remove students from the class list
+/// Teachers can view a list of all the students in each class.
+/// Each students details can be viewed individually.
 
-// List of students will be pulled from server
+// TODO: list of classes will be pulled from database
 const List _students = [
   'Student A',
   'Student B',
@@ -59,9 +58,11 @@ class StudentListScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  for (var theClass in _students) ...[
+                  // Repeated for each student in the class
+                  // TODO: list of students will be pulled from database
+                  for (var theStudents in _students) ...[
                     OptionCard(
-                      label: theClass,
+                      label: theStudents,
                       color: const Color(0xFF99C24D),
                       onTap: () {
                         showModalBottomSheet(
@@ -77,7 +78,7 @@ class StudentListScreen extends StatelessWidget {
                                     const Text('Student Profile',
                                         style: TextStyle(fontSize: 25)),
                                     const SizedBox(height: 20),
-                                    Text("Full Name: $theClass",
+                                    Text("Full Name: $theStudents",
                                         style: const TextStyle(fontSize: 20)),
                                     const SizedBox(height: 20),
                                     const Text(

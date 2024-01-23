@@ -3,6 +3,10 @@ import 'package:student_progress_monitor_app/partials/QuizCard.dart';
 
 import '../../partials/ClassCard.dart';
 
+/// Students can view each of the previous quizzes they have taken.
+/// They can see the score they got on each quiz.
+/// They can see the questions and answers and with the answers.
+
 class AllQuizzesScreen extends StatefulWidget {
   const AllQuizzesScreen({super.key});
 
@@ -11,7 +15,7 @@ class AllQuizzesScreen extends StatefulWidget {
 }
 
 class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
-  // List of previous quizzes will be pulled from server
+  // TODO: list of quizzes will be pulled from database
   final List _quizzes = const [
     'Quiz A',
     'Quiz B',
