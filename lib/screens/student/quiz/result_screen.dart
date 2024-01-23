@@ -49,7 +49,7 @@ class _ResultScreenState extends State<ResultScreen> {
               const SizedBox(height: 60),
               OutlinedButton(
                 onPressed: () {
-                  context.pushReplacement('/previous-quizzes');
+                  context.pushReplacement('/all-quizzes');
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(

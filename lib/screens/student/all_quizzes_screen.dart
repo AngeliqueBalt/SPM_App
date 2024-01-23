@@ -40,21 +40,6 @@ class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 30),
-                  Container(
-                    color: const Color(0xFF99C24D),
-                    height: 30,
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "All Classes",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
                   const SizedBox(height: 20),
                   for (var theClass in _quizzes) ...[
                     QuizCard(name: theClass),

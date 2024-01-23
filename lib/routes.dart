@@ -4,6 +4,7 @@ import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 
@@ -45,9 +46,16 @@ final GoRouter router = GoRouter(
 
     // Previous Quizzes
     GoRoute(
-      path: '/previous-quizzes',
+      path: '/all-quizzes',
       builder: (BuildContext context, GoRouterState state) {
         return const AllQuizzesScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/manage-quizzes',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ManageQuizScreen();
       },
     ),
   ],

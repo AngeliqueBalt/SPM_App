@@ -37,6 +37,13 @@ class ManageQuizScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               OptionCard(
+                label: "View Current Quiz",
+                color: const Color(0xFF99C24D),
+                // TODO: when pressed, shows current quiz/quiz that was just added
+                onTap: () {},
+              ),
+              const SizedBox(height: 20),
+              OptionCard(
                 label: "View Previous Quizzes",
                 color: const Color(0xFF99C24D),
                 onTap: () {
