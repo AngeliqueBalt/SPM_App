@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
+import 'package:student_progress_monitor_app/screens/student/quiz_summary_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
@@ -13,7 +14,7 @@ import 'package:student_progress_monitor_app/screens/home_screen.dart';
 // TODO: make isTeacher work
 
 bool isAuthenticated = true;
-const bool isTeacher = false;
+const bool isTeacher = true;
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -41,6 +42,23 @@ final GoRouter router = GoRouter(
             } else {
               return StudentClassScreen(name: state.pathParameters['classId']!);
             }
+          },
+        ),
+      ],
+    ),
+
+    // Quiz Summary
+    GoRoute(
+      path: '/all-quizzes',
+      builder: (BuildContext context, GoRouterState state) {
+        return const AllQuizzesScreen();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'quiz/:quizId',
+          builder: (context, state) {
+            print(state.pathParameters['quizId']);
+            return QuizSummaryScreen(name: state.pathParameters['quizId']!);
           },
         ),
       ],

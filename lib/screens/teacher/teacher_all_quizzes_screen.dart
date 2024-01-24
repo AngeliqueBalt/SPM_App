@@ -26,7 +26,7 @@ class _TeacherAllQuizzesScreenState extends State<TeacherAllQuizzesScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "All Previous Quizzes",
+          "Quiz History",
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),

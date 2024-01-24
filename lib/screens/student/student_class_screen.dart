@@ -5,12 +5,6 @@ import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.da
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
-// Teachers can view details about each individual class
-// Teachers can view the students in the class
-// Teachers can assign a new quiz for the class
-// Teachers can view the quiz history for the class
-// Teachers can view an summary/average progress of whole class over all quizzes
-
 /// Students can view each of their classes.
 /// Students can take a quiz that has been assigned to them.
 /// Students can view all previous quizzes they have taken.
@@ -55,7 +49,7 @@ class StudentClassScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               OptionCard(
-                label: "View All Quizzes",
+                label: "Quiz History",
                 color: const Color(0xFF99C24D),
                 onTap: () {
                   Navigator.of(context).push(

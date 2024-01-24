@@ -28,7 +28,7 @@ class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "All Previous Quizzes",
+          "Quiz History",
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
@@ -45,8 +45,8 @@ class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  for (var theClass in _quizzes) ...[
-                    QuizCard(name: theClass),
+                  for (var theQuiz in _quizzes) ...[
+                    QuizCard(name: theQuiz),
                     const SizedBox(height: 20),
                   ],
                 ],
