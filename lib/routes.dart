@@ -7,14 +7,16 @@ import 'package:student_progress_monitor_app/screens/student/quiz_summary_screen
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summary_screen.dart';
 
 // TODO: make authentication work
 // TODO: make isTeacher work
 
 bool isAuthenticated = true;
-const bool isTeacher = true;
+bool isTeacher = true;
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -36,7 +38,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'class/:classId',
           builder: (BuildContext context, GoRouterState state) {
-            print(state.pathParameters['classId']);
+            // print(state.pathParameters['classId']);
             if (isTeacher) {
               return TeacherClassScreen(name: state.pathParameters['classId']!);
             } else {
@@ -51,14 +53,22 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/all-quizzes',
       builder: (BuildContext context, GoRouterState state) {
-        return const AllQuizzesScreen();
+        if (isTeacher) {
+          return const TeacherAllQuizzesScreen();
+        } else {
+          return const AllQuizzesScreen();
+        }
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'quiz/:quizId',
-          builder: (context, state) {
-            print(state.pathParameters['quizId']);
-            return QuizSummaryScreen(name: state.pathParameters['quizId']!);
+          builder: (BuildContext context, GoRouterState state) {
+            if (isTeacher) {
+              return TeacherQuizSummaryScreen(
+                  name: state.pathParameters['quizId']!);
+            } else {
+              return QuizSummaryScreen(name: state.pathParameters['quizId']!);
+            }
           },
         ),
       ],
@@ -68,7 +78,11 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/all-quizzes',
       builder: (BuildContext context, GoRouterState state) {
-        return const AllQuizzesScreen();
+        if (isTeacher) {
+          return const TeacherAllQuizzesScreen();
+        } else {
+          return const AllQuizzesScreen();
+        }
       },
     ),
 

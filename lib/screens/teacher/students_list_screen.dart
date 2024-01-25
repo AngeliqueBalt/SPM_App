@@ -43,67 +43,40 @@ class StudentListScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  Container(
-                    color: const Color(0xFF99C24D),
-                    height: 30,
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "All Students",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
                   // Repeated for each student in the class
                   // TODO: list of students will be pulled from database
                   for (var theStudents in _students) ...[
-                    OptionCard(
-                      label: theStudents,
-                      color: const Color(0xFF99C24D),
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SizedBox(
-                              height: 300,
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    const Text('Student Profile',
-                                        style: TextStyle(fontSize: 25)),
-                                    const SizedBox(height: 20),
-                                    Text("Full Name: $theStudents",
-                                        style: const TextStyle(fontSize: 20)),
-                                    const SizedBox(height: 20),
-                                    const Text(
-                                      "Email: email@school",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    const Text(
-                                      "ID Number: 123456789",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    ElevatedButton(
-                                      child: const Text('Close'),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      },
+                    const Divider(
+                      color: Colors.grey,
+                      height: 0,
+                      thickness: 1,
+                      indent: 20,
+                      endIndent: 20,
                     ),
-                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const SizedBox(height: 15),
+                          Text(
+                            "Full Name: $theStudents",
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            "Email: email@school",
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            "ID Number: 123456789",
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          const SizedBox(height: 15),
+                        ],
+                      ),
+                    ),
                   ],
                 ],
               ),
