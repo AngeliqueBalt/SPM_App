@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_progress_monitor_app/partials/DisplayQuizQuestions.dart';
 
 import '../../components/score_chart.dart';
 
@@ -67,7 +68,8 @@ class CurrentQuizScreen extends StatelessWidget {
                     ),
                   ),
                   // TODO: get the quiz questions and answers from the database to be displayed for each quiz
-                  // TODO: get info from quiz overview screen?
+                  const SizedBox(height: 20),
+                  DisplayQuizQuestions(),
                 ],
               ),
             ],

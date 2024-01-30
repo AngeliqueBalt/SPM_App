@@ -11,6 +11,10 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isObscurePassword = true;
+  String fullName = "Name";
+  String email = "abcd@abcd";
+  String password = "abcdefg";
+  String idNumber = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +41,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 const SizedBox(height: 30),
                 // TODO: get the details from the database
-                buildTextField("Full Name", "full name", false),
+                // buildTextField("Full Name", "full name", false),
+                // const SizedBox(height: 20),
+                // buildTextField("Email", "email@school.com", false),
+                // const SizedBox(height: 20),
+                // buildTextField("Password", "********", true),
+                // const SizedBox(height: 20),
+                // buildTextField("ID number", "ID number", false),
+                buildTextField("Full Name", fullName, false),
                 const SizedBox(height: 20),
-                buildTextField("Email", "email@school.com", false),
+                buildTextField("Email", email, false),
                 const SizedBox(height: 20),
-                buildTextField("Password", "********", true),
+                buildTextField("Password", password, true),
                 const SizedBox(height: 20),
-                buildTextField("ID number", "ID number", false),
+                buildTextField("ID number", idNumber, false),
               ],
             ),
           ),

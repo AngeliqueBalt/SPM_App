@@ -95,14 +95,14 @@ List<QuestionModel> questions = [
         "DOC": false,
       }),
   QuestionModel(
-      "Which of the following is a progrmming language?",
+      "Which of the following is a programming language?",
       {
         "JPEG": false,
         "GIF": false,
         "Python": true,
         "PNG": false,
       },
-      question: 'Which of the following is a progrmming language?',
+      question: 'Which of the following is a programming language?',
       answers: {
         "JPEG": false,
         "GIF": false,

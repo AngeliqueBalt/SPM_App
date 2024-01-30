@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/score_chart.dart';
+import 'package:student_progress_monitor_app/partials/DisplayQuizQuestions.dart';
 
 class TeacherQuizSummaryScreen extends StatefulWidget {
   final String name;
@@ -75,8 +76,9 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                   // TODO: get the quiz questions and answers from the database to be displayed for each quiz
-                  // TODO: get info from quiz overview screen?
+                  DisplayQuizQuestions(),
                 ],
               ),
             ],
