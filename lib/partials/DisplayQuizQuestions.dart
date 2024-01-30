@@ -25,7 +25,7 @@ class DisplayQuizQuestions extends StatelessWidget {
             child: Flex(direction: Axis.horizontal, children: [
               Expanded(
                 child: SizedBox(
-                  height: 500,
+                  height: 750,
                   child: ListView.builder(
                     itemCount: questions.length,
                     itemBuilder: (context, index) {
@@ -47,8 +47,12 @@ class DisplayQuizQuestions extends StatelessWidget {
                           for (int i = 0; i < questions[i].answers.length; i++)
                             Text(
                               questions[index].answers.keys.elementAt(i),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 15,
+                                color:
+                                    questions[index].answers.values.elementAt(i)
+                                        ? Colors.green
+                                        : Colors.black,
                               ),
                             ),
                           const Divider(

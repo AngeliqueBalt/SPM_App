@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
-import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz_summary_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
@@ -16,7 +14,7 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summar
 // TODO: make isTeacher work
 
 bool isAuthenticated = true;
-bool isTeacher = true;
+bool isTeacher = false;
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
