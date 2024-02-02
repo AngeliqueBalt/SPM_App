@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/models/class_model.dart';
 
 class ClassCard extends StatelessWidget {
-  final String name;
+  final ClassModel lesson;
 
   const ClassCard({
     super.key,
-    required this.name,
+    required this.lesson,
   });
 
   @override
   Widget build(BuildContext context) {
     return OptionCard(
-      label: name,
+      // label: name,
+      label: lesson.className,
       color: const Color(0xFF99C24D),
-      onTap: () => context.go('/class/$name'),
+      onTap: () => context.go('/class/${lesson.className}'),
     );
   }
 }

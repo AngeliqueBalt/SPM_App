@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/data/questions.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
 /// Students can view each of their classes.
 /// Students can take a quiz that has been assigned to them.
@@ -42,7 +41,9 @@ class StudentClassScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const QuizScreen(),
+                      builder: (context) => QuizScreen(
+                        questions: questions,
+                      ),
                     ),
                   );
                 },

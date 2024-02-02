@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/screens/student/quiz/data/questions.dart';
+import 'package:student_progress_monitor_app/data/questions.dart';
 
 import '../routes.dart';
 

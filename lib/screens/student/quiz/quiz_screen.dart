@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/screens/student/quiz/data/questions.dart';
+import 'package:student_progress_monitor_app/models/question_model.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.dart';
 
 /// The most recent quiz assigned to the student.
@@ -9,7 +9,12 @@ import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.
 // TODO: Quiz should be saved to the database so that can later be retrieved again
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+  final List<QuestionModel> questions;
+
+  const QuizScreen({
+    super.key,
+    required this.questions,
+  });
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -49,7 +54,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 isPressed = false;
               });
             },
-            itemCount: questions.length,
+            itemCount: widget.questions.length,
             itemBuilder: (context, index) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +63,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      "Question ${index + 1} / ${questions.length}",
+                      "Question ${index + 1} / ${widget.questions.length}",
                       style: const TextStyle(
                           fontWeight: FontWeight.w300, fontSize: 30),
                     ),
@@ -71,14 +76,16 @@ class _QuizScreenState extends State<QuizScreen> {
                     height: 20,
                   ),
                   Text(
-                    questions[index].question,
+                    widget.questions[index].question,
                     style: const TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   // Buttons for answer options
-                  for (int i = 0; i < questions[index].answers.length; i++)
+                  for (int i = 0;
+                      i < widget.questions[index].answers.length;
+                      i++)
                     Container(
                       width: double.infinity,
                       margin: const EdgeInsets.only(bottom: 16),
@@ -89,7 +96,9 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         ),
                         color: isPressed
-                            ? questions[index].answers.entries.toList()[i].value
+                            ? widget.questions[index].answers.entries
+                                    .toList()[i]
+                                    .value
                                 ? correctAns
                                 : wrongAns
                             : btnColor,
@@ -100,9 +109,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 setState(() {
                                   isPressed = true;
                                 });
-                                if (questions[index]
-                                    .answers
-                                    .entries
+                                if (widget.questions[index].answers.entries
                                     .toList()[i]
                                     .value) {
                                   score += 10;
@@ -110,7 +117,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 }
                               },
                         child: Text(
-                          questions[index].answers.keys.toList()[i],
+                          widget.questions[index].answers.keys.toList()[i],
                           style: const TextStyle(fontSize: 17),
                         ),
                       ),
@@ -125,7 +132,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       // once reaches the end, redirects to result screen
                       OutlinedButton(
                         onPressed: isPressed
-                            ? index + 1 == questions.length
+                            ? index + 1 == widget.questions.length
                                 ? () {
                                     Navigator.push(
                                       context,
@@ -151,7 +158,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         ),
                         child: Text(
-                          index + 1 == questions.length
+                          index + 1 == widget.questions.length
                               ? "See Results"
                               : "Next Question",
                         ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/data/classes.dart';
+import 'package:student_progress_monitor_app/data/users.dart';
+import 'package:student_progress_monitor_app/models/class_model.dart';
+import 'package:student_progress_monitor_app/models/user_model.dart';
 import 'package:student_progress_monitor_app/routes.dart';
-import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
@@ -9,7 +12,10 @@ import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 /// It contains the user's name, email, and a list of options to navigate to.
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  const NavBar({super.key, required this.user, required this.classes});
+
+  final UserModel user;
+  final List<ClassModel> classes;
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -23,20 +29,20 @@ class _NavBarState extends State<NavBar> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
             // TODO: get name from database
             accountName: Text(
-              "Name",
-              style: TextStyle(
+              widget.user.name,
+              style: const TextStyle(
                 fontSize: 25,
               ),
             ),
             accountEmail: Text(
               // TODO: get email from database
-              "email@school.com",
-              style: TextStyle(fontSize: 15),
+              widget.user.email,
+              style: const TextStyle(fontSize: 15),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFF99C24D),
             ),
           ),
@@ -46,7 +52,10 @@ class _NavBarState extends State<NavBar> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => HomeScreen(
+                    user: user,
+                    classes: classes,
+                  ),
                 ),
               );
             },
@@ -57,7 +66,7 @@ class _NavBarState extends State<NavBar> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(),
+                  builder: (context) => ProfileScreen(user: user),
                 ),
               );
             },

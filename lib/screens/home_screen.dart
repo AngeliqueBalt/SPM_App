@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-// import 'package:student_progress_monitor_app/Screens/Teacher/teacher_classes_screen.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/data/classes.dart';
+import 'package:student_progress_monitor_app/data/users.dart';
+import 'package:student_progress_monitor_app/models/class_model.dart';
+import 'package:student_progress_monitor_app/models/user_model.dart';
 import 'package:student_progress_monitor_app/partials/ClassCard.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 
 /// Opening page/dashboard for both teachers and students.
 /// View of classes for the day and all classes.
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.user, required this.classes});
+
+  final UserModel user;
+  final List<ClassModel> classes;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // TODO: list of classes will be pulled from database
-  final List _classes = const [
-    'Class A',
-    'Class B',
-    'Class C',
-    'Class D',
-    'Class E',
-    'Class F',
-    'Class G',
-    'Class H'
-  ];
-
-  final List _todayClasses = const ['Class A', 'Class B', 'Class C'];
-
-  int _currentPage = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavBar(),
+      drawer: NavBar(user: widget.user, classes: classes),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
@@ -57,52 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 30),
-                  Container(
-                    color: const Color(0xFF99C24D),
-                    height: 30,
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Today's Classes",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    height: kOptionCardHeight,
-                    child: PageView(
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentPage = index;
-                        });
-                      },
-                      children: [
-                        for (var theClass in _todayClasses)
-                          ClassCard(name: theClass),
-                      ],
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: AnimatedSmoothIndicator(
-                        activeIndex: _currentPage,
-                        count: _todayClasses.length,
-                        effect: const ScrollingDotsEffect(
-                          activeDotColor: Color(0xFF99C24D),
-                          dotColor: Colors.grey,
-                          dotHeight: 8,
-                          dotWidth: 8,
-                          spacing: 10,
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(height: 20),
                   Container(
                     color: const Color(0xFF99C24D),
@@ -119,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  for (var theClass in _classes) ...[
-                    ClassCard(name: theClass),
+                  for (var lesson in classes) ...[
+                    ClassCard(lesson: lesson),
                     const SizedBox(height: 20),
                   ],
                 ],

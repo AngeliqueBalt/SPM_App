@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:student_progress_monitor_app/models/user_model.dart';
 
 /// Allows the user to view their profile details.
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final UserModel user;
+
+  const ProfileScreen({
+    super.key,
+    required this.user,
+  });
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -11,10 +17,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isObscurePassword = true;
-  String fullName = "Name";
-  String email = "abcd@abcd";
-  String password = "abcdefg";
-  String idNumber = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +42,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ListView(
               children: [
                 const SizedBox(height: 30),
-                // TODO: get the details from the database
-                // buildTextField("Full Name", "full name", false),
-                // const SizedBox(height: 20),
-                // buildTextField("Email", "email@school.com", false),
-                // const SizedBox(height: 20),
-                // buildTextField("Password", "********", true),
-                // const SizedBox(height: 20),
-                // buildTextField("ID number", "ID number", false),
-                buildTextField("Full Name", fullName, false),
+                buildTextField("Full Name", widget.user.name, false),
                 const SizedBox(height: 20),
-                buildTextField("Email", email, false),
+                buildTextField("Email", widget.user.email, false),
                 const SizedBox(height: 20),
-                buildTextField("Password", password, true),
+                buildTextField("Password", widget.user.password, true),
                 const SizedBox(height: 20),
-                buildTextField("ID number", idNumber, false),
+                buildTextField("ID number", "${widget.user.idNumber}", false),
               ],
             ),
           ),
@@ -71,19 +65,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         readOnly: true,
         obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
-          suffixIcon: isPasswordTextField
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isObscurePassword = !isObscurePassword;
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.remove_red_eye,
-                    color: Colors.grey,
-                  ),
-                )
-              : null,
+          // suffixIcon: isPasswordTextField
+          //     ? IconButton(
+          //         onPressed: () {
+          //           setState(() {
+          //             isObscurePassword = !isObscurePassword;
+          //           });
+          //         },
+          //         icon: const Icon(
+          //           Icons.remove_red_eye,
+          //           color: Colors.grey,
+          //         ),
+          //       )
+          //     : null,
           contentPadding: const EdgeInsets.only(bottom: 5),
           labelText: labelText,
           floatingLabelBehavior: FloatingLabelBehavior.always,

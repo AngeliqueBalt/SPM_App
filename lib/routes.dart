@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/data/classes.dart';
+import 'package:student_progress_monitor_app/data/users.dart';
+import 'package:student_progress_monitor_app/models/class_model.dart';
+import 'package:student_progress_monitor_app/models/user_model.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz_summary_screen.dart';
@@ -14,7 +18,10 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summar
 // TODO: make isTeacher work
 
 bool isAuthenticated = true;
-bool isTeacher = false;
+bool isTeacher = true;
+
+final UserModel user = users[0];
+final ClassModel clazz = classes[0];
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -30,15 +37,17 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
+        return HomeScreen(user: user, classes: classes);
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'class/:classId',
           builder: (BuildContext context, GoRouterState state) {
-            // print(state.pathParameters['classId']);
             if (isTeacher) {
-              return TeacherClassScreen(name: state.pathParameters['classId']!);
+              return TeacherClassScreen(
+                name: state.pathParameters['classId']!,
+                clazz: clazz,
+              );
             } else {
               return StudentClassScreen(name: state.pathParameters['classId']!);
             }

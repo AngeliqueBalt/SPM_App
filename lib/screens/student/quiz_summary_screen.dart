@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/partials/DisplayQuizQuestions.dart';
-import 'package:student_progress_monitor_app/screens/student/quiz/data/questions.dart';
 
 class QuizSummaryScreen extends StatefulWidget {
   final String name;

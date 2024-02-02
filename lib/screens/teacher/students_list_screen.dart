@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/data/classes.dart';
+import 'package:student_progress_monitor_app/data/users.dart';
+import 'package:student_progress_monitor_app/models/class_model.dart';
+import 'package:student_progress_monitor_app/models/user_model.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 /// Teachers can view a list of all the students in each class.
 /// Each students details can be viewed individually.
 
-// TODO: list of classes will be pulled from database
-const List _students = [
-  'Student A',
-  'Student B',
-  'Student C',
-  'Student D',
-  'Student E',
-  'Student F',
-  'Student G',
-  'Student H'
-];
-
 class StudentListScreen extends StatelessWidget {
-  const StudentListScreen({super.key});
+  final ClassModel clazz;
+
+  const StudentListScreen({super.key, required this.clazz});
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +37,7 @@ class StudentListScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  // Repeated for each student in the class
-                  // TODO: list of students will be pulled from database
-                  for (var theStudents in _students) ...[
+                  for (var student in clazz.students) ...[
                     const Divider(
                       color: Colors.grey,
                       height: 0,
@@ -60,18 +52,18 @@ class StudentListScreen extends StatelessWidget {
                         children: <Widget>[
                           const SizedBox(height: 15),
                           Text(
-                            "Full Name: $theStudents",
+                            "Full Name: ${student.name}",
                             style: const TextStyle(fontSize: 15),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
-                            "Email: email@school",
-                            style: TextStyle(fontSize: 12),
+                          Text(
+                            "Email: ${student.email}",
+                            style: const TextStyle(fontSize: 12),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
-                            "ID Number: 123456789",
-                            style: TextStyle(fontSize: 12),
+                          Text(
+                            "ID Number: ${student.idNumber}",
+                            style: const TextStyle(fontSize: 12),
                           ),
                           const SizedBox(height: 15),
                         ],
