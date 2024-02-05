@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/models/user_model.dart';
+import 'package:student_progress_monitor_app/models/user.dart';
 
 /// Allows the user to view their profile details.
 
 class ProfileScreen extends StatefulWidget {
-  final UserModel user;
+  final User user;
 
   const ProfileScreen({
     super.key,
@@ -45,8 +45,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 buildTextField("Full Name", widget.user.name, false),
                 const SizedBox(height: 20),
                 buildTextField("Email", widget.user.email, false),
-                const SizedBox(height: 20),
-                buildTextField("Password", widget.user.password, true),
                 const SizedBox(height: 20),
                 buildTextField("ID number", "${widget.user.idNumber}", false),
               ],

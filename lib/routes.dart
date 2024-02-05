@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_progress_monitor_app/data/classes.dart';
-import 'package:student_progress_monitor_app/data/users.dart';
-import 'package:student_progress_monitor_app/models/class_model.dart';
-import 'package:student_progress_monitor_app/models/user_model.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:student_progress_monitor_app/data/mock/classes.dart';
+import 'package:student_progress_monitor_app/data/mock/users.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:student_progress_monitor_app/models/user.dart';
+import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz_summary_screen.dart';
@@ -14,101 +16,122 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_class_scree
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summary_screen.dart';
 
-// TODO: make authentication work
-// TODO: make isTeacher work
+part 'routes.g.dart';
 
-bool isAuthenticated = true;
 bool isTeacher = true;
 
-final UserModel user = users[0];
-final ClassModel clazz = classes[0];
+final User user = isTeacher ? teacher : students[0];
+final Class clazz = classes[0];
 
-final GoRouter router = GoRouter(
-  routes: <RouteBase>[
+@riverpod
+GoRouter router(RouterRef ref) {
+  final isAuthenticatedState = ref.watch(isAuthenticatedProvider);
+
+  return GoRouter(
+    routes: <RouteBase>[
+      // Loading
+      GoRoute(
+        path: '/_loading',
+        builder: (BuildContext context, GoRouterState state) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        },
+      ),
+
+      // Authentication
+      GoRoute(
+        path: '/login',
+        builder: (BuildContext context, GoRouterState state) {
+          return const LogInScreen();
+        },
+      ),
+
+      // Dashboard
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return HomeScreen(classes: classes);
+        },
+        routes: <RouteBase>[
+          GoRoute(
+            path: 'class/:classId',
+            builder: (BuildContext context, GoRouterState state) {
+              if (isTeacher) {
+                return TeacherClassScreen(
+                  name: state.pathParameters['classId']!,
+                  clazz: clazz,
+                );
+              } else {
+                return StudentClassScreen(
+                    name: state.pathParameters['classId']!);
+              }
+            },
+          ),
+        ],
+      ),
+
+      // Quiz Summary
+      GoRoute(
+        path: '/all-quizzes',
+        builder: (BuildContext context, GoRouterState state) {
+          if (isTeacher) {
+            return const TeacherAllQuizzesScreen();
+          } else {
+            return const AllQuizzesScreen();
+          }
+        },
+        routes: <RouteBase>[
+          GoRoute(
+            path: 'quiz/:quizId',
+            builder: (BuildContext context, GoRouterState state) {
+              if (isTeacher) {
+                return TeacherQuizSummaryScreen(
+                    name: state.pathParameters['quizId']!);
+              } else {
+                return QuizSummaryScreen(name: state.pathParameters['quizId']!);
+              }
+            },
+          ),
+        ],
+      ),
+
+      // Previous Quizzes
+      GoRoute(
+        path: '/all-quizzes',
+        builder: (BuildContext context, GoRouterState state) {
+          if (isTeacher) {
+            return const TeacherAllQuizzesScreen();
+          } else {
+            return const AllQuizzesScreen();
+          }
+        },
+      ),
+
+      GoRoute(
+        path: '/manage-quizzes',
+        builder: (BuildContext context, GoRouterState state) {
+          return const ManageQuizScreen();
+        },
+      ),
+    ],
+
     // Authentication
-    GoRoute(
-      path: '/login',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LogInScreen();
-      },
-    ),
+    redirect: (context, routerState) {
+      if (isAuthenticatedState.isLoading) return '/_loading';
 
-    // Dashboard
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return HomeScreen(user: user, classes: classes);
-      },
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'class/:classId',
-          builder: (BuildContext context, GoRouterState state) {
-            if (isTeacher) {
-              return TeacherClassScreen(
-                name: state.pathParameters['classId']!,
-                clazz: clazz,
-              );
-            } else {
-              return StudentClassScreen(name: state.pathParameters['classId']!);
-            }
-          },
-        ),
-      ],
-    ),
+      bool requiresAuth = routerState.fullPath! != '/login';
+      bool isAuthenticated = isAuthenticatedState.requireValue;
 
-    // Quiz Summary
-    GoRoute(
-      path: '/all-quizzes',
-      builder: (BuildContext context, GoRouterState state) {
-        if (isTeacher) {
-          return const TeacherAllQuizzesScreen();
-        } else {
-          return const AllQuizzesScreen();
-        }
-      },
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'quiz/:quizId',
-          builder: (BuildContext context, GoRouterState state) {
-            if (isTeacher) {
-              return TeacherQuizSummaryScreen(
-                  name: state.pathParameters['quizId']!);
-            } else {
-              return QuizSummaryScreen(name: state.pathParameters['quizId']!);
-            }
-          },
-        ),
-      ],
-    ),
+      if (isAuthenticated) {
+        if (requiresAuth != isAuthenticated) return '/';
+      } else {
+        if (requiresAuth != isAuthenticated) return '/login';
+      }
 
-    // Previous Quizzes
-    GoRoute(
-      path: '/all-quizzes',
-      builder: (BuildContext context, GoRouterState state) {
-        if (isTeacher) {
-          return const TeacherAllQuizzesScreen();
-        } else {
-          return const AllQuizzesScreen();
-        }
-      },
-    ),
-
-    GoRoute(
-      path: '/manage-quizzes',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ManageQuizScreen();
-      },
-    ),
-  ],
-
-  // Authentication
-  redirect: (context, routerState) {
-    bool requiresAuth = routerState.fullPath! != '/login';
-
-    if (isAuthenticated) {
-      if (requiresAuth != isAuthenticated) return '/';
-    } else {
-      if (requiresAuth != isAuthenticated) return '/login';
-    }
-  },
-);
+      return null;
+    },
+  );
+}

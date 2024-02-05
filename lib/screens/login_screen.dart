@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/Screens//home_screen.dart';
+import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 
 import '../routes.dart';
 
-class LogInScreen extends StatefulWidget {
+class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  ConsumerState<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _LogInScreenState extends ConsumerState<LogInScreen> {
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +53,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
                 // Username text field
                 TextFormField(
+                  controller: _email,
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
@@ -68,19 +74,22 @@ class _LogInScreenState extends State<LogInScreen> {
 
                 // Password text field
                 TextFormField(
+                  controller: _password,
+                  obscureText: true,
                   decoration: InputDecoration(
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      prefixIcon:
-                          const Icon(Icons.lock_outline, color: Colors.grey),
-                      hintText: "Password",
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      filled: true,
-                      fillColor: Colors.grey.withOpacity(0.2)),
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    prefixIcon:
+                        const Icon(Icons.lock_outline, color: Colors.grey),
+                    hintText: "Password",
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.grey.withOpacity(0.2),
+                  ),
                 ),
 
                 const SizedBox(height: 30),
@@ -98,15 +107,13 @@ class _LogInScreenState extends State<LogInScreen> {
                 // ),
 
                 const SizedBox(height: 30),
-
                 // Log in button
                 GestureDetector(
-                  onTap: () => {
-                    // TODO: Make it that when pressed isAuthenicated is set to true
-                    context.go('/dashboard'),
-                    // setState(() {
-                    //   isAuthenticated == true;
-                    // }),
+                  onTap: () {
+                    ref.read(authenticationProvider.notifier).login(
+                          email: _email.text,
+                          password: _password.text,
+                        );
                   },
                   child: Container(
                     padding: const EdgeInsets.all(25),
@@ -119,9 +126,10 @@ class _LogInScreenState extends State<LogInScreen> {
                       child: Text(
                         "Log In",
                         style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),

@@ -1,31 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
-import 'package:student_progress_monitor_app/components/option_card.dart';
-import 'package:student_progress_monitor_app/data/classes.dart';
-import 'package:student_progress_monitor_app/data/users.dart';
-import 'package:student_progress_monitor_app/models/class_model.dart';
-import 'package:student_progress_monitor_app/models/user_model.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/partials/ClassCard.dart';
 
 /// Opening page/dashboard for both teachers and students.
 /// View of classes for the day and all classes.
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.user, required this.classes});
+class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key, required this.classes});
 
-  final UserModel user;
-  final List<ClassModel> classes;
+  final List<Class> classes;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      drawer: NavBar(user: widget.user, classes: classes),
+      drawer: NavBar(classes: classes),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(

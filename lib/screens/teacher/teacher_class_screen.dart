@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
-import 'package:student_progress_monitor_app/models/class_model.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
@@ -10,7 +10,7 @@ import 'package:student_progress_monitor_app/screens/teacher/students_list_scree
 
 class TeacherClassScreen extends StatelessWidget {
   final String name;
-  final ClassModel clazz;
+  final Class clazz;
 
   const TeacherClassScreen({
     Key? key,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
-import 'package:student_progress_monitor_app/models/class_model.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 
 class ClassCard extends StatelessWidget {
-  final ClassModel lesson;
+  final Class lesson;
 
   const ClassCard({
     super.key,

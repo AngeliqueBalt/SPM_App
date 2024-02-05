@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
-import 'package:student_progress_monitor_app/data/classes.dart';
-import 'package:student_progress_monitor_app/data/users.dart';
-import 'package:student_progress_monitor_app/models/class_model.dart';
-import 'package:student_progress_monitor_app/models/user_model.dart';
+import 'package:student_progress_monitor_app/data/mock/classes.dart';
+import 'package:student_progress_monitor_app/data/mock/users.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 /// Teachers can view a list of all the students in each class.
 /// Each students details can be viewed individually.
 
 class StudentListScreen extends StatelessWidget {
-  final ClassModel clazz;
+  final Class clazz;
 
   const StudentListScreen({super.key, required this.clazz});
 
