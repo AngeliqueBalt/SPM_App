@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 
 /// Allows the user to view their profile details.
@@ -28,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -43,10 +44,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 const SizedBox(height: 30),
                 buildTextField("Full Name", widget.user.name, false),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 buildTextField("Email", widget.user.email, false),
-                const SizedBox(height: 20),
-                buildTextField("ID number", "${widget.user.idNumber}", false),
+                if (widget.user.idNumber != null) ...[
+                  const SizedBox(height: 10),
+                  buildTextField("ID Number", widget.user.idNumber!, false),
+                ],
+                const SizedBox(height: 10),
+                buildTextField(
+                    "Account Type", widget.user.userType.label, false)
               ],
             ),
           ),
@@ -63,19 +69,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         readOnly: true,
         obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
-          // suffixIcon: isPasswordTextField
-          //     ? IconButton(
-          //         onPressed: () {
-          //           setState(() {
-          //             isObscurePassword = !isObscurePassword;
-          //           });
-          //         },
-          //         icon: const Icon(
-          //           Icons.remove_red_eye,
-          //           color: Colors.grey,
-          //         ),
-          //       )
-          //     : null,
           contentPadding: const EdgeInsets.only(bottom: 5),
           labelText: labelText,
           floatingLabelBehavior: FloatingLabelBehavior.always,

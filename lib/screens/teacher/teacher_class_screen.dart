@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
@@ -13,10 +14,10 @@ class TeacherClassScreen extends StatelessWidget {
   final Class clazz;
 
   const TeacherClassScreen({
-    Key? key,
+    super.key,
     required this.name,
     required this.clazz,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class TeacherClassScreen extends StatelessWidget {
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -39,7 +40,7 @@ class TeacherClassScreen extends StatelessWidget {
               const SizedBox(height: 20),
               OptionCard(
                 label: "View Students List",
-                color: const Color(0xFF99C24D),
+                color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -51,7 +52,7 @@ class TeacherClassScreen extends StatelessWidget {
               const SizedBox(height: 20),
               OptionCard(
                 label: "Manage Quizzes",
-                color: const Color(0xFF99C24D),
+                color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(

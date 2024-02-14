@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
 
 /// A form to create a new quiz.
@@ -13,16 +16,37 @@ class NewQuizScreen extends StatefulWidget {
 }
 
 class _NewQuizScreenState extends State<NewQuizScreen> {
-  bool isPressed = false;
-  final PageController _controller = PageController(initialPage: 0);
-  bool isCheckedOption1 = false;
-  bool isCheckedOption2 = false;
-  bool isCheckedOption3 = false;
-  bool isCheckedOption4 = false;
+  static const quizLength = 10;
+  static const answerCount = 4;
 
-  // TODO: questions should be saved to the database
-  // TODO: if checkbox is checked, then that is the correct answer
-  // TODO: when go to next question, the previous question should be kept till save button is pressed (so that the teacher can go back and edit the question)
+  final PageController _controller = PageController(initialPage: 0);
+
+  final List<GlobalKey<FormState>> _formKeys =
+      List.generate(quizLength, (_) => GlobalKey<FormState>());
+
+  bool get isFirstPage => _controller.hasClients ? _controller.page! < 1 : true;
+
+  bool get isLastPage =>
+      _controller.hasClients ? _controller.page! + 1 >= quizLength : false;
+
+  final questions = List.filled(
+    quizLength,
+    Question.empty(answerCount: answerCount),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,202 +54,54 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "Create new Quiz",
+          "Create New Quiz",
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: PageView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _controller,
-            onPageChanged: (page) {
+      body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _controller,
+        itemCount: quizLength,
+        itemBuilder: (context, index) {
+          return NewQuizScreenQuestion(
+            quizLength: quizLength,
+            index: index,
+            question: questions[index],
+            onQuestionChanged: (question) {
               setState(() {
-                isPressed = false;
+                questions[index] = question;
               });
             },
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            formKey: _formKeys[index],
+          );
+        },
+      ),
+      bottomNavigationBar: SafeArea(
+        bottom: true,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+
+              // Buttons for next question and save question
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      "Question ${index + 1}/10",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w300, fontSize: 28),
-                    ),
-                  ),
-                  const Divider(
-                    height: 20,
-                    thickness: 2,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-
-                  // Quiz form
-                  const Text(
-                    "Enter Question",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: "Enter your question here",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Text(
-                    "Enter Answer Options",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 12,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: "Enter option 1",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: SizedBox(
-                          // width : 10,
-                          child: Checkbox(
-                            value: isCheckedOption1,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isCheckedOption1 = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 12,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: "Enter option 2",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: SizedBox(
-                          // width : 10,
-                          child: Checkbox(
-                            value: isCheckedOption2,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isCheckedOption2 = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 12,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: "Enter option 3",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: SizedBox(
-                          // width : 10,
-                          child: Checkbox(
-                            value: isCheckedOption3,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isCheckedOption3 = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 12,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: "Enter option 4",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        child: SizedBox(
-                          // width : 10,
-                          child: Checkbox(
-                            value: isCheckedOption4,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isCheckedOption4 = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-
-                  // Buttons for next question and save question
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      OutlinedButton(
+                  IgnorePointer(
+                    ignoring: isFirstPage,
+                    child: AnimatedOpacity(
+                      opacity: isFirstPage ? 0.0 : 1.0,
+                      duration: kAnimationDuration,
+                      curve: kAnimationCurve,
+                      child: OutlinedButton(
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
@@ -233,34 +109,278 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
                             ),
                           ),
                         ),
-                        onPressed: index + 1 == 10
-                            ? () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const QuizOverviewScreen(),
-                                  ),
-                                );
-                              }
-                            : () {
-                                _controller.nextPage(
-                                    duration: const Duration(milliseconds: 600),
-                                    curve: Curves.ease);
-                                isPressed = false;
-                              },
-                        child: Text(
-                          index + 1 == 10 ? "View Quiz" : "Next Question",
+                        onPressed: previousPage,
+                        child: const Text("Previous"),
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                    ],
-                  )
+                    ),
+                    onPressed: nextPage,
+                    child: Text(isLastPage ? "Preview" : "Next"),
+                  ),
                 ],
-              );
-            },
+              )
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  void nextPage() {
+    if (!_formKeys[_controller.page!.round()].currentState!.validate()) {
+      return;
+    }
+
+    if (_controller.page == null) return;
+
+    if (isLastPage) {
+      // print(
+      //   jsonEncode(
+      //     questions.map((question) => question.toJson()).toList(),
+      //   ),
+      // );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => QuizOverviewScreen(questions: questions),
+        ),
+      );
+      return;
+    }
+
+    _controller.nextPage(
+      duration: kAnimationDuration,
+      curve: kAnimationCurve,
+    );
+  }
+
+  void previousPage() {
+    if (_controller.page == null) return;
+    if (isFirstPage) return;
+
+    _controller.previousPage(
+      duration: kAnimationDuration,
+      curve: kAnimationCurve,
+    );
+  }
+}
+
+class NewQuizScreenQuestion extends StatefulWidget {
+  final int quizLength;
+  final int index;
+
+  final Question question;
+
+  final void Function(Question) onQuestionChanged;
+
+  final GlobalKey<FormState>? formKey;
+
+  const NewQuizScreenQuestion({
+    super.key,
+    required this.question,
+    required this.quizLength,
+    required this.index,
+    required this.onQuestionChanged,
+    this.formKey,
+  });
+
+  @override
+  State<NewQuizScreenQuestion> createState() => _NewQuizScreenQuestionState();
+}
+
+class _NewQuizScreenQuestionState extends State<NewQuizScreenQuestion> {
+  late final TextEditingController _questionController;
+
+  @override
+  void initState() {
+    _questionController = TextEditingController(text: widget.question.question);
+    _questionController.addListener(() {
+      widget.onQuestionChanged(widget.question.copyWith(
+        question: _questionController.text,
+      ));
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _questionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: widget.formKey,
+      child: Scrollbar(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "Question ${widget.index + 1}/${widget.quizLength}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w300, fontSize: 28),
+                  ),
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 2,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+
+                // Quiz form
+                const Text(
+                  "Enter Question",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: _questionController,
+                  validator: (value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return "You need to enter a question.";
+                    }
+                    if (widget.question.answers
+                        .every((answer) => !answer.isCorrect)) {
+                      return "At least one answer must be marked as correct.";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: "Enter your question here",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "Enter Answer Options",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                for (int i = 0; i < widget.question.answers.length; i++)
+                  NewQuizScreenAnswer(
+                    answer: widget.question.answers[i],
+                    index: i,
+                    onAnswerChanged: (answer) {
+                      final answers = [...widget.question.answers];
+                      answers[i] = answer;
+                      widget.onQuestionChanged(
+                        widget.question.copyWith(answers: answers),
+                      );
+                    },
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NewQuizScreenAnswer extends StatefulWidget {
+  final Answer answer;
+  final int index;
+
+  final void Function(Answer) onAnswerChanged;
+
+  const NewQuizScreenAnswer({
+    super.key,
+    required this.answer,
+    required this.index,
+    required this.onAnswerChanged,
+  });
+
+  @override
+  State<NewQuizScreenAnswer> createState() => _NewQuizScreenAnswerState();
+}
+
+class _NewQuizScreenAnswerState extends State<NewQuizScreenAnswer> {
+  late final TextEditingController _answerController;
+
+  @override
+  void initState() {
+    _answerController = TextEditingController(text: widget.answer.answer);
+    _answerController.addListener(() {
+      widget.onAnswerChanged(widget.answer.copyWith(
+        answer: _answerController.text,
+      ));
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _answerController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: _answerController,
+                validator: (value) => value?.trim().isEmpty ?? true
+                    ? "You need to enter a answer"
+                    : null,
+                decoration: InputDecoration(
+                  hintText: "Enter option ${widget.index + 1}",
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+            ),
+            Checkbox(
+              value: widget.answer.isCorrect,
+              onChanged: (bool? newValue) {
+                widget.onAnswerChanged(
+                  widget.answer.copyWith(
+                    isCorrect: newValue ?? false,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 }

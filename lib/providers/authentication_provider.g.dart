@@ -3,6 +3,22 @@
 part of 'authentication_provider.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$CurrentUserImpl _$$CurrentUserImplFromJson(Map<String, dynamic> json) =>
+    _$CurrentUserImpl(
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      sessionToken: json['sessionToken'] as String,
+    );
+
+Map<String, dynamic> _$$CurrentUserImplToJson(_$CurrentUserImpl instance) =>
+    <String, dynamic>{
+      'user': instance.user,
+      'sessionToken': instance.sessionToken,
+    };
+
+// **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 

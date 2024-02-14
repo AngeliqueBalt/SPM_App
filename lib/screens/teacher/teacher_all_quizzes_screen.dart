@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/partials/QuizCard.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/partials/quiz_card.dart';
 
 /// Teachers can view a list of all previously created/assigned quizzes.
 /// Each quiz can then be further viewed to see a result summary and the question and answers.
@@ -30,7 +31,7 @@ class _TeacherAllQuizzesScreenState extends State<TeacherAllQuizzesScreen> {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),

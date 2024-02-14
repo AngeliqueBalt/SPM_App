@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/partials/QuizCard.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/partials/quiz_card.dart';
 
-import '../../partials/ClassCard.dart';
+import '../../partials/class_card.dart';
 
 /// Students can view each of the previous quizzes they have taken.
 /// They can see the score they got on each quiz.
@@ -32,7 +33,7 @@ class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),

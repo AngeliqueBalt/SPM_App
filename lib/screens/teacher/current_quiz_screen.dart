@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/partials/DisplayQuizQuestions.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
 
 import '../../components/score_chart.dart';
 
@@ -16,7 +17,7 @@ class CurrentQuizScreen extends StatelessWidget {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -31,7 +32,7 @@ class CurrentQuizScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 30),
                   Container(
-                    color: const Color(0xFF99C24D),
+                    color: greenColor,
                     height: 30,
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),
@@ -54,7 +55,7 @@ class CurrentQuizScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Container(
-                    color: const Color(0xFF99C24D),
+                    color: greenColor,
                     height: 30,
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),
@@ -69,7 +70,8 @@ class CurrentQuizScreen extends StatelessWidget {
                   ),
                   // TODO: get the quiz questions and answers from the database to be displayed for each quiz
                   const SizedBox(height: 20),
-                  DisplayQuizQuestions(),
+
+                  // DisplayQuizQuestions(),
                 ],
               ),
             ],

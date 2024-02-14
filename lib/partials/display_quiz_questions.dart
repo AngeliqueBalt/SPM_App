@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/data/mock/questions.dart';
-
-import '../routes.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 
 class DisplayQuizQuestions extends StatelessWidget {
-  const DisplayQuizQuestions({super.key});
+  final List<Question> questions;
+
+  const DisplayQuizQuestions({super.key, required this.questions});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (!isTeacher)
-            const Text(
-                "Note: Only the correct answers are shown, not your own."),
-          if (!isTeacher)
-            const Divider(
-              height: 20,
-              thickness: 1,
-            ),
           Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            padding: const EdgeInsets.all(20),
             child: Flex(direction: Axis.horizontal, children: [
               Expanded(
                 child: SizedBox(
@@ -46,13 +37,12 @@ class DisplayQuizQuestions extends StatelessWidget {
                           ),
                           for (int i = 0; i < questions[i].answers.length; i++)
                             Text(
-                              questions[index].answers.keys.elementAt(i),
+                              questions[index].answers[i].answer,
                               style: TextStyle(
                                 fontSize: 15,
-                                color:
-                                    questions[index].answers.values.elementAt(i)
-                                        ? Colors.green
-                                        : Colors.black,
+                                color: questions[index].answers[i].isCorrect
+                                    ? Colors.green
+                                    : Colors.black,
                               ),
                             ),
                           const Divider(

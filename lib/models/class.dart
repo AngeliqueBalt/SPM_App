@@ -1,12 +1,14 @@
 import 'package:student_progress_monitor_app/models/user.dart';
 
 class Class {
-  String className;
-  User teacher;
-  List<User> students;
+  final String id;
+  final String name;
+  final User teacher;
+  final List<User> students;
 
   Class({
-    required this.className,
+    required this.id,
+    required this.name,
     required this.teacher,
     required this.students,
   });

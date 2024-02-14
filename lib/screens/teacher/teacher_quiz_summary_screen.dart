@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/score_chart.dart';
-import 'package:student_progress_monitor_app/partials/DisplayQuizQuestions.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
 
 class TeacherQuizSummaryScreen extends StatefulWidget {
   final String name;
 
   const TeacherQuizSummaryScreen({
-    Key? key,
+    super.key,
     required this.name,
-  }) : super(key: key);
+  });
 
   @override
   State<TeacherQuizSummaryScreen> createState() =>
@@ -22,11 +23,11 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          ('${widget.name} Summary'),
+          ('${widget.name} Report'),
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -40,7 +41,7 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
                 children: [
                   const SizedBox(height: 30),
                   Container(
-                    color: const Color(0xFF99C24D),
+                    color: greenColor,
                     height: 30,
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),
@@ -63,7 +64,7 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
                   ),
                   const SizedBox(height: 20),
                   Container(
-                    color: const Color(0xFF99C24D),
+                    color: greenColor,
                     height: 30,
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),
@@ -78,7 +79,7 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
                   ),
                   const SizedBox(height: 20),
                   // TODO: get the quiz questions and answers from the database to be displayed for each quiz
-                  DisplayQuizQuestions(),
+                  // DisplayQuizQuestions(),
                 ],
               ),
             ],

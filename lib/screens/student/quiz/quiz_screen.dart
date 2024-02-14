@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/models/question_model.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.dart';
 
 /// The most recent quiz assigned to the student.
@@ -9,7 +10,7 @@ import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.
 // TODO: Quiz should be saved to the database so that can later be retrieved again
 
 class QuizScreen extends StatefulWidget {
-  final List<QuestionModel> questions;
+  final List<Question> questions;
 
   const QuizScreen({
     super.key,
@@ -22,6 +23,12 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   final PageController _controller = PageController(initialPage: 0);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   bool isPressed = false;
   Color correctAns = Colors.green;
@@ -39,7 +46,7 @@ class _QuizScreenState extends State<QuizScreen> {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -96,9 +103,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         ),
                         color: isPressed
-                            ? widget.questions[index].answers.entries
-                                    .toList()[i]
-                                    .value
+                            ? widget.questions[index].answers[i].isCorrect
                                 ? correctAns
                                 : wrongAns
                             : btnColor,
@@ -109,15 +114,13 @@ class _QuizScreenState extends State<QuizScreen> {
                                 setState(() {
                                   isPressed = true;
                                 });
-                                if (widget.questions[index].answers.entries
-                                    .toList()[i]
-                                    .value) {
+                                if (widget
+                                    .questions[index].answers[i].isCorrect) {
                                   score += 10;
-                                  print(score);
                                 }
                               },
                         child: Text(
-                          widget.questions[index].answers.keys.toList()[i],
+                          widget.questions[index].answers[i].answer,
                           style: const TextStyle(fontSize: 17),
                         ),
                       ),

@@ -12,5 +12,10 @@ const List<String> classNames = [
 ];
 
 List<Class> classes = classNames
-    .map((name) => Class(className: name, teacher: teacher, students: students))
+    .map((name) => Class(
+          id: name,
+          name: name,
+          teacher: teacher,
+          students: students,
+        ))
     .toList();

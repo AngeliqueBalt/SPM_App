@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/Screens//home_screen.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 
 import '../routes.dart';
@@ -93,20 +94,6 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                 ),
 
                 const SizedBox(height: 30),
-
-                // forgot password?
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: [
-                //       Text("Forgot Password?",
-                //           style: TextStyle(color: Colors.grey[700])),
-                //     ],
-                //   ),
-                // ),
-
-                const SizedBox(height: 30),
                 // Log in button
                 GestureDetector(
                   onTap: () {
@@ -119,7 +106,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                     padding: const EdgeInsets.all(25),
                     margin: const EdgeInsets.symmetric(horizontal: 25),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF99C24D),
+                      color: greenColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Center(

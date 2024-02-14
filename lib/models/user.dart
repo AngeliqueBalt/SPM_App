@@ -1,14 +1,21 @@
-import 'package:student_progress_monitor_app/data/mock/classes.dart' as mock;
-import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'user.freezed.dart';
+
+part 'user.g.dart';
 
 enum UserType {
-  admin("admin"),
-  teacher("teacher"),
-  student("student");
+  admin(value: "admin", label: "Admin"),
+  teacher(value: "teacher", label: "Teacher"),
+  student(value: "student", label: "Student");
 
   final String value;
+  final String label;
 
-  const UserType(this.value);
+  const UserType({
+    required this.value,
+    String? label,
+  }) : label = label ?? value;
 
   static UserType? fromValue(String value) {
     return UserType.values
@@ -17,34 +24,15 @@ enum UserType {
   }
 }
 
-class User {
-  final String name;
-  final String email;
-  final UserType userType;
-  final String? idNumber;
+@freezed
+class User with _$User {
+  const factory User({
+    required String id,
+    required String name,
+    required String email,
+    required UserType userType,
+    String? idNumber,
+  }) = _User;
 
-  const User({
-    required this.name,
-    required this.email,
-    required this.userType,
-    this.idNumber,
-  });
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      name: json['name'] as String,
-      email: json['email'] as String,
-      idNumber: json['idNumber'] as String?,
-      userType: UserType.fromValue(json['userType'] as String)!,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'email': email,
-      'idNumber': idNumber,
-      'userType': userType.value,
-    };
-  }
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 
 class ClassCard extends StatelessWidget {
@@ -15,9 +16,9 @@ class ClassCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return OptionCard(
       // label: name,
-      label: lesson.className,
-      color: const Color(0xFF99C24D),
-      onTap: () => context.go('/class/${lesson.className}'),
+      label: lesson.name,
+      color: greenColor,
+      onTap: () => context.go('/class/${lesson.name}'),
     );
   }
 }

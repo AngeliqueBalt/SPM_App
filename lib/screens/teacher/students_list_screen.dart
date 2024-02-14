@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
 import 'package:student_progress_monitor_app/data/mock/users.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
@@ -24,7 +25,7 @@ class StudentListScreen extends StatelessWidget {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -60,11 +61,13 @@ class StudentListScreen extends StatelessWidget {
                             "Email: ${student.email}",
                             style: const TextStyle(fontSize: 12),
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "ID Number: ${student.idNumber}",
-                            style: const TextStyle(fontSize: 12),
-                          ),
+                          if (student.idNumber != null) ...[
+                            const SizedBox(height: 10),
+                            Text(
+                              "ID Number: ${student.idNumber}",
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                          ],
                           const SizedBox(height: 15),
                         ],
                       ),

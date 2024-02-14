@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/partials/ClassCard.dart';
+import 'package:student_progress_monitor_app/partials/class_card.dart';
 
 /// Opening page/dashboard for both teachers and students.
 /// View of classes for the day and all classes.
@@ -23,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
-        backgroundColor: const Color(0xFF99C24D),
+        backgroundColor: greenColor,
         elevation: 0,
         toolbarHeight: 50,
       ),
@@ -37,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   const SizedBox(height: 20),
                   Container(
-                    color: const Color(0xFF99C24D),
+                    color: greenColor,
                     height: 30,
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),

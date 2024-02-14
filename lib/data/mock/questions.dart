@@ -1,97 +1,97 @@
 // List of sample questions for the quiz
 // Questions will be collected from the add new quiz screen/database?
 
-import 'package:student_progress_monitor_app/models/question_model.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 
-List<QuestionModel> questions = [
-  QuestionModel(
+List<Question> questions = [
+  Question(
     question: 'What does CPU stand for?',
-    answers: {
-      "Central Processing Unit": true,
-      "Computer Personal Unit": false,
-      "Central Process Unit": false,
-      "Central Peripheral Unit": false,
-    },
+    answers: [
+      Answer(answer: "Central Processing Unit", isCorrect: true),
+      Answer(answer: "Computer Personal Unit", isCorrect: false),
+      Answer(answer: "Central Process Unit", isCorrect: false),
+      Answer(answer: "Central Peripheral Unit", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'What does RAM stand for?',
-    answers: {
-      "Random Access Memory": true,
-      "Random Access Machine": false,
-      "Random Access Module": false,
-      "Random Access Method": false,
-    },
+    answers: [
+      Answer(answer: "Random Access Memory", isCorrect: true),
+      Answer(answer: "Random Access Machine", isCorrect: false),
+      Answer(answer: "Random Access Module", isCorrect: false),
+      Answer(answer: "Random Access Method", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'What does ROM stand for?',
-    answers: {
-      "Read Only Memory": true,
-      "Read Only Machine": false,
-      "Read Only Module": false,
-      "Read Only Method": false,
-    },
+    answers: [
+      Answer(answer: "Read Only Memory", isCorrect: true),
+      Answer(answer: "Read Only Machine", isCorrect: false),
+      Answer(answer: "Read Only Module", isCorrect: false),
+      Answer(answer: "Read Only Method", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'What does GPU stand for?',
-    answers: {
-      "Graphics Processing Unit": true,
-      "Graphics Personal Unit": false,
-      "Graphics Process Unit": false,
-      "Graphics Peripheral Unit": false,
-    },
+    answers: [
+      Answer(answer: "Graphics Processing Unit", isCorrect: true),
+      Answer(answer: "Graphics Personal Unit", isCorrect: false),
+      Answer(answer: "Graphics Process Unit", isCorrect: false),
+      Answer(answer: "Graphics Peripheral Unit", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'What is the purpose of a web browser?',
-    answers: {
-      "To create documents": false,
-      "To play games": false,
-      "To browse websites": true,
-      "To edit images": false,
-    },
+    answers: [
+      Answer(answer: "To create documents", isCorrect: false),
+      Answer(answer: "To play games", isCorrect: false),
+      Answer(answer: "To browse websites", isCorrect: true),
+      Answer(answer: "To edit images", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'Which file format is commonly used for compressed archives?',
-    answers: {
-      "TXT": false,
-      "ZIP": true,
-      "EXE": false,
-      "DOC": false,
-    },
+    answers: [
+      Answer(answer: "TXT", isCorrect: false),
+      Answer(answer: "ZIP", isCorrect: true),
+      Answer(answer: "EXE", isCorrect: false),
+      Answer(answer: "DOC", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'Which of the following is a programming language?',
-    answers: {
-      "JPEG": false,
-      "GIF": false,
-      "Python": true,
-      "PNG": false,
-    },
+    answers: [
+      Answer(answer: "JPEG", isCorrect: false),
+      Answer(answer: "GIF", isCorrect: false),
+      Answer(answer: "Python", isCorrect: true),
+      Answer(answer: "PNG", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'Which is the file extension of a text file?',
-    answers: {
-      ".txt": true,
-      ".doc": false,
-      ".exe": false,
-      ".jpg": false,
-    },
+    answers: [
+      Answer(answer: ".txt", isCorrect: true),
+      Answer(answer: ".doc", isCorrect: false),
+      Answer(answer: ".exe", isCorrect: false),
+      Answer(answer: ".jpg", isCorrect: false),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'What does the "WWW" in a website URL stand for?',
-    answers: {
-      "Web World Wide": false,
-      "Web World Wonders": false,
-      "Wide World Web": false,
-      "World Wide Web": true,
-    },
+    answers: [
+      Answer(answer: "Web World Wide", isCorrect: false),
+      Answer(answer: "Web World Wonders", isCorrect: false),
+      Answer(answer: "Wide World Web", isCorrect: false),
+      Answer(answer: "World Wide Web", isCorrect: true),
+    ],
   ),
-  QuestionModel(
+  Question(
     question: 'Which device is used to input data into a computer?',
-    answers: {
-      "Monitor": false,
-      "Keyboard": true,
-      "Printer": false,
-      "Speakers": false,
-    },
+    answers: [
+      Answer(answer: "Monitor", isCorrect: false),
+      Answer(answer: "Keyboard", isCorrect: true),
+      Answer(answer: "Printer", isCorrect: false),
+      Answer(answer: "Speakers", isCorrect: false),
+    ],
   ),
 ];

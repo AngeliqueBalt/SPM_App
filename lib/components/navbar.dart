@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:student_progress_monitor_app/data/mock/classes.dart';
-import 'package:student_progress_monitor_app/data/mock/users.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
-import 'package:student_progress_monitor_app/routes.dart';
-import 'package:student_progress_monitor_app/screens/home_screen.dart';
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 /// The navigation bar that appears on the left side of the screen.
 /// It contains the user's name, email, and a list of options to navigate to.
 
 class NavBar extends ConsumerWidget {
-  const NavBar({super.key, required this.classes});
+  const NavBar({super.key, this.classes});
 
-  final List<Class> classes;
+  final List<Class>? classes;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,22 +34,22 @@ class NavBar extends ConsumerWidget {
               style: const TextStyle(fontSize: 15),
             ),
             decoration: const BoxDecoration(
-              color: Color(0xFF99C24D),
+              color: greenColor,
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.book),
-            title: const Text("Classes"),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(
-                    classes: classes,
-                  ),
-                ),
-              );
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.book),
+          //   title: const Text("Classes"),
+          //   onTap: () {
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(
+          //         builder: (context) => HomeScreen(
+          //           classes: classes,
+          //         ),
+          //       ),
+          //     );
+          //   },
+          // ),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text("Profile"),

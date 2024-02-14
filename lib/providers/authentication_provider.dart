@@ -1,34 +1,24 @@
 import 'dart:convert';
 
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/network/authentication.dart';
 import 'package:student_progress_monitor_app/main.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 
+part 'authentication_provider.freezed.dart';
+
 part 'authentication_provider.g.dart';
 
-class CurrentUser {
-  final User user;
-  final String sessionToken;
+@freezed
+class CurrentUser with _$CurrentUser {
+  factory CurrentUser({
+    required User user,
+    required String sessionToken,
+  }) = _CurrentUser;
 
-  CurrentUser({
-    required this.user,
-    required this.sessionToken,
-  });
-
-  factory CurrentUser.fromJson(Map<String, dynamic> json) {
-    return CurrentUser(
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
-      sessionToken: json['sessionToken'] as String,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'user': user.toJson(),
-      'sessionToken': sessionToken,
-    };
-  }
+  factory CurrentUser.fromJson(Map<String, dynamic> json) =>
+      _$CurrentUserFromJson(json);
 }
 
 @riverpod
