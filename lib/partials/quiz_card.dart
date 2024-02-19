@@ -16,7 +16,6 @@ class QuizCard extends StatelessWidget {
     return OptionCard(
       label: name,
       color: greenColor,
-      // TODO: add routing to view quiz summary
       onTap: () => context.push('/all-quizzes/quiz/$name'),
     );
   }

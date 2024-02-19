@@ -16,4 +16,15 @@ final class _$UsersService extends UsersService {
 
   @override
   final Type definitionType = UsersService;
+
+  @override
+  Future<Response<Map<String, dynamic>>> getCurrent() {
+    final Uri $url = Uri.parse('/user');
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
+  }
 }

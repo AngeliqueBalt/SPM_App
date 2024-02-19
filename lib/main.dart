@@ -2,8 +2,10 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:student_progress_monitor_app/data/network/admin.dart';
 import 'package:student_progress_monitor_app/data/network/authentication.dart';
 import 'package:student_progress_monitor_app/data/network/network.dart';
+import 'package:student_progress_monitor_app/data/network/users.dart';
 import 'package:student_progress_monitor_app/routes.dart';
 
 const FlutterSecureStorage storage = FlutterSecureStorage(
@@ -16,6 +18,8 @@ const FlutterSecureStorage storage = FlutterSecureStorage(
 final _apiClient = setUpClient(
   services: [
     AuthenticationService.create(),
+    UsersService.create(),
+    AdminService.create(),
   ],
 );
 

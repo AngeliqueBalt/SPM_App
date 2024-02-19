@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/network/authentication.dart';
 import 'package:student_progress_monitor_app/main.dart';
+import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 
 part 'authentication_provider.freezed.dart';
@@ -33,7 +34,7 @@ class Authentication extends _$Authentication {
     final response = await getApiService<AuthenticationService>()
         .login(email: email, password: password);
 
-    final currentUser = CurrentUser.fromJson(response.body!['payload']!);
+    final currentUser = Api.unwrap(CurrentUser.fromJson, response)!.payload;
     await writeToStorage(currentUser);
     state = AsyncData(currentUser);
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/screens/teacher/current_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/new_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summary_screen.dart';
 
 /// Where teachers can manage quizzes for the class previously selected.
 /// Teachers can add a new quiz, view the current quiz, or view all previous quizzes.
@@ -46,12 +46,12 @@ class ManageQuizScreen extends StatelessWidget {
               // redirects to view the most recently added quiz
               OptionCard(
                 label: "Current Quiz",
-                color: const Color(0xFF99C24D),
-                // TODO: when pressed, shows current quiz/quiz that was just added
+                color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const CurrentQuizScreen(),
+                      builder: (context) =>
+                          const TeacherQuizSummaryScreen(name: "Current"),
                     ),
                   );
                 },
@@ -59,7 +59,7 @@ class ManageQuizScreen extends StatelessWidget {
               const SizedBox(height: 20),
               // redirects to a list of all previous quizzes
               OptionCard(
-                label: "Quiz History",
+                label: "All Quizzes",
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(

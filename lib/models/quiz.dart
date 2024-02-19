@@ -9,6 +9,7 @@ class Quiz with _$Quiz {
   const factory Quiz({
     required String name,
     required List<Question> questions,
+    // required List<int> score,
   }) = _Quiz;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
@@ -25,11 +26,12 @@ class Question with _$Question {
       _$QuestionFromJson(json);
 
   factory Question.empty({required int answerCount}) => Question(
-      question: "",
-      answers: List.filled(
-        answerCount,
-        Answer.empty,
-      ));
+        question: "",
+        answers: List.filled(
+          answerCount,
+          Answer.empty,
+        ),
+      );
 }
 
 @freezed

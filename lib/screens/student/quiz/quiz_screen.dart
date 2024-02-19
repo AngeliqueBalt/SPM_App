@@ -10,11 +10,13 @@ import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.
 // TODO: Quiz should be saved to the database so that can later be retrieved again
 
 class QuizScreen extends StatefulWidget {
-  final List<Question> questions;
+  // final List<Questions> questions;
+  final Quiz quiz;
 
   const QuizScreen({
     super.key,
-    required this.questions,
+    required this.quiz,
+    // required this.questions,
   });
 
   @override
@@ -41,9 +43,9 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          "Quiz",
-          style: TextStyle(
+        title: Text(
+          widget.quiz.name,
+          style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
         backgroundColor: greenColor,
@@ -61,7 +63,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 isPressed = false;
               });
             },
-            itemCount: widget.questions.length,
+            itemCount: widget.quiz.questions.length,
             itemBuilder: (context, index) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +72,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      "Question ${index + 1} / ${widget.questions.length}",
+                      "Question ${index + 1} / ${widget.quiz.questions.length}",
                       style: const TextStyle(
                           fontWeight: FontWeight.w300, fontSize: 30),
                     ),
@@ -83,7 +85,8 @@ class _QuizScreenState extends State<QuizScreen> {
                     height: 20,
                   ),
                   Text(
-                    widget.questions[index].question,
+                    widget.quiz.questions[index].question,
+                    // widget.question[index].question,
                     style: const TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
@@ -91,7 +94,8 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   // Buttons for answer options
                   for (int i = 0;
-                      i < widget.questions[index].answers.length;
+                      // i < widget.questions[index].answers.length;
+                      i < widget.quiz.questions[index].answers.length;
                       i++)
                     Container(
                       width: double.infinity,
@@ -103,7 +107,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         ),
                         color: isPressed
-                            ? widget.questions[index].answers[i].isCorrect
+                            ? widget.quiz.questions[index].answers[i].isCorrect
                                 ? correctAns
                                 : wrongAns
                             : btnColor,
@@ -114,13 +118,13 @@ class _QuizScreenState extends State<QuizScreen> {
                                 setState(() {
                                   isPressed = true;
                                 });
-                                if (widget
-                                    .questions[index].answers[i].isCorrect) {
+                                if (widget.quiz.questions[index].answers[i]
+                                    .isCorrect) {
                                   score += 10;
                                 }
                               },
                         child: Text(
-                          widget.questions[index].answers[i].answer,
+                          widget.quiz.questions[index].answers[i].answer,
                           style: const TextStyle(fontSize: 17),
                         ),
                       ),
@@ -135,7 +139,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       // once reaches the end, redirects to result screen
                       OutlinedButton(
                         onPressed: isPressed
-                            ? index + 1 == widget.questions.length
+                            ? index + 1 == widget.quiz.questions.length
                                 ? () {
                                     Navigator.push(
                                       context,
@@ -161,7 +165,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         ),
                         child: Text(
-                          index + 1 == widget.questions.length
+                          index + 1 == widget.quiz.questions.length
                               ? "See Results"
                               : "Next Question",
                         ),

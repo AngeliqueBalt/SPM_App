@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/data/network/users.dart';
+import 'package:student_progress_monitor_app/main.dart';
+import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 
 /// Allows the user to view their profile details.

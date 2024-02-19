@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/score_chart.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/data/mock/questions.dart';
 import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
 
 class TeacherQuizSummaryScreen extends StatefulWidget {
@@ -39,7 +40,12 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 15),
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: const Text("Activate Quiz"),
+                  ),
+                  const SizedBox(height: 15),
                   Container(
                     color: greenColor,
                     height: 30,
@@ -77,9 +83,8 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
                   // TODO: get the quiz questions and answers from the database to be displayed for each quiz
-                  // DisplayQuizQuestions(),
+                  DisplayQuizQuestions(questions: questions),
                 ],
               ),
             ],

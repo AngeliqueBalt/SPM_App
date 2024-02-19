@@ -19,17 +19,6 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summar
 
 part 'routes.g.dart';
 
-final Class clazz = classes[0];
-final List<User> teachers = [
-  const User(
-    id: '55ef528e-99bf-45f1-b0b3-5689c35bc7bf',
-    name: "Ethan Anderson",
-    email: "Ethan@school.com",
-    idNumber: "SCH-T0001",
-    userType: UserType.teacher,
-  ),
-];
-
 @riverpod
 GoRouter router(RouterRef ref) {
   final isAuthenticatedState = ref.watch(isAuthenticatedProvider);
@@ -64,7 +53,7 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: '/admin',
         builder: (BuildContext context, GoRouterState state) {
-          return AdminDashboard(teachers: teachers);
+          return const AdminDashboard();
         },
         redirect: (BuildContext context, GoRouterState state) {
           if (!isAdmin) {
@@ -87,7 +76,6 @@ GoRouter router(RouterRef ref) {
               if (isTeacher) {
                 return TeacherClassScreen(
                   name: state.pathParameters['classId']!,
-                  clazz: clazz,
                 );
               } else {
                 return StudentClassScreen(

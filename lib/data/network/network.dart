@@ -9,7 +9,7 @@ ChopperClient setUpClient({required final Iterable<ChopperService> services}) {
     errorConverter: const JsonConverter(),
     interceptors: [
       (final Request request) async {
-        if (request.uri.path == '/api/_auth/login') return request;
+        if (request.uri.path == '/_auth/login') return request;
 
         final currentUser = await Authentication.readFromStorage();
 

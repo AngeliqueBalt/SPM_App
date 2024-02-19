@@ -36,6 +36,7 @@ class StudentClassScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
+              // TODO: IF NO QUIZ - ADD DIALOG TO SAY NO QUIZ TO TAKE
               OptionCard(
                 label: "Take Quiz",
                 color: greenColor,
@@ -43,7 +44,7 @@ class StudentClassScreen extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => QuizScreen(
-                        questions: questions,
+                        quiz: sampleQuiz,
                       ),
                     ),
                   );
@@ -51,7 +52,7 @@ class StudentClassScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               OptionCard(
-                label: "Quiz History",
+                label: "All Quizzes",
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(

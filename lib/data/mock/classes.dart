@@ -15,7 +15,8 @@ List<Class> classes = classNames
     .map((name) => Class(
           id: name,
           name: name,
-          teacher: teacher,
+          teacher: teachers[0],
           students: students,
+          quizzes: [],
         ))
     .toList();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/data/mock/classes.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
@@ -11,12 +12,10 @@ import 'package:student_progress_monitor_app/screens/teacher/students_list_scree
 
 class TeacherClassScreen extends StatelessWidget {
   final String name;
-  final Class clazz;
 
   const TeacherClassScreen({
     super.key,
     required this.name,
-    required this.clazz,
   });
 
   @override
@@ -44,7 +43,8 @@ class TeacherClassScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => StudentListScreen(clazz: clazz),
+                      builder: (context) =>
+                          StudentListScreen(clazz: classes[0]),
                     ),
                   );
                 },

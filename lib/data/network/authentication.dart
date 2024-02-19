@@ -1,14 +1,15 @@
 import 'package:chopper/chopper.dart';
+import 'package:student_progress_monitor_app/models/api.dart';
 
 part 'authentication.chopper.dart';
 
-@ChopperApi(baseUrl: '/api/_auth')
+@ChopperApi(baseUrl: '/_auth')
 abstract class AuthenticationService extends ChopperService {
   static AuthenticationService create([ChopperClient? client]) =>
       _$AuthenticationService(client);
 
   @Post(path: '/login')
-  Future<Response<Map<String, dynamic>>> login({
+  Future<RawApiResponse> login({
     @Field() required String email,
     @Field() required String password,
   });

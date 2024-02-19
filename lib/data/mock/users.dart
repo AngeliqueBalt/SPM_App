@@ -1,12 +1,14 @@
 import 'package:student_progress_monitor_app/models/user.dart';
 
-User teacher = const User(
-  id: '55ef528e-99bf-45f1-b0b3-5689c35bc7bf',
-  name: "Ethan Anderson",
-  email: "Ethan@school.com",
-  idNumber: "SCH-T0001",
-  userType: UserType.teacher,
-);
+List<User> teachers = const [
+  User(
+    id: '55ef528e-99bf-45f1-b0b3-5689c35bc7bf',
+    name: "Ethan Anderson",
+    email: "Ethan@school.com",
+    idNumber: "SCH-T0001",
+    userType: UserType.teacher,
+  ),
+];
 
 List<User> students = const [
   User(
@@ -45,3 +47,14 @@ List<User> students = const [
     userType: UserType.student,
   ),
 ];
+
+List<User> admins = const [
+  User(
+    id: 'b2164e08-7c34-4d93-81d1-1be836bb9bcf',
+    name: "Aurora Blake",
+    email: "Aurora@school.com",
+    userType: UserType.admin,
+  ),
+];
+
+List<User> users = [...teachers, ...students, ...admins];

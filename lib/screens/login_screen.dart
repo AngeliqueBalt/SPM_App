@@ -64,7 +64,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                     ),
                     prefixIcon:
                         const Icon(Icons.person_outline, color: Colors.grey),
-                    hintText: "Email",
+                    labelText: "Email",
                     hintStyle: const TextStyle(color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey.withOpacity(0.2),
@@ -86,7 +86,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                     ),
                     prefixIcon:
                         const Icon(Icons.lock_outline, color: Colors.grey),
-                    hintText: "Password",
+                    labelText: "Password",
                     hintStyle: const TextStyle(color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey.withOpacity(0.2),

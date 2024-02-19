@@ -3,8 +3,10 @@
 
 import 'package:student_progress_monitor_app/models/quiz.dart';
 
+Quiz sampleQuiz = Quiz(name: "SAMPLE QUIZ", questions: questions);
+
 List<Question> questions = [
-  Question(
+  const Question(
     question: 'What does CPU stand for?',
     answers: [
       Answer(answer: "Central Processing Unit", isCorrect: true),
@@ -13,7 +15,7 @@ List<Question> questions = [
       Answer(answer: "Central Peripheral Unit", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'What does RAM stand for?',
     answers: [
       Answer(answer: "Random Access Memory", isCorrect: true),
@@ -22,7 +24,7 @@ List<Question> questions = [
       Answer(answer: "Random Access Method", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'What does ROM stand for?',
     answers: [
       Answer(answer: "Read Only Memory", isCorrect: true),
@@ -31,7 +33,7 @@ List<Question> questions = [
       Answer(answer: "Read Only Method", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'What does GPU stand for?',
     answers: [
       Answer(answer: "Graphics Processing Unit", isCorrect: true),
@@ -40,7 +42,7 @@ List<Question> questions = [
       Answer(answer: "Graphics Peripheral Unit", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'What is the purpose of a web browser?',
     answers: [
       Answer(answer: "To create documents", isCorrect: false),
@@ -49,7 +51,7 @@ List<Question> questions = [
       Answer(answer: "To edit images", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'Which file format is commonly used for compressed archives?',
     answers: [
       Answer(answer: "TXT", isCorrect: false),
@@ -58,7 +60,7 @@ List<Question> questions = [
       Answer(answer: "DOC", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'Which of the following is a programming language?',
     answers: [
       Answer(answer: "JPEG", isCorrect: false),
@@ -67,7 +69,7 @@ List<Question> questions = [
       Answer(answer: "PNG", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'Which is the file extension of a text file?',
     answers: [
       Answer(answer: ".txt", isCorrect: true),
@@ -76,7 +78,7 @@ List<Question> questions = [
       Answer(answer: ".jpg", isCorrect: false),
     ],
   ),
-  Question(
+  const Question(
     question: 'What does the "WWW" in a website URL stand for?',
     answers: [
       Answer(answer: "Web World Wide", isCorrect: false),
@@ -85,7 +87,7 @@ List<Question> questions = [
       Answer(answer: "World Wide Web", isCorrect: true),
     ],
   ),
-  Question(
+  const Question(
     question: 'Which device is used to input data into a computer?',
     answers: [
       Answer(answer: "Monitor", isCorrect: false),

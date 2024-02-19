@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'authentication.dart';
+part of 'admin.dart';
 
 // **************************************************************************
 // ChopperGenerator
@@ -8,25 +8,31 @@ part of 'authentication.dart';
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-final class _$AuthenticationService extends AuthenticationService {
-  _$AuthenticationService([ChopperClient? client]) {
+final class _$AdminService extends AdminService {
+  _$AdminService([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;
   }
 
   @override
-  final Type definitionType = AuthenticationService;
+  final Type definitionType = AdminService;
 
   @override
-  Future<Response<Map<String, dynamic>>> login({
-    required String email,
-    required String password,
-  }) {
-    final Uri $url = Uri.parse('/_auth/login');
-    final $body = <String, dynamic>{
-      'email': email,
-      'password': password,
-    };
+  Future<Response<Map<String, dynamic>>> getAll() {
+    final Uri $url = Uri.parse('/admin/users');
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
+  }
+
+  @override
+  Future<Response<Map<String, dynamic>>> addUser(
+      {required Map<String, dynamic> body}) {
+    final Uri $url = Uri.parse('/admin/users');
+    final $body = body;
     final Request $request = Request(
       'POST',
       $url,
@@ -34,16 +40,5 @@ final class _$AuthenticationService extends AuthenticationService {
       body: $body,
     );
     return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
-  }
-
-  @override
-  Future<Response<dynamic>> logout() {
-    final Uri $url = Uri.parse('/_auth/logout');
-    final Request $request = Request(
-      'POST',
-      $url,
-      client.baseUrl,
-    );
-    return client.send<dynamic, dynamic>($request);
   }
 }
