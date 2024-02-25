@@ -7,7 +7,7 @@ class DisplayQuizQuestions extends StatelessWidget {
   const DisplayQuizQuestions({super.key, required this.questions});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
@@ -19,7 +19,7 @@ class DisplayQuizQuestions extends StatelessWidget {
                   height: 750,
                   child: ListView.builder(
                     itemCount: questions.length,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (final context, final index) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

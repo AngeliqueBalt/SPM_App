@@ -18,7 +18,7 @@ class StudentClassScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -36,14 +36,14 @@ class StudentClassScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              // TODO: IF NO QUIZ - ADD DIALOG TO SAY NO QUIZ TO TAKE
+              // TODO(A): IF NO QUIZ - ADD DIALOG TO SAY NO QUIZ TO TAKE
               OptionCard(
                 label: "Take Quiz",
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => QuizScreen(
+                    MaterialPageRoute<void>(
+                      builder: (final context) => QuizScreen(
                         quiz: sampleQuiz,
                       ),
                     ),
@@ -56,8 +56,8 @@ class StudentClassScreen extends StatelessWidget {
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const AllQuizzesScreen(),
+                    MaterialPageRoute<void>(
+                      builder: (final context) => const AllQuizzesScreen(),
                     ),
                   );
                 },

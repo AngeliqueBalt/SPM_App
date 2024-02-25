@@ -12,7 +12,7 @@ class ManageQuizScreen extends StatelessWidget {
   const ManageQuizScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -36,8 +36,8 @@ class ManageQuizScreen extends StatelessWidget {
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NewQuizScreen(),
+                    MaterialPageRoute<void>(
+                      builder: (final context) => const NewQuizScreen(),
                     ),
                   );
                 },
@@ -49,8 +49,8 @@ class ManageQuizScreen extends StatelessWidget {
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
+                    MaterialPageRoute<void>(
+                      builder: (final context) =>
                           const TeacherQuizSummaryScreen(name: "Current"),
                     ),
                   );
@@ -63,8 +63,9 @@ class ManageQuizScreen extends StatelessWidget {
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TeacherAllQuizzesScreen(),
+                    MaterialPageRoute<void>(
+                      builder: (final context) =>
+                          const TeacherAllQuizzesScreen(),
                     ),
                   );
                 },

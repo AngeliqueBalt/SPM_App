@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
-import 'package:student_progress_monitor_app/data/mock/users.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/screens/admin/admin_dashboard.dart';
@@ -20,7 +18,7 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summar
 part 'routes.g.dart';
 
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(final RouterRef ref) {
   final isAuthenticatedState = ref.watch(isAuthenticatedProvider);
 
   final currentUser = ref.watch(authenticationProvider).value;
@@ -32,7 +30,7 @@ GoRouter router(RouterRef ref) {
       // Loading
       GoRoute(
         path: '/_loading',
-        builder: (BuildContext context, GoRouterState state) {
+        builder: (final BuildContext context, final GoRouterState state) {
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
@@ -44,7 +42,7 @@ GoRouter router(RouterRef ref) {
       // Authentication
       GoRoute(
         path: '/login',
-        builder: (BuildContext context, GoRouterState state) {
+        builder: (final BuildContext context, final GoRouterState state) {
           return const LogInScreen();
         },
       ),
@@ -52,10 +50,10 @@ GoRouter router(RouterRef ref) {
       // Admin dashboard
       GoRoute(
         path: '/admin',
-        builder: (BuildContext context, GoRouterState state) {
+        builder: (final BuildContext context, final GoRouterState state) {
           return const AdminDashboard();
         },
-        redirect: (BuildContext context, GoRouterState state) {
+        redirect: (final BuildContext context, final GoRouterState state) {
           if (!isAdmin) {
             return '/login';
           }
@@ -66,13 +64,13 @@ GoRouter router(RouterRef ref) {
       // Dashboard
       GoRoute(
         path: '/',
-        builder: (BuildContext context, GoRouterState state) {
+        builder: (final BuildContext context, final GoRouterState state) {
           return HomeScreen(classes: classes);
         },
         routes: <RouteBase>[
           GoRoute(
             path: 'class/:classId',
-            builder: (BuildContext context, GoRouterState state) {
+            builder: (final BuildContext context, final GoRouterState state) {
               if (isTeacher) {
                 return TeacherClassScreen(
                   name: state.pathParameters['classId']!,
@@ -89,7 +87,7 @@ GoRouter router(RouterRef ref) {
       // Quiz Summary
       GoRoute(
         path: '/all-quizzes',
-        builder: (BuildContext context, GoRouterState state) {
+        builder: (final BuildContext context, final GoRouterState state) {
           if (isTeacher) {
             return const TeacherAllQuizzesScreen();
           } else {
@@ -99,7 +97,7 @@ GoRouter router(RouterRef ref) {
         routes: <RouteBase>[
           GoRoute(
             path: 'quiz/:quizId',
-            builder: (BuildContext context, GoRouterState state) {
+            builder: (final BuildContext context, final GoRouterState state) {
               if (isTeacher) {
                 return TeacherQuizSummaryScreen(
                     name: state.pathParameters['quizId']!);
@@ -113,18 +111,18 @@ GoRouter router(RouterRef ref) {
 
       GoRoute(
         path: '/manage-quizzes',
-        builder: (BuildContext context, GoRouterState state) {
+        builder: (final BuildContext context, final GoRouterState state) {
           return const ManageQuizScreen();
         },
       ),
     ],
 
     // Authentication
-    redirect: (context, routerState) {
+    redirect: (final context, final routerState) {
       if (isAuthenticatedState.isLoading) return '/_loading';
 
-      bool requiresAuth = routerState.fullPath! != '/login';
-      bool isAuthenticated = isAuthenticatedState.requireValue;
+      final bool requiresAuth = routerState.fullPath! != '/login';
+      final bool isAuthenticated = isAuthenticatedState.requireValue;
 
       if (isAuthenticated || isTeacher && isAuthenticated) {
         if (requiresAuth != isAuthenticated) return '/';

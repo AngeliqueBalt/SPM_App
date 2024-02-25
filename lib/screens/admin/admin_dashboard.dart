@@ -4,7 +4,6 @@ import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
-import 'package:student_progress_monitor_app/data/mock/users.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/users_provider.dart';
 import 'package:student_progress_monitor_app/screens/admin/class_list_screen.dart';
@@ -16,7 +15,7 @@ class AdminDashboard extends ConsumerWidget {
   const AdminDashboard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     final users = ref.watch(usersProvider.future);
 
     return Scaffold(
@@ -37,7 +36,7 @@ class AdminDashboard extends ConsumerWidget {
         child: SafeArea(
           child: FutureBuilder(
               future: users,
-              builder: (context, snapshot) {
+              builder: (final context, final snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -70,8 +69,8 @@ class AdminDashboard extends ConsumerWidget {
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => UserList(
+                            MaterialPageRoute<void>(
+                              builder: (final context) => UserList(
                                   users: users, userType: UserType.student),
                             ),
                           );
@@ -83,8 +82,8 @@ class AdminDashboard extends ConsumerWidget {
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => UserList(
+                            MaterialPageRoute<void>(
+                              builder: (final context) => UserList(
                                   users: users, userType: UserType.teacher),
                             ),
                           );
@@ -96,8 +95,8 @@ class AdminDashboard extends ConsumerWidget {
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => UserList(
+                            MaterialPageRoute<void>(
+                              builder: (final context) => UserList(
                                   users: users, userType: UserType.admin),
                             ),
                           );
@@ -109,8 +108,8 @@ class AdminDashboard extends ConsumerWidget {
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const AddNewUser(),
+                            MaterialPageRoute<void>(
+                              builder: (final context) => const AddNewUser(),
                             ),
                           );
                         },
@@ -136,8 +135,8 @@ class AdminDashboard extends ConsumerWidget {
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
+                            MaterialPageRoute<void>(
+                              builder: (final context) =>
                                   AdminClassList(clazzes: classes),
                             ),
                           );
@@ -149,8 +148,8 @@ class AdminDashboard extends ConsumerWidget {
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const AddNewClass(),
+                            MaterialPageRoute<void>(
+                              builder: (final context) => const AddNewClass(),
                             ),
                           );
                         },

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class ScoreChart extends StatelessWidget {
   const ScoreChart({super.key});
 
-  // TODO: value will be replaced with scores as percentages
+  // TODO(A): value will be replaced with scores as percentages
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return PieChart(
       swapAnimationDuration: const Duration(milliseconds: 400), // Optional
       swapAnimationCurve: Curves.easeInOut,

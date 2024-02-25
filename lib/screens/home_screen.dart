@@ -14,7 +14,7 @@ class HomeScreen extends ConsumerWidget {
   final List<Class> classes;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     return Scaffold(
       drawer: NavBar(classes: classes),
       appBar: AppBar(
@@ -52,7 +52,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  for (var lesson in classes) ...[
+                  for (final lesson in classes) ...[
                     ClassCard(lesson: lesson),
                     const SizedBox(height: 20),
                   ],

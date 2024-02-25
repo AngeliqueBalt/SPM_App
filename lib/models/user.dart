@@ -14,12 +14,12 @@ enum UserType {
 
   const UserType({
     required this.value,
-    String? label,
+    final String? label,
   }) : label = label ?? value;
 
-  static UserType? fromValue(String value) {
+  static UserType? fromValue(final String value) {
     return UserType.values
-        .where((userType) => userType.value == value)
+        .where((final userType) => userType.value == value)
         .firstOrNull;
   }
 }
@@ -27,12 +27,13 @@ enum UserType {
 @freezed
 class User with _$User {
   const factory User({
-    required String id,
-    required String name,
-    required String email,
-    required UserType userType,
-    String? idNumber,
+    required final String id,
+    required final String name,
+    required final String email,
+    required final UserType userType,
+    final String? idNumber,
   }) = _User;
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromJson(final Map<String, dynamic> json) =>
+      _$UserFromJson(json);
 }

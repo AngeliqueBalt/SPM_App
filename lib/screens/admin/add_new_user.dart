@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/network/admin.dart';
-import 'package:student_progress_monitor_app/main.dart';
-import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
+import 'package:student_progress_monitor_app/providers/users_provider.dart';
 
 class AddNewUser extends ConsumerStatefulWidget {
   const AddNewUser({super.key});
@@ -45,7 +43,7 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -93,7 +91,7 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                       enableSearch: true,
                       enableFilter: true,
                       label: const Text("Type of user"),
-                      onSelected: (value) {
+                      onSelected: (final value) {
                         _userType = value;
                       },
                       dropdownMenuEntries: const <DropdownMenuEntry<UserType>>[
@@ -130,7 +128,7 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                     child: TextFormField(
                       enabled: !_loading,
                       controller: _nameController,
-                      validator: (value) => value?.trim().isEmpty ?? true
+                      validator: (final value) => value?.trim().isEmpty ?? true
                           ? "You need to enter a full name"
                           : null,
                       decoration: const InputDecoration(
@@ -163,7 +161,7 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                     child: TextFormField(
                       enabled: !_loading,
                       controller: _idController,
-                      validator: (value) => value?.trim().isEmpty ?? true
+                      validator: (final value) => value?.trim().isEmpty ?? true
                           ? "You need to enter an ID"
                           : null,
                       decoration: const InputDecoration(
@@ -197,7 +195,7 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                     child: TextFormField(
                       enabled: !_loading,
                       controller: _emailController,
-                      validator: (value) {
+                      validator: (final value) {
                         if (value?.trim().isEmpty ?? true) {
                           return "You need to enter valid email";
                         }
@@ -246,7 +244,7 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                     child: TextFormField(
                       enabled: !_loading,
                       controller: _passwordController,
-                      validator: (value) => value?.trim().isEmpty ?? true
+                      validator: (final value) => value?.trim().isEmpty ?? true
                           ? "You need to enter a password"
                           : null,
                       decoration: const InputDecoration(
@@ -278,8 +276,8 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                           setState(() {
                             _loading = true;
                           });
-                          final response = await getApiService<AdminService>()
-                              .addUser(body: {
+
+                          await ref.read(usersProvider.notifier).addUser(body: {
                             "user": {
                               "email": "${_emailController.text}$_domain",
                               "name": _nameController.text,
@@ -289,13 +287,8 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                             "password": _passwordController.text,
                           });
 
-                          final data = Api.unwrap<Map<String, dynamic>>(
-                              (data) => data, response);
-
-                          if (data?.success ?? false) {
-                            if (context.mounted) {
-                              context.pop();
-                            }
+                          if (context.mounted) {
+                            context.pop();
                           }
                         },
                         child: const Text("Create new user"),

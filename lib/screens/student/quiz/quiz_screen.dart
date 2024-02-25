@@ -6,8 +6,8 @@ import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.
 /// The most recent quiz assigned to the student.
 /// Students answer questions and are given a score at the end.
 
-// TODO: Score should be saved to the database
-// TODO: Quiz should be saved to the database so that can later be retrieved again
+// TODO(A): Score should be saved to the database
+// TODO(A): Quiz should be saved to the database so that can later be retrieved again
 
 class QuizScreen extends StatefulWidget {
   // final List<Questions> questions;
@@ -39,7 +39,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int score = 0;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -58,13 +58,13 @@ class _QuizScreenState extends State<QuizScreen> {
           child: PageView.builder(
             physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
-            onPageChanged: (page) {
+            onPageChanged: (final page) {
               setState(() {
                 isPressed = false;
               });
             },
             itemCount: widget.quiz.questions.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (final context, final index) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,8 +143,8 @@ class _QuizScreenState extends State<QuizScreen> {
                                 ? () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
+                                      MaterialPageRoute<void>(
+                                        builder: (final context) =>
                                             ResultScreen(score: score),
                                       ),
                                     );

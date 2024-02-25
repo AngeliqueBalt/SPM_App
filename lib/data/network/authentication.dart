@@ -5,15 +5,15 @@ part 'authentication.chopper.dart';
 
 @ChopperApi(baseUrl: '/_auth')
 abstract class AuthenticationService extends ChopperService {
-  static AuthenticationService create([ChopperClient? client]) =>
+  static AuthenticationService create([final ChopperClient? client]) =>
       _$AuthenticationService(client);
 
   @Post(path: '/login')
   Future<RawApiResponse> login({
-    @Field() required String email,
-    @Field() required String password,
+    @Field() required final String email,
+    @Field() required final String password,
   });
 
   @Post(path: '/logout', optionalBody: true)
-  Future<Response> logout();
+  Future<Response<void>> logout();
 }

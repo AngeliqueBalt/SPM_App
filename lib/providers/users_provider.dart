@@ -1,3 +1,4 @@
+import 'package:riverpod/src/framework.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/network/admin.dart';
 import 'package:student_progress_monitor_app/main.dart';
@@ -17,4 +18,45 @@ class Users extends _$Users {
   Future<void> refresh() async {
     state = await AsyncValue.guard(build);
   }
+
+  Future<void> addUser({required final Map<String, dynamic> body}) async {
+    final response = await getApiService<AdminService>().addUser(body: body);
+
+    final data =
+        Api.unwrap<Map<String, dynamic>>((final data) => data, response);
+
+    if (data?.success ?? false) {
+      final user = User.fromJson(data?.payload["user"] as Map<String, dynamic>);
+
+      if (state.isLoading || state.hasError) {
+        throw StateError(
+            "Tried to update list of users while it was being updated");
+      }
+
+      final current = state.requireValue;
+
+      state = AsyncData([...current, user]);
+    }
+  }
+
+  Future<void> removeUser({required final String id}) async {
+    final response = await getApiService<AdminService>().removeUser(id: id);
+
+    final data =
+        Api.unwrap<Map<String, dynamic>>((final data) => data, response);
+
+    if (data?.success ?? false) {
+      if (state.isLoading || state.hasError) {
+        throw StateError(
+            "Tried to update list of users while it was being updated");
+      }
+
+      final newData =
+          state.requireValue.where((final user) => user.id != id).toList();
+
+      state = AsyncData(newData);
+    }
+  }
+
+// Future<void> editUser() async {}
 }

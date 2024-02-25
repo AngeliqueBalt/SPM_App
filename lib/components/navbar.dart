@@ -14,7 +14,7 @@ class NavBar extends ConsumerWidget {
   final List<Class>? classes;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     final currentUser = ref.watch(authenticationProvider);
     final user = currentUser.requireValue!.user;
 
@@ -55,8 +55,8 @@ class NavBar extends ConsumerWidget {
             title: const Text("Profile"),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ProfileScreen(user: user),
+                MaterialPageRoute<void>(
+                  builder: (final context) => ProfileScreen(user: user),
                 ),
               );
             },

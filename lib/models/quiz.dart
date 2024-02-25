@@ -7,25 +7,26 @@ part 'quiz.g.dart';
 @freezed
 class Quiz with _$Quiz {
   const factory Quiz({
-    required String name,
-    required List<Question> questions,
+    required final String name,
+    required final List<Question> questions,
     // required List<int> score,
   }) = _Quiz;
 
-  factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
+  factory Quiz.fromJson(final Map<String, dynamic> json) =>
+      _$QuizFromJson(json);
 }
 
 @freezed
 class Question with _$Question {
   const factory Question({
-    required String question,
-    required List<Answer> answers,
+    required final String question,
+    required final List<Answer> answers,
   }) = _Question;
 
-  factory Question.fromJson(Map<String, dynamic> json) =>
+  factory Question.fromJson(final Map<String, dynamic> json) =>
       _$QuestionFromJson(json);
 
-  factory Question.empty({required int answerCount}) => Question(
+  factory Question.empty({required final int answerCount}) => Question(
         question: "",
         answers: List.filled(
           answerCount,
@@ -37,11 +38,12 @@ class Question with _$Question {
 @freezed
 class Answer with _$Answer {
   const factory Answer({
-    required String answer,
-    required bool isCorrect,
+    required final String answer,
+    required final bool isCorrect,
   }) = _Answer;
 
-  factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
+  factory Answer.fromJson(final Map<String, dynamic> json) =>
+      _$AnswerFromJson(json);
 
   static const Answer empty = Answer(answer: "", isCorrect: false);
 }

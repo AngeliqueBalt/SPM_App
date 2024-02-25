@@ -14,11 +14,11 @@ part 'authentication_provider.g.dart';
 @freezed
 class CurrentUser with _$CurrentUser {
   factory CurrentUser({
-    required User user,
-    required String sessionToken,
+    required final User user,
+    required final String sessionToken,
   }) = _CurrentUser;
 
-  factory CurrentUser.fromJson(Map<String, dynamic> json) =>
+  factory CurrentUser.fromJson(final Map<String, dynamic> json) =>
       _$CurrentUserFromJson(json);
 }
 
@@ -26,10 +26,11 @@ class CurrentUser with _$CurrentUser {
 class Authentication extends _$Authentication {
   @override
   Future<CurrentUser?> build() async {
-    return await readFromStorage();
+    return readFromStorage();
   }
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login(
+      {required final String email, required final String password}) async {
     state = const AsyncLoading();
     final response = await getApiService<AuthenticationService>()
         .login(email: email, password: password);
@@ -48,12 +49,12 @@ class Authentication extends _$Authentication {
 
   static Future<void> writeToStorage(final CurrentUser? user) async {
     if (user != null) {
-      storage.write(
+      await storage.write(
         key: "user",
         value: jsonEncode(user.toJson()),
       );
     } else {
-      storage.delete(key: "user");
+      await storage.delete(key: "user");
     }
   }
 
@@ -62,13 +63,13 @@ class Authentication extends _$Authentication {
     if (userString == null) {
       return null;
     }
-    final Map<String, dynamic> userMap = jsonDecode(userString);
+    final userMap = jsonDecode(userString) as Map<String, dynamic>;
     return CurrentUser.fromJson(userMap);
   }
 }
 
 @riverpod
-AsyncValue<bool> isAuthenticated(IsAuthenticatedRef ref) {
+AsyncValue<bool> isAuthenticated(final IsAuthenticatedRef ref) {
   final currentUser = ref.watch(authenticationProvider);
 
   if (currentUser.hasError) return const AsyncData(false);

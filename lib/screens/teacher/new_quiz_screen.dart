@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
@@ -22,7 +21,7 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
   final PageController _controller = PageController(initialPage: 0);
 
   final List<GlobalKey<FormState>> _formKeys =
-      List.generate(quizLength, (_) => GlobalKey<FormState>());
+      List.generate(quizLength, (final _) => GlobalKey<FormState>());
 
   bool get isFirstPage => _controller.hasClients ? _controller.page! < 1 : true;
 
@@ -49,7 +48,7 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -66,12 +65,12 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
         physics: const NeverScrollableScrollPhysics(),
         controller: _controller,
         itemCount: quizLength,
-        itemBuilder: (context, index) {
+        itemBuilder: (final context, final index) {
           return NewQuizScreenQuestion(
             quizLength: quizLength,
             index: index,
             question: questions[index],
-            onQuestionChanged: (question) {
+            onQuestionChanged: (final question) {
               setState(() {
                 questions[index] = question;
               });
@@ -150,8 +149,8 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => QuizOverviewScreen(questions: questions),
+        MaterialPageRoute<void>(
+          builder: (final context) => QuizOverviewScreen(questions: questions),
         ),
       );
       return;
@@ -219,7 +218,7 @@ class _NewQuizScreenQuestionState extends State<NewQuizScreenQuestion> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Form(
       key: widget.formKey,
       child: Scrollbar(
@@ -258,12 +257,12 @@ class _NewQuizScreenQuestionState extends State<NewQuizScreenQuestion> {
                 ),
                 TextFormField(
                   controller: _questionController,
-                  validator: (value) {
+                  validator: (final value) {
                     if (value?.trim().isEmpty ?? true) {
                       return "You need to enter a question.";
                     }
                     if (widget.question.answers
-                        .every((answer) => !answer.isCorrect)) {
+                        .every((final answer) => !answer.isCorrect)) {
                       return "At least one answer must be marked as correct.";
                     }
                     return null;
@@ -290,7 +289,7 @@ class _NewQuizScreenQuestionState extends State<NewQuizScreenQuestion> {
                   NewQuizScreenAnswer(
                     answer: widget.question.answers[i],
                     index: i,
-                    onAnswerChanged: (answer) {
+                    onAnswerChanged: (final answer) {
                       final answers = [...widget.question.answers];
                       answers[i] = answer;
                       widget.onQuestionChanged(
@@ -346,7 +345,7 @@ class _NewQuizScreenAnswerState extends State<NewQuizScreenAnswer> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -356,7 +355,7 @@ class _NewQuizScreenAnswerState extends State<NewQuizScreenAnswer> {
             Expanded(
               child: TextFormField(
                 controller: _answerController,
-                validator: (value) => value?.trim().isEmpty ?? true
+                validator: (final value) => value?.trim().isEmpty ?? true
                     ? "You need to enter a answer"
                     : null,
                 decoration: InputDecoration(
@@ -367,7 +366,7 @@ class _NewQuizScreenAnswerState extends State<NewQuizScreenAnswer> {
             ),
             Checkbox(
               value: widget.answer.isCorrect,
-              onChanged: (bool? newValue) {
+              onChanged: (final bool? newValue) {
                 widget.onAnswerChanged(
                   widget.answer.copyWith(
                     isCorrect: newValue ?? false,

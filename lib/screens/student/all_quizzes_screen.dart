@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/partials/quiz_card.dart';
 
-import '../../partials/class_card.dart';
-
 /// Students can view each of the previous quizzes they have taken.
 /// They can see the score they got on each quiz.
 /// They can see the questions and answers and with the answers.
@@ -16,15 +14,15 @@ class AllQuizzesScreen extends StatefulWidget {
 }
 
 class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
-  // TODO: list of quizzes will be pulled from database
-  final List _quizzes = const [
+  // TODO(A): list of quizzes will be pulled from database
+  final _quizzes = const [
     'Quiz A',
     'Quiz B',
     'Quiz C',
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -46,7 +44,7 @@ class _AllQuizzesScreenState extends State<AllQuizzesScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  for (var theQuiz in _quizzes) ...[
+                  for (final theQuiz in _quizzes) ...[
                     QuizCard(name: theQuiz),
                     const SizedBox(height: 20),
                   ],

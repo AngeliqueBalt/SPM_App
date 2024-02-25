@@ -13,7 +13,7 @@ class ClassCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return OptionCard(
       // label: name,
       label: lesson.name,

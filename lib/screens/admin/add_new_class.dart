@@ -29,7 +29,7 @@ class _AddNewClassState extends State<AddNewClass> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -69,7 +69,7 @@ class _AddNewClassState extends State<AddNewClass> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: _classNameController,
-                  validator: (value) => value?.trim().isEmpty ?? true
+                  validator: (final value) => value?.trim().isEmpty ?? true
                       ? "You need to enter a class name"
                       : null,
                   decoration: const InputDecoration(
@@ -106,8 +106,9 @@ class _AddNewClassState extends State<AddNewClass> {
                     enableFilter: true,
                     hintText: "Teacher",
                     dropdownMenuEntries: users
-                        .where((user) => user.userType == UserType.teacher)
-                        .map((user) => DropdownMenuEntry(
+                        .where(
+                            (final user) => user.userType == UserType.teacher)
+                        .map((final user) => DropdownMenuEntry(
                             value: user,
                             label: "${user.name} (${user.idNumber})"))
                         .toList()),
@@ -126,7 +127,7 @@ class _AddNewClassState extends State<AddNewClass> {
                     ),
                   ),
                   onPressed: () {
-                    // TODO: MAKE POST REQUEST
+                    // TODO(A): MAKE POST REQUEST
                   },
                   child: const Text("Create new class"),
                 ),

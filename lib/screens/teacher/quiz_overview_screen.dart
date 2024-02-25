@@ -28,7 +28,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -68,7 +68,7 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                 onPressed: () async {
                   await showDialog<String>(
                     context: context,
-                    builder: (context) => AlertDialog(
+                    builder: (final context) => AlertDialog(
                       title: const Text("Enter quiz name"),
                       content: TextField(
                         controller: _quizNameController,
@@ -88,12 +88,12 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                     ),
                   );
 
-                  // TODO: make JSON
+                  // TODO(A): make JSON
                   // jsonEncode(
                   //   questions.map((question) => question.toJson()).toList(),
                   // ),
 
-                  // TODO: send to cinnamon
+                  // TODO(A): send to cinnamon
 
                   // context.pushReplacement('/manage-quizzes');
                 },

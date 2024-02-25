@@ -17,7 +17,7 @@ class QuizSummaryScreen extends StatefulWidget {
 
 class _QuizSummaryScreenState extends State<QuizSummaryScreen> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -54,7 +54,7 @@ class _QuizSummaryScreenState extends State<QuizSummaryScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // TODO: get the quiz score from the database to be displayed
+                // TODO(A): get the quiz score from the database to be displayed
                 const Center(
                   child: Text(
                     "100",
@@ -79,7 +79,7 @@ class _QuizSummaryScreenState extends State<QuizSummaryScreen> {
                     ),
                   ),
                 ),
-                // TODO: get the quiz questions and answers from the database to be displayed for each quiz
+                // TODO(A): get the quiz questions and answers from the database to be displayed for each quiz
                 const SizedBox(height: 15),
                 DisplayQuizQuestions(questions: questions),
               ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
@@ -19,7 +18,7 @@ class TeacherClassScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -42,8 +41,8 @@ class TeacherClassScreen extends StatelessWidget {
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
+                    MaterialPageRoute<void>(
+                      builder: (final context) =>
                           StudentListScreen(clazz: classes[0]),
                     ),
                   );
@@ -55,8 +54,8 @@ class TeacherClassScreen extends StatelessWidget {
                 color: greenColor,
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const ManageQuizScreen(),
+                    MaterialPageRoute<void>(
+                      builder: (final context) => const ManageQuizScreen(),
                     ),
                   );
                 },

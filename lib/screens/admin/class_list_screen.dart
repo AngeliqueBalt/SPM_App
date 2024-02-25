@@ -10,7 +10,7 @@ class AdminClassList extends StatelessWidget {
   const AdminClassList({super.key, required this.clazzes});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -28,7 +28,7 @@ class AdminClassList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (var clazz in clazzes) ...[
+              for (final clazz in clazzes) ...[
                 const Divider(
                   color: Colors.grey,
                   height: 0,
@@ -67,9 +67,9 @@ class AdminClassList extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () async {
-                                await showDialog(
+                                await showDialog<void>(
                                   context: context,
-                                  builder: (context) => AlertDialog(
+                                  builder: (final context) => AlertDialog(
                                     title: const Text("Edit class"),
                                     content: Column(
                                       children: [
@@ -87,13 +87,14 @@ class AdminClassList extends StatelessWidget {
                                             enableFilter: true,
                                             hintText: "Teacher",
                                             dropdownMenuEntries: users
-                                                .where((user) =>
+                                                .where((final user) =>
                                                     user.userType ==
                                                     UserType.teacher)
-                                                .map((user) => DropdownMenuEntry(
-                                                    value: user,
-                                                    label:
-                                                        "${user.name} (${user.idNumber})"))
+                                                .map((final user) =>
+                                                    DropdownMenuEntry(
+                                                        value: user,
+                                                        label:
+                                                            "${user.name} (${user.idNumber})"))
                                                 .toList()),
                                       ],
                                     ),
@@ -116,7 +117,7 @@ class AdminClassList extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                // TODO: MAKE DELETE REQUEST
+                                // TODO(A): MAKE DELETE REQUEST
                               },
                               icon: const Icon(Icons.delete),
                             ),

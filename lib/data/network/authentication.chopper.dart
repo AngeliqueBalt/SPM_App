@@ -37,13 +37,13 @@ final class _$AuthenticationService extends AuthenticationService {
   }
 
   @override
-  Future<Response<dynamic>> logout() {
+  Future<Response<void>> logout() {
     final Uri $url = Uri.parse('/_auth/logout');
     final Request $request = Request(
       'POST',
       $url,
       client.baseUrl,
     );
-    return client.send<dynamic, dynamic>($request);
+    return client.send<void, void>($request);
   }
 }

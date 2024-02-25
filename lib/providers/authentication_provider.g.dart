@@ -22,7 +22,7 @@ Map<String, dynamic> _$$CurrentUserImplToJson(_$CurrentUserImpl instance) =>
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isAuthenticatedHash() => r'9fcc8f901e3a1a6c376f2987f9762b4b165ac42a';
+String _$isAuthenticatedHash() => r'f0bc29c69243a36f0c81e3e89b439bf91454ba82';
 
 /// See also [isAuthenticated].
 @ProviderFor(isAuthenticated)
@@ -37,7 +37,7 @@ final isAuthenticatedProvider = AutoDisposeProvider<AsyncValue<bool>>.internal(
 );
 
 typedef IsAuthenticatedRef = AutoDisposeProviderRef<AsyncValue<bool>>;
-String _$authenticationHash() => r'6c33fbec22d6eeeacb618c76cfeb8efcf0e0d52f';
+String _$authenticationHash() => r'de2e202b9d9fbbdfc9f0df0466b5fc5c22c8b00f';
 
 /// See also [Authentication].
 @ProviderFor(Authentication)

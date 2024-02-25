@@ -12,7 +12,7 @@ class QuizCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return OptionCard(
       label: name,
       color: greenColor,

@@ -14,15 +14,15 @@ class TeacherAllQuizzesScreen extends StatefulWidget {
 }
 
 class _TeacherAllQuizzesScreenState extends State<TeacherAllQuizzesScreen> {
-// TODO: list of quizzes will be pulled from database
-  final List _quizzes = const [
+// TODO(A): list of quizzes will be pulled from database
+  final _quizzes = const [
     'Quiz A',
     'Quiz B',
     'Quiz C',
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -44,7 +44,7 @@ class _TeacherAllQuizzesScreenState extends State<TeacherAllQuizzesScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  for (var theQuiz in _quizzes) ...[
+                  for (final theQuiz in _quizzes) ...[
                     QuizCard(name: theQuiz),
                     const SizedBox(height: 20),
                   ],

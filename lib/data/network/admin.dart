@@ -5,7 +5,8 @@ part 'admin.chopper.dart';
 
 @ChopperApi(baseUrl: '/admin/users')
 abstract class AdminService extends ChopperService {
-  static AdminService create([ChopperClient? client]) => _$AdminService(client);
+  static AdminService create([final ChopperClient? client]) =>
+      _$AdminService(client);
 
   // Admin get all users
   @Get(path: '')
@@ -14,20 +15,23 @@ abstract class AdminService extends ChopperService {
 // Admin add new user
   @Post(path: '')
   Future<RawApiResponse> addUser({
-    @Body() required Map<String, dynamic> body,
+    @Body() required final Map<String, dynamic> body,
   });
 
 // Admin remove user
-// @Delete(path: '/{id}')
-// Future<void> removeUser ();
+  @Delete(path: '/{id}')
+  Future<RawApiResponse> removeUser({
+    @Path() required final String id,
+  });
 
 // Admin update user
-// @Put(path: '')
-// Future<void> updateUser ();
+//   @Put(path: '/{id}')
+//   Future<RawApiResponse> editUser({
+//     @Path() required String id,
+//   });
 
 // Admin view all classes
 // @Get(path: '')
 // Future<Response<List<User>>> viewAllClasses ({
-//
 // });
 }

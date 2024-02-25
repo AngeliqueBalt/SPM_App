@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/mock/classes.dart';
-import 'package:student_progress_monitor_app/data/mock/users.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/models/user.dart';
-import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 /// Teachers can view a list of all the students in each class.
 /// Each students details can be viewed individually.
@@ -16,7 +11,7 @@ class StudentListScreen extends StatelessWidget {
   const StudentListScreen({super.key, required this.clazz});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -38,7 +33,7 @@ class StudentListScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  for (var student in clazz.students) ...[
+                  for (final student in clazz.students) ...[
                     const Divider(
                       color: Colors.grey,
                       height: 0,
