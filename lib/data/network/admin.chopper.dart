@@ -52,4 +52,20 @@ final class _$AdminService extends AdminService {
     );
     return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
   }
+
+  @override
+  Future<Response<Map<String, dynamic>>> editUser({
+    required String id,
+    required Map<String, dynamic> body,
+  }) {
+    final Uri $url = Uri.parse('/admin/users/${id}');
+    final $body = body;
+    final Request $request = Request(
+      'PATCH',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
+  }
 }

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/network/admin.dart';
-import 'package:student_progress_monitor_app/main.dart';
-import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
+import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/providers/users_provider.dart';
 
 class UserList extends ConsumerStatefulWidget {
@@ -23,6 +21,8 @@ class _UserListState extends ConsumerState<UserList> {
   late final TextEditingController _emailController;
   late final TextEditingController _idController;
 
+  late final String _domain;
+
   bool _loading = false;
 
   @override
@@ -30,6 +30,10 @@ class _UserListState extends ConsumerState<UserList> {
     _nameController = TextEditingController();
     _emailController = TextEditingController();
     _idController = TextEditingController();
+    final currentUser = ref.read(authenticationProvider).value!;
+    _domain =
+        RegExp(r'[^@]+(@.+)').firstMatch(currentUser.user.email)!.group(1)!;
+
     super.initState();
   }
 
@@ -106,66 +110,94 @@ class _UserListState extends ConsumerState<UserList> {
                               padding: const EdgeInsets.only(right: 30.0),
                               child: Column(
                                 children: [
-                                  IconButton(
-                                    onPressed: () async {
-                                      await showDialog<void>(
-                                        context: context,
-                                        builder: (final context) => AlertDialog(
-                                          title: const Text("Edit user"),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              TextField(
-                                                controller: _nameController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text("Full Name"),
-                                                  border:
-                                                      UnderlineInputBorder(),
-                                                ),
+                                  if (_loading)
+                                    const Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Center(
+                                          child: CircularProgressIndicator()),
+                                    )
+                                  else
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          await showDialog<void>(
+                                            context: context,
+                                            builder: (final context) =>
+                                                AlertDialog(
+                                              title: const Text("Edit user"),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  TextField(
+                                                    controller: _nameController,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      label: Text("Full Name"),
+                                                      border:
+                                                          UnderlineInputBorder(),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 20),
+                                                  TextField(
+                                                    controller:
+                                                        _emailController,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      label: Text("Email"),
+                                                      border:
+                                                          UnderlineInputBorder(),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 20),
+                                                  TextField(
+                                                    controller: _idController,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      label: Text("ID Number"),
+                                                      border:
+                                                          UnderlineInputBorder(),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 20),
+                                                ],
                                               ),
-                                              const SizedBox(height: 20),
-                                              TextField(
-                                                controller: _emailController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text("Email"),
-                                                  border:
-                                                      UnderlineInputBorder(),
+                                              actions: [
+                                                OutlinedButton(
+                                                  onPressed: () async {
+                                                    await ref
+                                                        .read(usersProvider
+                                                            .notifier)
+                                                        .editUser(body: {
+                                                      "user": {
+                                                        "email":
+                                                            "${_emailController.text}$_domain",
+                                                        "name": _nameController
+                                                            .text,
+                                                        "idNumber":
+                                                            _idController.text,
+                                                      }
+                                                    }, id: user.id);
+
+                                                    if (context.mounted) {
+                                                      context.pop();
+                                                    }
+                                                  },
+                                                  child: const Text("Save"),
                                                 ),
-                                              ),
-                                              const SizedBox(height: 20),
-                                              TextField(
-                                                controller: _idController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  label: Text("ID Number"),
-                                                  border:
-                                                      UnderlineInputBorder(),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 20),
-                                            ],
-                                          ),
-                                          actions: [
-                                            OutlinedButton(
-                                              onPressed: () {
-                                                // TODO(A): MAKE UPDATE REQUEST
-                                              },
-                                              child: const Text("Save"),
+                                                OutlinedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text("Cancel"),
+                                                )
+                                              ],
                                             ),
-                                            OutlinedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text("Cancel"),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                    icon: const Icon(Icons.edit),
-                                  ),
+                                          );
+                                        },
+                                        icon: const Icon(Icons.edit),
+                                      ),
+                                    ),
                                   if (_loading)
                                     const Padding(
                                       padding: EdgeInsets.all(20.0),

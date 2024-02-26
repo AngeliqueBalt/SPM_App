@@ -276,7 +276,6 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                           setState(() {
                             _loading = true;
                           });
-
                           await ref.read(usersProvider.notifier).addUser(body: {
                             "user": {
                               "email": "${_emailController.text}$_domain",

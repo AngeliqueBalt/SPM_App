@@ -25,10 +25,11 @@ abstract class AdminService extends ChopperService {
   });
 
 // Admin update user
-//   @Put(path: '/{id}')
-//   Future<RawApiResponse> editUser({
-//     @Path() required String id,
-//   });
+  @Patch(path: '/{id}')
+  Future<RawApiResponse> editUser({
+    @Path() required final String id,
+    @Body() required final Map<String, dynamic> body,
+  });
 
 // Admin view all classes
 // @Get(path: '')
