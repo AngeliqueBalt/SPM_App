@@ -28,8 +28,6 @@ GoRouter router(final RouterRef ref) {
   final isTeacher = [UserType.teacher].contains(currentUser?.user.userType);
   final isAdmin = [UserType.admin].contains(currentUser?.user.userType);
 
-  final classes = ref.watch(classesProvider);
-
   return GoRouter(
     routes: <RouteBase>[
       // Loading
@@ -78,8 +76,7 @@ GoRouter router(final RouterRef ref) {
             builder: (final BuildContext context, final GoRouterState state) {
               if (isTeacher) {
                 return TeacherClassScreen(
-                  name: state.pathParameters['classId']!,
-                );
+                    name: state.pathParameters['classId']!);
               } else {
                 return StudentClassScreen(
                     name: state.pathParameters['classId']!);

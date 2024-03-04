@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
-import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
-import 'package:student_progress_monitor_app/screens/class_list_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 
 /// Opening page/dashboard for both teachers and students.
 /// View all classes.
@@ -62,17 +62,35 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      OptionCard(
-                          label: "View all classes",
-                          color: greenColor,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (final context) =>
-                                    ClassList(classes: classes),
+                      for (final clazz in classes) ...[
+                        GestureDetector(
+                          onTap: () => context.go('/class/${clazz.name}'),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Container(
+                              height: 165.0,
+                              decoration: BoxDecoration(
+                                color: greenColor,
+                                borderRadius: BorderRadius.circular(15),
                               ),
-                            );
-                          }),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 15,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  clazz.name,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                     ],
                   ),
                 ],
