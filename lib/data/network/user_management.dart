@@ -1,38 +1,33 @@
 import 'package:chopper/chopper.dart';
 import 'package:student_progress_monitor_app/models/api.dart';
 
-part 'admin.chopper.dart';
+part 'user_management.chopper.dart';
 
 @ChopperApi(baseUrl: '/admin/users')
-abstract class AdminService extends ChopperService {
-  static AdminService create([final ChopperClient? client]) =>
-      _$AdminService(client);
+abstract class UserManagementService extends ChopperService {
+  static UserManagementService create([final ChopperClient? client]) =>
+      _$UserManagementService(client);
 
-  // Admin get all users
+  // Get all users
   @Get(path: '')
   Future<RawApiResponse> getAll();
 
-// Admin add new user
+  // Add new user
   @Post(path: '')
   Future<RawApiResponse> addUser({
     @Body() required final Map<String, dynamic> body,
   });
 
-// Admin remove user
+  // Remove user
   @Delete(path: '/{id}')
   Future<RawApiResponse> removeUser({
     @Path() required final String id,
   });
 
-// Admin update user
+  // Update user
   @Patch(path: '/{id}')
   Future<RawApiResponse> editUser({
     @Path() required final String id,
     @Body() required final Map<String, dynamic> body,
   });
-
-// Admin view all classes
-// @Get(path: '')
-// Future<Response<List<User>>> viewAllClasses ({
-// });
 }

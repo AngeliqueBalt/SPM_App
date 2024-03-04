@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
+import 'package:student_progress_monitor_app/data/mock/users.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
@@ -9,21 +11,23 @@ import 'package:student_progress_monitor_app/screens/teacher/students_list_scree
 /// Teachers can view the list of students in the selected class.
 /// Teachers can manage quizzes for the selected class.
 
-class TeacherClassScreen extends StatelessWidget {
+class TeacherClassScreen extends ConsumerStatefulWidget {
   final String name;
 
-  const TeacherClassScreen({
-    super.key,
-    required this.name,
-  });
+  const TeacherClassScreen({super.key, required this.name});
 
+  @override
+  ConsumerState<TeacherClassScreen> createState() => _TeacherClassScreenState();
+}
+
+class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          name,
+          widget.name,
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod/src/framework.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
+import 'package:student_progress_monitor_app/providers/class_provider.dart';
 import 'package:student_progress_monitor_app/screens/admin/admin_dashboard.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
@@ -24,6 +27,8 @@ GoRouter router(final RouterRef ref) {
   final currentUser = ref.watch(authenticationProvider).value;
   final isTeacher = [UserType.teacher].contains(currentUser?.user.userType);
   final isAdmin = [UserType.admin].contains(currentUser?.user.userType);
+
+  final classes = ref.watch(classesProvider);
 
   return GoRouter(
     routes: <RouteBase>[
@@ -65,7 +70,7 @@ GoRouter router(final RouterRef ref) {
       GoRoute(
         path: '/',
         builder: (final BuildContext context, final GoRouterState state) {
-          return HomeScreen(classes: classes);
+          return const HomeScreen();
         },
         routes: <RouteBase>[
           GoRoute(

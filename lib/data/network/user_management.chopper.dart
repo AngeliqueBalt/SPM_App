@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'admin.dart';
+part of 'user_management.dart';
 
 // **************************************************************************
 // ChopperGenerator
@@ -8,14 +8,14 @@ part of 'admin.dart';
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-final class _$AdminService extends AdminService {
-  _$AdminService([ChopperClient? client]) {
+final class _$UserManagementService extends UserManagementService {
+  _$UserManagementService([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;
   }
 
   @override
-  final Type definitionType = AdminService;
+  final Type definitionType = UserManagementService;
 
   @override
   Future<Response<Map<String, dynamic>>> getAll() {

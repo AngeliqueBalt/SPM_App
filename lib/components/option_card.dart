@@ -24,7 +24,7 @@ class OptionCard extends StatelessWidget {
           height: kOptionCardHeight,
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(15),
           ),
           padding: const EdgeInsets.symmetric(
             vertical: 15,
@@ -34,6 +34,7 @@ class OptionCard extends StatelessWidget {
             child: Text(
               label,
               textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
         ),

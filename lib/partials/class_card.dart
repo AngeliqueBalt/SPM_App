@@ -7,7 +7,7 @@ import 'package:student_progress_monitor_app/models/class.dart';
 class ClassCard extends StatelessWidget {
   final Class lesson;
 
-  const ClassCard({
+  ClassCard({
     super.key,
     required this.lesson,
   });

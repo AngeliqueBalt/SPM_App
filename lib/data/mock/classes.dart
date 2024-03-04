@@ -18,5 +18,6 @@ List<Class> classes = classNames
           teacher: teachers[0],
           students: students,
           quizzes: [],
+          activeQuiz: null,
         ))
     .toList();

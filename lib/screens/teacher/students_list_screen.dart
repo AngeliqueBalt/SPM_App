@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 
 /// Teachers can view a list of all the students in each class.
 /// Each students details can be viewed individually.
 
-class StudentListScreen extends StatelessWidget {
+class StudentListScreen extends ConsumerWidget {
   final Class clazz;
 
   const StudentListScreen({super.key, required this.clazz});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(final BuildContext context, final WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),

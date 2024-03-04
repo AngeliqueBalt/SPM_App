@@ -65,6 +65,8 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
+
+                  // user type
                   Container(
                     color: greenColor,
                     height: 30,
@@ -80,8 +82,6 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                     ),
                   ),
                   const SizedBox(height: 20),
-
-                  // user type
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: DropdownMenu(
@@ -253,12 +253,14 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
 
+                  const SizedBox(height: 20),
                   if (_loading)
                     const Padding(
                       padding: EdgeInsets.all(20.0),
-                      child: Center(child: CircularProgressIndicator()),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     )
                   else
                     Padding(

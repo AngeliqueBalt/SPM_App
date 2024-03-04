@@ -3,13 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/mock/classes.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
+import 'package:student_progress_monitor_app/providers/admin_class_provider.dart';
 import 'package:student_progress_monitor_app/providers/users_provider.dart';
-import 'package:student_progress_monitor_app/screens/admin/class_list_screen.dart';
-import 'package:student_progress_monitor_app/screens/admin/add_new_class.dart';
-import 'package:student_progress_monitor_app/screens/admin/add_new_user.dart';
-import 'package:student_progress_monitor_app/screens/admin/user_list_screen.dart';
+import 'package:student_progress_monitor_app/screens/admin/classes/class_list_screen.dart';
+import 'package:student_progress_monitor_app/screens/admin/classes/add_new_class.dart';
+import 'package:student_progress_monitor_app/screens/admin/users/add_new_user.dart';
+import 'package:student_progress_monitor_app/screens/admin/users/user_list_screen.dart';
 
 class AdminDashboard extends ConsumerWidget {
   const AdminDashboard({super.key});
@@ -17,6 +18,7 @@ class AdminDashboard extends ConsumerWidget {
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
     final users = ref.watch(usersProvider.future);
+    final classes = ref.watch(adminClassesProvider.future);
 
     return Scaffold(
       drawer: const NavBar(),
@@ -35,13 +37,14 @@ class AdminDashboard extends ConsumerWidget {
         onRefresh: ref.read(usersProvider.notifier).refresh,
         child: SafeArea(
           child: FutureBuilder(
-              future: users,
+              future: Future.wait([users, classes]),
               builder: (final context, final snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                final users = snapshot.data!;
+                final users = snapshot.data![0] as List<User>;
+                final classes = snapshot.data![1] as List<Class>;
 
                 return SingleChildScrollView(
                   child: Column(
@@ -137,7 +140,7 @@ class AdminDashboard extends ConsumerWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
                               builder: (final context) =>
-                                  AdminClassList(clazzes: classes),
+                                  ClassList(clazzes: classes),
                             ),
                           );
                         },
