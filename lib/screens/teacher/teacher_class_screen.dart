@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/mock/classes.dart';
-import 'package:student_progress_monitor_app/providers/class_provider.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
@@ -11,23 +10,18 @@ import 'package:student_progress_monitor_app/screens/teacher/students_list_scree
 /// Teachers can view the list of students in the selected class.
 /// Teachers can manage quizzes for the selected class.
 
-class TeacherClassScreen extends ConsumerStatefulWidget {
-  final String name;
+class TeacherClassScreen extends StatelessWidget {
+  final Class clazz;
 
-  const TeacherClassScreen({super.key, required this.name});
+  const TeacherClassScreen({super.key, required this.clazz});
 
-  @override
-  ConsumerState<TeacherClassScreen> createState() => _TeacherClassScreenState();
-}
-
-class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          widget.name,
+          clazz.name,
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
@@ -47,7 +41,7 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (final context) =>
-                          StudentListScreen(clazz: classes[0]),
+                          StudentListScreen(students: clazz.students),
                     ),
                   );
                 },
@@ -59,7 +53,8 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (final context) => const ManageQuizScreen(),
+                      builder: (final context) =>
+                          ManageQuizScreen(clazz: clazz),
                     ),
                   );
                 },

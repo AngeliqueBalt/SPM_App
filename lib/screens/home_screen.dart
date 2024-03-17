@@ -9,11 +9,16 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_class_scree
 /// Opening page/dashboard for both teachers and students.
 /// View all classes.
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  Widget build(final BuildContext context) {
     final classes = ref.watch(classesProvider.future);
 
     return Scaffold(
@@ -21,7 +26,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
-          "Dashboard",
+          "All Classes",
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
@@ -39,6 +44,14 @@ class HomeScreen extends ConsumerWidget {
 
             final classes = snapshot.data!;
 
+            if (classes.isEmpty) {
+              return const Center(
+                  child: Text(
+                "No Classes",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+              ));
+            }
+
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -47,24 +60,9 @@ class HomeScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: 20),
-                      Container(
-                        color: greenColor,
-                        height: 30,
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            "All Classes",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
                       for (final clazz in classes) ...[
                         GestureDetector(
-                          onTap: () => context.go('/class/${clazz.name}'),
+                          onTap: () => context.go('/class/${clazz.id}'),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40),
                             child: Container(

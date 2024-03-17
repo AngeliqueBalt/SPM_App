@@ -6,7 +6,7 @@ part of 'class_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$classesHash() => r'81d5186d6aea464fe53bd1ca580556d350b3cc98';
+String _$classesHash() => r'8abc5be2da6360be37d104c64e3956cb673b356e';
 
 /// See also [Classes].
 @ProviderFor(Classes)

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_screen.dart';
 
@@ -8,14 +11,16 @@ import 'package:student_progress_monitor_app/screens/teacher/quiz_overview_scree
 /// After creating the quiz, the teacher can view the quiz overview screen to see the quiz they just created and save the quiz.
 
 class NewQuizScreen extends StatefulWidget {
-  const NewQuizScreen({super.key});
+  final Class clazz;
+
+  const NewQuizScreen({super.key, required this.clazz});
 
   @override
   State<NewQuizScreen> createState() => _NewQuizScreenState();
 }
 
 class _NewQuizScreenState extends State<NewQuizScreen> {
-  static const quizLength = 10;
+  static const quizLength = 5;
   static const answerCount = 4;
 
   final PageController _controller = PageController(initialPage: 0);
@@ -141,16 +146,13 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
     if (_controller.page == null) return;
 
     if (isLastPage) {
-      // print(
-      //   jsonEncode(
-      //     questions.map((question) => question.toJson()).toList(),
-      //   ),
-      // );
-
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (final context) => QuizOverviewScreen(questions: questions),
+          builder: (final context) => QuizOverviewScreen(
+            clazz: widget.clazz,
+            questions: questions,
+          ),
         ),
       );
       return;

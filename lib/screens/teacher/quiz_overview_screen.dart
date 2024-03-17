@@ -1,18 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/data/mock/questions.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
+import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
+import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 
-class QuizOverviewScreen extends StatefulWidget {
+class QuizOverviewScreen extends ConsumerStatefulWidget {
   final List<Question> questions;
+  final Class clazz;
 
-  const QuizOverviewScreen({super.key, required this.questions});
+  const QuizOverviewScreen(
+      {super.key, required this.questions, required this.clazz});
 
   @override
-  State<QuizOverviewScreen> createState() => _QuizOverviewScreenState();
+  ConsumerState<QuizOverviewScreen> createState() => _QuizOverviewScreenState();
 }
 
-class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
+class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
   late final TextEditingController _quizNameController;
 
   @override
@@ -73,29 +83,39 @@ class _QuizOverviewScreenState extends State<QuizOverviewScreen> {
                       content: TextField(
                         controller: _quizNameController,
                         decoration: const InputDecoration(
-                          hintText: "Enter your question here",
+                          hintText: "Enter the quiz name",
                           border: UnderlineInputBorder(),
                         ),
                       ),
                       actions: [
                         OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(_quizNameController.text);
+                          onPressed: () async {
+                            await ref
+                                .read(quizzesProvider(widget.clazz.id).notifier)
+                                .addQuiz(body: {
+                              "name": _quizNameController.text,
+                              "questions": widget.questions
+                                  .map((final question) => question.toJson())
+                                  .toList(),
+                              // "questions": widget.questions,
+                            });
+
+                            if (context.mounted) {
+                              context.pushReplacement(
+                                  '/class/${widget.clazz.id}/manage-quizzes');
+                            }
                           },
                           child: const Text("Save"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Cancel"),
                         ),
                       ],
                     ),
                   );
-
-                  // TODO(A): make JSON
-                  // jsonEncode(
-                  //   questions.map((question) => question.toJson()).toList(),
-                  // ),
-
-                  // TODO(A): send to cinnamon
-
-                  // context.pushReplacement('/manage-quizzes');
                 },
                 child: const Text("Save Quiz"),
               ),

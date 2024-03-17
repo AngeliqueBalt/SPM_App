@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:student_progress_monitor_app/models/user.dart';
 
 /// Teachers can view a list of all the students in each class.
 /// Each students details can be viewed individually.
 
 class StudentListScreen extends ConsumerWidget {
-  final Class clazz;
+  // final Class clazz;
+  final List<User> students;
 
-  const StudentListScreen({super.key, required this.clazz});
+  const StudentListScreen({super.key, required this.students});
 
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
@@ -34,7 +36,7 @@ class StudentListScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  for (final student in clazz.students) ...[
+                  for (final student in students) ...[
                     const Divider(
                       color: Colors.grey,
                       height: 0,

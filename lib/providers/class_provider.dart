@@ -1,3 +1,4 @@
+import 'package:chopper/chopper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/network/classes.dart';
 import 'package:student_progress_monitor_app/main.dart';
@@ -16,5 +17,10 @@ class Classes extends _$Classes {
 
   Future<void> refresh() async {
     state = await AsyncValue.guard(build);
+  }
+
+  Future<Class> getClass({required final String id}) async {
+    final response = await getApiService<ClassesService>().getClass(id: id);
+    return Api.unwrap(Class.fromJson, response)!.payload;
   }
 }

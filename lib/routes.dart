@@ -74,48 +74,79 @@ GoRouter router(final RouterRef ref) {
           GoRoute(
             path: 'class/:classId',
             builder: (final BuildContext context, final GoRouterState state) {
+              final String classId = state.pathParameters['classId']!;
               if (isTeacher) {
                 return TeacherClassScreen(
-                    name: state.pathParameters['classId']!);
+                    clazz: ref
+                        .read(classesProvider)
+                        .requireValue
+                        .where((final Class clazz) => clazz.id == classId)
+                        .first);
               } else {
                 return StudentClassScreen(
-                    name: state.pathParameters['classId']!);
+                    clazz: ref
+                        .read(classesProvider)
+                        .requireValue
+                        .where((final Class clazz) => clazz.id == classId)
+                        .first);
               }
             },
+            routes: [
+              // Quiz Summary
+              GoRoute(
+                path: 'all-quizzes',
+                builder:
+                    (final BuildContext context, final GoRouterState state) {
+                  final String classId = state.pathParameters['classId']!;
+                  if (isTeacher) {
+                    return TeacherAllQuizzesScreen(
+                        clazz: ref
+                            .read(classesProvider)
+                            .requireValue
+                            .where((final Class clazz) => clazz.id == classId)
+                            .first);
+                  } else {
+                    return AllQuizzesScreen(
+                        clazz: ref
+                            .read(classesProvider)
+                            .requireValue
+                            .where((final Class clazz) => clazz.id == classId)
+                            .first);
+                  }
+                },
+                routes: <RouteBase>[
+                  GoRoute(
+                    path: 'quiz/:quizId',
+                    builder: (final BuildContext context,
+                        final GoRouterState state) {
+                      if (isTeacher) {
+                        return TeacherQuizSummaryScreen(
+                            name: state.pathParameters['quizId']!);
+                      } else {
+                        return QuizSummaryScreen(
+                            name: state.pathParameters['quizId']!);
+                      }
+                    },
+                  ),
+                ],
+              ),
+
+              GoRoute(
+                path: 'manage-quizzes',
+                builder:
+                    (final BuildContext context, final GoRouterState state) {
+                  final String classId = state.pathParameters['classId']!;
+                  return ManageQuizScreen(
+                      clazz: ref
+                          .read(classesProvider)
+                          .requireValue
+                          .where((final Class clazz) => clazz.id == classId)
+                          .first);
+                },
+              ),
+            ],
           ),
         ],
-      ),
-
-      // Quiz Summary
-      GoRoute(
-        path: '/all-quizzes',
-        builder: (final BuildContext context, final GoRouterState state) {
-          if (isTeacher) {
-            return const TeacherAllQuizzesScreen();
-          } else {
-            return const AllQuizzesScreen();
-          }
-        },
-        routes: <RouteBase>[
-          GoRoute(
-            path: 'quiz/:quizId',
-            builder: (final BuildContext context, final GoRouterState state) {
-              if (isTeacher) {
-                return TeacherQuizSummaryScreen(
-                    name: state.pathParameters['quizId']!);
-              } else {
-                return QuizSummaryScreen(name: state.pathParameters['quizId']!);
-              }
-            },
-          ),
-        ],
-      ),
-
-      GoRoute(
-        path: '/manage-quizzes',
-        builder: (final BuildContext context, final GoRouterState state) {
-          return const ManageQuizScreen();
-        },
       ),
     ],
 
