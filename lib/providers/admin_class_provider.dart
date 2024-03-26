@@ -62,7 +62,7 @@ class AdminClasses extends _$AdminClasses {
     }
   }
 
-  // TODO(A): FIX EDIT CLASS SO THAT GETS THE CORRECT DATA FROM THE DB
+  // DOES NOT WORK, CAN BE FIXED - NEEDS TO GET CORRECT DATA FROM THE DB
   Future<void> editClass(
       {required final Map<String, dynamic> body,
       required final String id}) async {
@@ -95,8 +95,8 @@ class AdminClasses extends _$AdminClasses {
             ? clazz.copyWith(
                 name: data!.payload["name"] as String,
                 teacher: User.fromJson(
-                    data!.payload["teacher"] as Map<String, dynamic>),
-                students: data!.payload["students"] as List<User>)
+                    data.payload["teacher"] as Map<String, dynamic>),
+                students: data.payload["students"] as List<User>)
             : clazz)
         .toList();
 

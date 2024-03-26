@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:student_progress_monitor_app/components/score_chart.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/questions.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
 
 class TeacherQuizSummaryScreen extends StatefulWidget {
-  final String name;
+  final Quiz quiz;
 
   const TeacherQuizSummaryScreen({
     super.key,
-    required this.name,
+    required this.quiz,
   });
 
   @override
@@ -24,7 +25,7 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          ('${widget.name} Report'),
+          ('${widget.quiz.name} Report'),
           style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
@@ -84,7 +85,7 @@ class _TeacherQuizSummaryScreenState extends State<TeacherQuizSummaryScreen> {
                     ),
                   ),
                   // TODO(A): get the quiz questions and answers from the database to be displayed for each quiz
-                  DisplayQuizQuestions(questions: questions),
+                  DisplayQuizQuestions(quiz: widget.quiz),
                 ],
               ),
             ],

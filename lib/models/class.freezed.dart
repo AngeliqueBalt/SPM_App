@@ -23,7 +23,7 @@ mixin _$Class {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   User get teacher => throw _privateConstructorUsedError;
-  List<User> get students => throw _privateConstructorUsedError;
+  List<User>? get students => throw _privateConstructorUsedError;
   List<Quiz>? get quizzes => throw _privateConstructorUsedError;
   Quiz? get activeQuiz => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $ClassCopyWith<$Res> {
       {String id,
       String name,
       User teacher,
-      List<User> students,
+      List<User>? students,
       List<Quiz>? quizzes,
       Quiz? activeQuiz});
 
@@ -65,7 +65,7 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
     Object? id = null,
     Object? name = null,
     Object? teacher = null,
-    Object? students = null,
+    Object? students = freezed,
     Object? quizzes = freezed,
     Object? activeQuiz = freezed,
   }) {
@@ -82,10 +82,10 @@ class _$ClassCopyWithImpl<$Res, $Val extends Class>
           ? _value.teacher
           : teacher // ignore: cast_nullable_to_non_nullable
               as User,
-      students: null == students
+      students: freezed == students
           ? _value.students
           : students // ignore: cast_nullable_to_non_nullable
-              as List<User>,
+              as List<User>?,
       quizzes: freezed == quizzes
           ? _value.quizzes
           : quizzes // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ abstract class _$$ClassImplCopyWith<$Res> implements $ClassCopyWith<$Res> {
       {String id,
       String name,
       User teacher,
-      List<User> students,
+      List<User>? students,
       List<Quiz>? quizzes,
       Quiz? activeQuiz});
 
@@ -153,7 +153,7 @@ class __$$ClassImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? teacher = null,
-    Object? students = null,
+    Object? students = freezed,
     Object? quizzes = freezed,
     Object? activeQuiz = freezed,
   }) {
@@ -170,10 +170,10 @@ class __$$ClassImplCopyWithImpl<$Res>
           ? _value.teacher
           : teacher // ignore: cast_nullable_to_non_nullable
               as User,
-      students: null == students
+      students: freezed == students
           ? _value._students
           : students // ignore: cast_nullable_to_non_nullable
-              as List<User>,
+              as List<User>?,
       quizzes: freezed == quizzes
           ? _value._quizzes
           : quizzes // ignore: cast_nullable_to_non_nullable
@@ -193,7 +193,7 @@ class _$ClassImpl implements _Class {
       {required this.id,
       required this.name,
       required this.teacher,
-      required final List<User> students,
+      required final List<User>? students,
       required final List<Quiz>? quizzes,
       required this.activeQuiz})
       : _students = students,
@@ -208,12 +208,14 @@ class _$ClassImpl implements _Class {
   final String name;
   @override
   final User teacher;
-  final List<User> _students;
+  final List<User>? _students;
   @override
-  List<User> get students {
+  List<User>? get students {
+    final value = _students;
+    if (value == null) return null;
     if (_students is EqualUnmodifiableListView) return _students;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_students);
+    return EqualUnmodifiableListView(value);
   }
 
   final List<Quiz>? _quizzes;
@@ -278,7 +280,7 @@ abstract class _Class implements Class {
       {required final String id,
       required final String name,
       required final User teacher,
-      required final List<User> students,
+      required final List<User>? students,
       required final List<Quiz>? quizzes,
       required final Quiz? activeQuiz}) = _$ClassImpl;
 
@@ -291,7 +293,7 @@ abstract class _Class implements Class {
   @override
   User get teacher;
   @override
-  List<User> get students;
+  List<User>? get students;
   @override
   List<Quiz>? get quizzes;
   @override

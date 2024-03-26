@@ -12,9 +12,9 @@ abstract class ClassesService extends ChopperService {
   @Get(path: '')
   Future<RawApiResponse> getClasses();
 
-  // Get Current class
-  @Get(path: '')
-  Future<RawApiResponse> getClass({
-    @Path() required final String id,
-  });
+// Get Current class
+// @Get(path: '')
+// Future<RawApiResponse> getClass({
+//   @Path() required final String id,
+// });
 }

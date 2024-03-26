@@ -73,8 +73,8 @@ class AdminDashboard extends ConsumerWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
-                              builder: (final context) => UserList(
-                                  users: users, userType: UserType.student),
+                              builder: (final context) =>
+                                  const UserList(userType: UserType.student),
                             ),
                           );
                         },
@@ -86,21 +86,21 @@ class AdminDashboard extends ConsumerWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
-                              builder: (final context) => UserList(
-                                  users: users, userType: UserType.teacher),
+                              builder: (final context) =>
+                                  const UserList(userType: UserType.teacher),
                             ),
                           );
                         },
                       ),
                       const SizedBox(height: 20),
                       OptionCard(
-                        label: "All Admin",
+                        label: "All Admins",
                         color: greenColor,
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute<void>(
-                              builder: (final context) => UserList(
-                                  users: users, userType: UserType.admin),
+                              builder: (final context) =>
+                                  const UserList(userType: UserType.admin),
                             ),
                           );
                         },

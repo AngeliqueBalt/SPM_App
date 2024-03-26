@@ -150,8 +150,8 @@ class _NewQuizScreenState extends State<NewQuizScreen> {
         context,
         MaterialPageRoute<void>(
           builder: (final context) => QuizOverviewScreen(
-            clazz: widget.clazz,
-            questions: questions,
+            quiz: Quiz(
+                name: '', questions: questions, clazz: widget.clazz, id: ''),
           ),
         ),
       );

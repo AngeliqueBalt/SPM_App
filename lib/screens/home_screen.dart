@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/navbar.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 
 /// Opening page/dashboard for both teachers and students.
 /// View all classes.

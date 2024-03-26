@@ -4,9 +4,11 @@ import 'package:riverpod/src/framework.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
+import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 import 'package:student_progress_monitor_app/screens/admin/admin_dashboard.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
@@ -119,12 +121,26 @@ GoRouter router(final RouterRef ref) {
                     path: 'quiz/:quizId',
                     builder: (final BuildContext context,
                         final GoRouterState state) {
+                      final quizId = state.pathParameters['quizId']!;
+                      final classId = state.pathParameters['classId']!;
+
+                      // print(quizId);
+                      // print(classId);
+
                       if (isTeacher) {
                         return TeacherQuizSummaryScreen(
-                            name: state.pathParameters['quizId']!);
+                            quiz: ref
+                                .read(quizzesProvider(classId))
+                                .requireValue
+                                .where((final Quiz quiz) => quiz.id == quizId)
+                                .first);
                       } else {
                         return QuizSummaryScreen(
-                            name: state.pathParameters['quizId']!);
+                            quiz: ref
+                                .read(quizzesProvider(classId))
+                                .requireValue
+                                .where((final Quiz quiz) => quiz.id == quizId)
+                                .first);
                       }
                     },
                   ),

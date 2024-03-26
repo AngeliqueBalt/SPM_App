@@ -67,7 +67,7 @@ class _TeacherAllQuizzesScreenState
                     children: [
                       const SizedBox(height: 20),
                       for (final theQuiz in quizzes) ...[
-                        QuizCard(name: theQuiz.name, clazz: widget.clazz),
+                        QuizCard(quiz: theQuiz),
                         const SizedBox(height: 20),
                       ],
                     ],

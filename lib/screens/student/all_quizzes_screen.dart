@@ -37,40 +37,41 @@ class _AllQuizzesScreenState extends ConsumerState<AllQuizzesScreen> {
       ),
       body: SafeArea(
         child: FutureBuilder(
-            future: quizzes,
-            builder: (final context, final snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
+          future: quizzes,
+          builder: (final context, final snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-              final quizzes = snapshot.data!;
+            final quizzes = snapshot.data!;
 
-              if (quizzes.isEmpty) {
-                return const Center(
-                    child: Text(
-                  "No Quizzes",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-                ));
-              }
+            if (quizzes.isEmpty) {
+              return const Center(
+                  child: Text(
+                "No Quizzes",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+              ));
+            }
 
-              return SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(height: 20),
+                      for (final theQuiz in quizzes) ...[
+                        QuizCard(quiz: theQuiz),
                         const SizedBox(height: 20),
-                        for (final theQuiz in quizzes) ...[
-                          QuizCard(name: theQuiz.name, clazz: widget.clazz),
-                          const SizedBox(height: 20),
-                        ],
                       ],
-                    ),
-                  ],
-                ),
-              );
-            }),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

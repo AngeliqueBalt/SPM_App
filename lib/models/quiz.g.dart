@@ -7,16 +7,20 @@ part of 'quiz.dart';
 // **************************************************************************
 
 _$QuizImpl _$$QuizImplFromJson(Map<String, dynamic> json) => _$QuizImpl(
+      id: json['id'] as String,
       name: json['name'] as String,
       questions: (json['questions'] as List<dynamic>)
           .map((e) => Question.fromJson(e as Map<String, dynamic>))
           .toList(),
+      clazz: Class.fromJson(json['class'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$QuizImplToJson(_$QuizImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'questions': instance.questions,
+      'class': instance.clazz,
     };
 
 _$QuestionImpl _$$QuestionImplFromJson(Map<String, dynamic> json) =>

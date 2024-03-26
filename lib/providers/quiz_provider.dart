@@ -1,9 +1,9 @@
-import 'package:chopper/chopper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/network/quizzes.dart';
 import 'package:student_progress_monitor_app/main.dart';
 import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
+import 'package:student_progress_monitor_app/providers/class_provider.dart';
 
 part 'quiz_provider.g.dart';
 

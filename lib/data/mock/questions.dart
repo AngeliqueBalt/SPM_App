@@ -1,9 +1,11 @@
 // List of sample questions for the quiz
 // Questions will be collected from the add new quiz screen/database?
 
+import 'package:student_progress_monitor_app/data/mock/classes.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 
-Quiz sampleQuiz = Quiz(name: "SAMPLE QUIZ", questions: questions);
+Quiz sampleQuiz =
+    Quiz(name: "SAMPLE QUIZ", questions: questions, id: '', clazz: classes[0]);
 
 List<Question> questions = [
   const Question(

@@ -12,11 +12,11 @@ import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 
 class QuizOverviewScreen extends ConsumerStatefulWidget {
-  final List<Question> questions;
-  final Class clazz;
+  // final List<Question> questions;
+  // final Class clazz;
+  final Quiz quiz;
 
-  const QuizOverviewScreen(
-      {super.key, required this.questions, required this.clazz});
+  const QuizOverviewScreen({super.key, required this.quiz});
 
   @override
   ConsumerState<QuizOverviewScreen> createState() => _QuizOverviewScreenState();
@@ -58,7 +58,7 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  DisplayQuizQuestions(questions: widget.questions),
+                  DisplayQuizQuestions(quiz: widget.quiz),
                 ],
               ),
             ),
@@ -91,10 +91,11 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
                         OutlinedButton(
                           onPressed: () async {
                             await ref
-                                .read(quizzesProvider(widget.clazz.id).notifier)
+                                .read(quizzesProvider(widget.quiz.clazz.id)
+                                    .notifier)
                                 .addQuiz(body: {
                               "name": _quizNameController.text,
-                              "questions": widget.questions
+                              "questions": widget.quiz.questions
                                   .map((final question) => question.toJson())
                                   .toList(),
                               // "questions": widget.questions,
@@ -102,7 +103,7 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
 
                             if (context.mounted) {
                               context.pushReplacement(
-                                  '/class/${widget.clazz.id}/manage-quizzes');
+                                  '/class/${widget.quiz.clazz.id}/manage-quizzes');
                             }
                           },
                           child: const Text("Save"),

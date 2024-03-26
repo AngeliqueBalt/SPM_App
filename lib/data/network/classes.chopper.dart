@@ -27,15 +27,4 @@ final class _$ClassesService extends ClassesService {
     );
     return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
   }
-
-  @override
-  Future<Response<Map<String, dynamic>>> getClass({required String id}) {
-    final Uri $url = Uri.parse('/user/classes');
-    final Request $request = Request(
-      'GET',
-      $url,
-      client.baseUrl,
-    );
-    return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
-  }
 }

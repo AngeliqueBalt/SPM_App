@@ -4,9 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/admin_class_provider.dart';
-import 'package:student_progress_monitor_app/providers/users_provider.dart';
 
 class ClassList extends ConsumerStatefulWidget {
   final List<Class> clazzes;
@@ -20,13 +18,9 @@ class ClassList extends ConsumerStatefulWidget {
 class _AdminClassListState extends ConsumerState<ClassList> {
   bool _loading = false;
 
-  // final _formKey = GlobalKey<FormState>();
-
   late final TextEditingController _nameController;
   late final TextEditingController _teacherController;
   late final MultiSelectController<String> _studentController;
-
-  String? _teacherId;
 
   @override
   void initState() {
@@ -103,7 +97,7 @@ class _AdminClassListState extends ConsumerState<ClassList> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(right: 30.0),
+                                padding: const EdgeInsets.only(right: 15.0),
                                 child: Column(
                                   children: [
                                     if (_loading)
@@ -113,140 +107,141 @@ class _AdminClassListState extends ConsumerState<ClassList> {
                                             child: CircularProgressIndicator()),
                                       )
                                     else
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: IconButton(
-                                          onPressed: () async {
-                                            await showDialog<void>(
-                                              context: context,
-                                              builder: (final context) =>
-                                                  AlertDialog(
-                                                title: const Text("Edit class"),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    TextField(
-                                                      controller:
-                                                          _nameController,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        label:
-                                                            Text("Class Name"),
-                                                        border:
-                                                            UnderlineInputBorder(),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(height: 20),
-                                                    DropdownMenu<String>(
-                                                      enabled: !_loading,
-                                                      controller:
-                                                          _teacherController,
-                                                      width: 250,
-                                                      requestFocusOnTap: true,
-                                                      enableSearch: true,
-                                                      enableFilter: true,
-                                                      label:
-                                                          const Text("Teacher"),
-                                                      onSelected:
-                                                          (final value) {
-                                                        _teacherId = value;
-                                                      },
-                                                      dropdownMenuEntries: ref
-                                                          .read(usersProvider)
-                                                          .requireValue
-                                                          .where((final user) =>
-                                                              user.userType ==
-                                                              UserType.teacher)
-                                                          .map((final user) =>
-                                                              DropdownMenuEntry(
-                                                                  value:
-                                                                      user.id,
-                                                                  label:
-                                                                      "${user.name} (${user.idNumber})"))
-                                                          .toList(),
-                                                    ),
-                                                    const SizedBox(height: 20),
-                                                    MultiSelectDropDown(
-                                                      hint: "Select student(s)",
-                                                      controller:
-                                                          _studentController,
-                                                      onOptionSelected:
-                                                          (final options) {
-                                                        options.toString();
-                                                      },
-                                                      options: ref
-                                                          .read(usersProvider)
-                                                          .requireValue
-                                                          .where((final user) =>
-                                                              user.userType ==
-                                                              UserType.student)
-                                                          .map((final user) =>
-                                                              ValueItem(
-                                                                  value:
-                                                                      user.id,
-                                                                  label:
-                                                                      "${user.name} (${user.idNumber})"))
-                                                          .toList(),
-                                                      selectionType:
-                                                          SelectionType.multi,
-                                                      chipConfig:
-                                                          const ChipConfig(
-                                                              wrapType: WrapType
-                                                                  .wrap),
-                                                      dropdownHeight: 300,
-                                                      optionTextStyle:
-                                                          const TextStyle(
-                                                              fontSize: 16),
-                                                      selectedOptionIcon:
-                                                          const Icon(Icons
-                                                              .check_circle),
-                                                    ),
-                                                  ],
-                                                ),
-                                                actions: [
-                                                  OutlinedButton(
-                                                    onPressed: () async {
-                                                      await ref
-                                                          .read(
-                                                              adminClassesProvider
-                                                                  .notifier)
-                                                          .editClass(body: {
-                                                        "name": _nameController
-                                                            .text,
-                                                        "teacher": _teacherId,
-                                                        "students": _studentController
-                                                            .selectedOptions
-                                                            .map((final selectedOption) =>
-                                                                selectedOption
-                                                                    .value)
-                                                            .toList(),
-                                                      }, id: clazz.id);
-
-                                                      if (context.mounted) {
-                                                        context.pop();
-                                                      }
-                                                    },
-                                                    child: const Text("Save"),
-                                                  ),
-                                                  OutlinedButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: const Text("Cancel"),
-                                                  )
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                          icon: const Icon(Icons.edit),
-                                        ),
-                                      ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(8.0),
+                                    //   child: IconButton(
+                                    //     onPressed: () async {
+                                    //       await showDialog<void>(
+                                    //         context: context,
+                                    //         builder: (final context) =>
+                                    //             AlertDialog(
+                                    //           title: const Text("Edit class"),
+                                    //           content: Column(
+                                    //             mainAxisSize:
+                                    //                 MainAxisSize.min,
+                                    //             children: [
+                                    //               TextField(
+                                    //                 controller:
+                                    //                     _nameController,
+                                    //                 decoration:
+                                    //                     const InputDecoration(
+                                    //                   label:
+                                    //                       Text("Class Name"),
+                                    //                   border:
+                                    //                       UnderlineInputBorder(),
+                                    //                 ),
+                                    //               ),
+                                    //               const SizedBox(height: 20),
+                                    //               DropdownMenu<String>(
+                                    //                 enabled: !_loading,
+                                    //                 controller:
+                                    //                     _teacherController,
+                                    //                 width: 250,
+                                    //                 requestFocusOnTap: true,
+                                    //                 enableSearch: true,
+                                    //                 enableFilter: true,
+                                    //                 label:
+                                    //                     const Text("Teacher"),
+                                    //                 onSelected:
+                                    //                     (final value) {
+                                    //                   _teacherId = value;
+                                    //                 },
+                                    //                 dropdownMenuEntries: ref
+                                    //                     .read(usersProvider)
+                                    //                     .requireValue
+                                    //                     .where((final user) =>
+                                    //                         user.userType ==
+                                    //                         UserType.teacher)
+                                    //                     .map((final user) =>
+                                    //                         DropdownMenuEntry(
+                                    //                             value:
+                                    //                                 user.id,
+                                    //                             label:
+                                    //                                 "${user.name} (${user.idNumber})"))
+                                    //                     .toList(),
+                                    //               ),
+                                    //               const SizedBox(height: 20),
+                                    //               MultiSelectDropDown(
+                                    //                 hint: "Select student(s)",
+                                    //                 controller:
+                                    //                     _studentController,
+                                    //                 onOptionSelected:
+                                    //                     (final options) {
+                                    //                   options.toString();
+                                    //                 },
+                                    //                 options: ref
+                                    //                     .read(usersProvider)
+                                    //                     .requireValue
+                                    //                     .where((final user) =>
+                                    //                         user.userType ==
+                                    //                         UserType.student)
+                                    //                     .map((final user) =>
+                                    //                         ValueItem(
+                                    //                             value:
+                                    //                                 user.id,
+                                    //                             label:
+                                    //                                 "${user.name} (${user.idNumber})"))
+                                    //                     .toList(),
+                                    //                 selectionType:
+                                    //                     SelectionType.multi,
+                                    //                 chipConfig:
+                                    //                     const ChipConfig(
+                                    //                         wrapType: WrapType
+                                    //                             .wrap),
+                                    //                 dropdownHeight: 300,
+                                    //                 optionTextStyle:
+                                    //                     const TextStyle(
+                                    //                         fontSize: 16),
+                                    //                 selectedOptionIcon:
+                                    //                     const Icon(Icons
+                                    //                         .check_circle),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //           actions: [
+                                    //             OutlinedButton(
+                                    //               onPressed: () async {
+                                    //                 await ref
+                                    //                     .read(
+                                    //                         adminClassesProvider
+                                    //                             .notifier)
+                                    //                     .editClass(body: {
+                                    //                   "name": _nameController
+                                    //                       .text,
+                                    //                   "teacher": _teacherId,
+                                    //                   "students": _studentController
+                                    //                       .selectedOptions
+                                    //                       .map((final selectedOption) =>
+                                    //                           selectedOption
+                                    //                               .value)
+                                    //                       .toList(),
+                                    //                 }, id: clazz.id);
+                                    //
+                                    //                 if (context.mounted) {
+                                    //                   context.pop();
+                                    //                 }
+                                    //               },
+                                    //               child: const Text("Save"),
+                                    //             ),
+                                    //             OutlinedButton(
+                                    //               onPressed: () {
+                                    //                 Navigator.pop(context);
+                                    //               },
+                                    //               child: const Text("Cancel"),
+                                    //             )
+                                    //           ],
+                                    //         ),
+                                    //       );
+                                    //     },
+                                    //     icon: const Icon(Icons.edit),
+                                    //   ),
+                                    // ),
                                     if (_loading)
                                       const Padding(
                                         padding: EdgeInsets.all(20.0),
                                         child: Center(
-                                            child: CircularProgressIndicator()),
+                                          child: CircularProgressIndicator(),
+                                        ),
                                       )
                                     else
                                       Padding(

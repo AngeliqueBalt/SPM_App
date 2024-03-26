@@ -12,7 +12,7 @@ class Class with _$Class {
     required final String id,
     required final String name,
     required final User teacher,
-    required final List<User> students,
+    required final List<User>? students,
     required final List<Quiz>? quizzes,
     required final Quiz? activeQuiz,
   }) = _Class;

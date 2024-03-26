@@ -7,16 +7,12 @@ import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.
 /// Students answer questions and are given a score at the end.
 
 // TODO(A): Score should be saved to the database
-// TODO(A): Quiz should be saved to the database so that can later be retrieved again
-
 class QuizScreen extends StatefulWidget {
-  // final List<Questions> questions;
   final Quiz quiz;
 
   const QuizScreen({
     super.key,
     required this.quiz,
-    // required this.questions,
   });
 
   @override

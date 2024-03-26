@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:student_progress_monitor_app/models/class.dart';
 
 part 'quiz.freezed.dart';
 
@@ -7,9 +8,10 @@ part 'quiz.g.dart';
 @freezed
 class Quiz with _$Quiz {
   const factory Quiz({
+    required final String id,
     required final String name,
     required final List<Question> questions,
-    // required List<int> score,
+    @JsonKey(name: "class") required final Class clazz,
   }) = _Quiz;
 
   factory Quiz.fromJson(final Map<String, dynamic> json) =>

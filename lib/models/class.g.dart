@@ -10,8 +10,8 @@ _$ClassImpl _$$ClassImplFromJson(Map<String, dynamic> json) => _$ClassImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       teacher: User.fromJson(json['teacher'] as Map<String, dynamic>),
-      students: (json['students'] as List<dynamic>)
-          .map((e) => User.fromJson(e as Map<String, dynamic>))
+      students: (json['students'] as List<dynamic>?)
+          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList(),
       quizzes: (json['quizzes'] as List<dynamic>?)
           ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))

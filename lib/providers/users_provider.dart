@@ -75,13 +75,10 @@ class Users extends _$Users {
       }
     }
 
+    final updatedUser = data!.payload['user'] as Map<String, dynamic>;
+
     final updated = state.requireValue
-        .map((final user) => user.id == id
-            ? user.copyWith(
-                email: body["user"]["email"] as String,
-                name: body["user"]["name"] as String,
-                idNumber: body["user"]["idNumber"] as String)
-            : user)
+        .map((final user) => user.id == id ? User.fromJson(updatedUser) : user)
         .toList();
 
     state = AsyncData(updated);

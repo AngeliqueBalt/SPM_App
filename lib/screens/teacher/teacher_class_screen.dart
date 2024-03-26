@@ -41,7 +41,7 @@ class TeacherClassScreen extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (final context) =>
-                          StudentListScreen(students: clazz.students),
+                          StudentListScreen(students: clazz.students!),
                     ),
                   );
                 },

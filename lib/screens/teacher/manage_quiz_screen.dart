@@ -37,12 +37,12 @@ class ManageQuizScreen extends ConsumerWidget {
             future: quizzes,
             builder: (final context, final snapshot) {
               // print(snapshot);
+
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final quizzes = snapshot.data!;
-
+              // final quizzes = snapshot.data!;
               // print(quizzes);
 
               return SingleChildScrollView(
@@ -64,18 +64,20 @@ class ManageQuizScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 20),
                     // redirects to view the most recently added quiz
-                    OptionCard(
-                      label: "Current Quiz",
-                      color: greenColor,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (final context) =>
-                                const TeacherQuizSummaryScreen(name: "Current"),
-                          ),
-                        );
-                      },
-                    ),
+                    if (clazz.activeQuiz != null)
+                      OptionCard(
+                        label: "Current Quiz",
+                        color: greenColor,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (final context) =>
+                                  TeacherQuizSummaryScreen(
+                                      quiz: clazz.activeQuiz!),
+                            ),
+                          );
+                        },
+                      ),
                     const SizedBox(height: 20),
                     // redirects to a list of all previous quizzes
                     OptionCard(

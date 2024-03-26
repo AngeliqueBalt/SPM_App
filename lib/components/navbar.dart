@@ -37,19 +37,6 @@ class NavBar extends ConsumerWidget {
               color: greenColor,
             ),
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.book),
-          //   title: const Text("Classes"),
-          //   onTap: () {
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: (context) => HomeScreen(
-          //           classes: classes,
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text("Profile"),

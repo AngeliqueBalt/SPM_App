@@ -3,23 +3,20 @@ import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:student_progress_monitor_app/models/quiz.dart';
 
 class QuizCard extends StatelessWidget {
-  final String name;
-  final Class clazz;
+  final Quiz quiz;
 
-  const QuizCard({
-    super.key,
-    required this.name,
-    required this.clazz,
-  });
+  const QuizCard({super.key, required this.quiz});
 
   @override
   Widget build(final BuildContext context) {
     return OptionCard(
-      label: name,
+      label: quiz.name,
       color: greenColor,
-      onTap: () => context.push('/class/${clazz.id}/all-quizzes/quiz/$name'),
+      onTap: () =>
+          context.push('/class/${quiz.clazz.id}/all-quizzes/quiz/${quiz.id}'),
     );
   }
 }
