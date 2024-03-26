@@ -3,6 +3,9 @@ import 'package:student_progress_monitor_app/models/api.dart';
 
 part 'user_management.chopper.dart';
 
+/// User management service
+/// This file contains the http requests for an admin to get all users, add a new user, remove a user, and edit a user.
+
 @ChopperApi(baseUrl: '/admin/users')
 abstract class UserManagementService extends ChopperService {
   static UserManagementService create([final ChopperClient? client]) =>

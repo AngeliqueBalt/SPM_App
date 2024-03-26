@@ -6,30 +6,16 @@ import 'package:student_progress_monitor_app/models/class.dart';
 
 part 'class_provider.g.dart';
 
-// @riverpod
-// class Classes extends _$Classes {
-//   @override
-//   Future<List<Class>> build() async {
-//     final response = await getApiService<ClassesService>().getClasses();
-//     return Api.unwrapList(Class.fromJson, response)!.payload;
-//   }
-//
-//   Future<void> refresh() async {
-//     state = await AsyncValue.guard(build);
-//   }
-//
-//   Future<Class> getClass({required final String id}) async {
-//     final response = await getApiService<ClassesService>().getClass(id: id);
-//     return Api.unwrap(Class.fromJson, response)!.payload;
-//   }
-// }
+/// A provider that fetches a list of classes.
 
+// Gets all classes from the database
 @riverpod
 Future<List<Class>> classes(final ClassesRef ref) async {
   final response = await getApiService<ClassesService>().getClasses();
   return Api.unwrapList(Class.fromJson, response)!.payload;
 }
 
+// Selects the selected class from the list of classes
 @riverpod
 Future<Class> classInfo(final ClassInfoRef ref, final String classId) async {
   return await ref.watch(classesProvider.selectAsync((final value) =>

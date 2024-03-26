@@ -6,9 +6,12 @@ import 'package:student_progress_monitor_app/models/user.dart';
 
 part 'users_provider.g.dart';
 
+/// Provider to deal with the state of the users
+
 @riverpod
 class Users extends _$Users {
   @override
+  // Gets all users from the database
   Future<List<User>> build() async {
     final response = await getApiService<UserManagementService>().getAll();
     return Api.unwrapList(User.fromJson, response)!.payload;
@@ -18,6 +21,7 @@ class Users extends _$Users {
     state = await AsyncValue.guard(build);
   }
 
+  // Adds a user to the database
   Future<void> addUser({required final Map<String, dynamic> body}) async {
     final response =
         await getApiService<UserManagementService>().addUser(body: body);
@@ -39,6 +43,7 @@ class Users extends _$Users {
     }
   }
 
+  // Removes a user from the database
   Future<void> removeUser({required final String id}) async {
     final response =
         await getApiService<UserManagementService>().removeUser(id: id);
@@ -59,6 +64,7 @@ class Users extends _$Users {
     }
   }
 
+  // Edits a user in the database
   Future<void> editUser(
       {required final Map<String, dynamic> body,
       required final String id}) async {

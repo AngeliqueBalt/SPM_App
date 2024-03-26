@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';

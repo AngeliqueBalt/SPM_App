@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
@@ -34,68 +34,64 @@ class ManageQuizScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: FutureBuilder(
-            future: quizzes,
-            builder: (final context, final snapshot) {
-              // print(snapshot);
+          future: quizzes,
+          builder: (final context, final snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
-
-              // final quizzes = snapshot.data!;
-              // print(quizzes);
-
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    // redirects to form to create new quiz
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  // Redirects to form to create new quiz
+                  OptionCard(
+                    label: "Add New Quiz",
+                    color: greenColor,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (final context) =>
+                              NewQuizScreen(clazz: clazz),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  // Redirects to view the most recently added quiz
+                  if (clazz.activeQuiz != null)
                     OptionCard(
-                      label: "Add New Quiz",
+                      label: "Current Quiz",
                       color: greenColor,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute<void>(
                             builder: (final context) =>
-                                NewQuizScreen(clazz: clazz),
+                                TeacherQuizSummaryScreen(
+                                    quiz: clazz.activeQuiz!),
                           ),
                         );
                       },
                     ),
-                    const SizedBox(height: 20),
-                    // redirects to view the most recently added quiz
-                    if (clazz.activeQuiz != null)
-                      OptionCard(
-                        label: "Current Quiz",
-                        color: greenColor,
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (final context) =>
-                                  TeacherQuizSummaryScreen(
-                                      quiz: clazz.activeQuiz!),
-                            ),
-                          );
-                        },
-                      ),
-                    const SizedBox(height: 20),
-                    // redirects to a list of all previous quizzes
-                    OptionCard(
-                      label: "All Quizzes",
-                      color: greenColor,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (final context) =>
-                                TeacherAllQuizzesScreen(clazz: clazz),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              );
-            }),
+                  const SizedBox(height: 20),
+                  // redirects to a list of all quizzes
+                  OptionCard(
+                    label: "All Quizzes",
+                    color: greenColor,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (final context) =>
+                              TeacherAllQuizzesScreen(clazz: clazz),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

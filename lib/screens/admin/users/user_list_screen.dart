@@ -6,6 +6,8 @@ import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/providers/users_provider.dart';
 
+/// This screen displays a list of users.
+
 class UserList extends ConsumerStatefulWidget {
   final UserType userType;
 

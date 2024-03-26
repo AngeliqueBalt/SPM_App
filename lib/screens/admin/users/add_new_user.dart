@@ -6,6 +6,8 @@ import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/providers/users_provider.dart';
 
+/// This screen is used by the admin to add a new user to the system.
+
 class AddNewUser extends ConsumerStatefulWidget {
   const AddNewUser({super.key});
 

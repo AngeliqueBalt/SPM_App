@@ -3,6 +3,9 @@ import 'package:student_progress_monitor_app/models/api.dart';
 
 part 'quizzes.chopper.dart';
 
+/// Service for quizzes
+/// This file contains the http requests to get all quizzes and add a new quiz.
+
 @ChopperApi(baseUrl: '')
 abstract class QuizzesService extends ChopperService {
   static QuizzesService create([final ChopperClient? client]) =>

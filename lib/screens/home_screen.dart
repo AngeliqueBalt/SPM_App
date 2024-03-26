@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:student_progress_monitor_app/components/navbar.dart';
+import 'package:student_progress_monitor_app/partials/navbar.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
 

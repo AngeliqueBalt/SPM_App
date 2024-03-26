@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_progress_monitor_app/components/option_card.dart';
+import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/questions.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
@@ -42,6 +42,7 @@ class StudentClassScreen extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (final context) => QuizScreen(
+                        // TODO(A): TO GET ACTIVE QUIZ FROM DB
                         quiz: sampleQuiz,
                       ),
                     ),
@@ -49,6 +50,7 @@ class StudentClassScreen extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
+              // Quiz List
               OptionCard(
                 label: "All Quizzes",
                 color: greenColor,

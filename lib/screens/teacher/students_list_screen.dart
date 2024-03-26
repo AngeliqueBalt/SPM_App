@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 
 /// Teachers can view a list of all the students in each class.
 /// Each students details can be viewed individually.
 
 class StudentListScreen extends ConsumerWidget {
-  // final Class clazz;
   final List<User> students;
 
   const StudentListScreen({super.key, required this.students});

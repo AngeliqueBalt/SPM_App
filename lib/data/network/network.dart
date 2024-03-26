@@ -1,6 +1,8 @@
 import 'package:chopper/chopper.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 
+/// Sets up the Chopper client with the given services.
+
 ChopperClient setUpClient({required final Iterable<ChopperService> services}) {
   return ChopperClient(
     baseUrl: Uri.parse('http://localhost:51548/'),
@@ -21,7 +23,6 @@ ChopperClient setUpClient({required final Iterable<ChopperService> services}) {
             override: false,
           );
         }
-
         return request;
       },
     ],

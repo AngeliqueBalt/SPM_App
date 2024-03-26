@@ -4,6 +4,9 @@ import 'package:student_progress_monitor_app/data/mock/questions.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
 
+/// The screen that displays the summary of a quiz
+/// The summary includes the score and the questions and answers.
+
 class QuizSummaryScreen extends StatefulWidget {
   final Quiz quiz;
 

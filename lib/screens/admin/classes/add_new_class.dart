@@ -7,6 +7,8 @@ import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/admin_class_provider.dart';
 import 'package:student_progress_monitor_app/providers/users_provider.dart';
 
+/// This screen is used by the admin to add a new class.
+
 class AddNewClass extends ConsumerStatefulWidget {
   const AddNewClass({super.key});
 

@@ -14,8 +14,6 @@ class Api<T> with _$Api<T> {
     required final T payload,
   }) = _Api;
 
-  // Api<User>.fromJson(snapshot.data!.body!, User.fromJson)
-
   factory Api.fromJson(final Map<String, dynamic> json,
           final T Function(Object?) payloadFactory) =>
       _$ApiFromJson(json, (final payload) => payloadFactory(payload));

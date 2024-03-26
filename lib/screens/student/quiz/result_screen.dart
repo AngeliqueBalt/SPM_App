@@ -48,7 +48,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     color: Colors.white),
               ),
               const SizedBox(height: 60),
-              // redirects to the list of all quizzes
+              // Redirects to the list of all quizzes
               OutlinedButton(
                 onPressed: () {
                   context.pushReplacement('/all-quizzes');

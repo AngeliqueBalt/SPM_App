@@ -40,22 +40,19 @@ class _TeacherAllQuizzesScreenState
         child: FutureBuilder(
           future: quizzes,
           builder: (final context, final snapshot) {
-            // print(snapshot.error);
-            // print(snapshot.stackTrace);
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
             }
 
             final quizzes = snapshot.data!;
 
-            // print(quizzes);
-
             if (quizzes.isEmpty) {
               return const Center(
-                  child: Text(
-                "No Quizzes",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-              ));
+                child: Text(
+                  "No Quizzes",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                ),
+              );
             }
 
             return SingleChildScrollView(

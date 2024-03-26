@@ -11,9 +11,10 @@ import 'package:student_progress_monitor_app/partials/display_quiz_questions.dar
 import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 
+/// The screen that displays the quiz overview.
+/// This screen allows the teacher to preview the quiz before saving it.
+
 class QuizOverviewScreen extends ConsumerStatefulWidget {
-  // final List<Question> questions;
-  // final Class clazz;
   final Quiz quiz;
 
   const QuizOverviewScreen({super.key, required this.quiz});
@@ -98,7 +99,6 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
                               "questions": widget.quiz.questions
                                   .map((final question) => question.toJson())
                                   .toList(),
-                              // "questions": widget.questions,
                             });
 
                             if (context.mounted) {

@@ -3,6 +3,10 @@ import 'package:student_progress_monitor_app/models/api.dart';
 
 part 'class_management.chopper.dart';
 
+/// Service for class management
+/// This file contains the http requests for class management.
+/// These include getting all classes, adding a new class, removing a class, and editing a class.
+
 @ChopperApi(baseUrl: '/admin/classes')
 abstract class ClassManagementService extends ChopperService {
   static ClassManagementService create([final ChopperClient? client]) =>

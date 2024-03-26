@@ -6,7 +6,9 @@ import 'package:student_progress_monitor_app/providers/authentication_provider.d
 import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 /// The navigation bar that appears on the left side of the screen.
-/// It contains the user's name, email, and a list of options to navigate to.
+/// This widget allows the user to navigate to different parts of the app,
+/// such as the profile screen and the logout screen.
+/// It also displays the user's name and email.
 
 class NavBar extends ConsumerWidget {
   const NavBar({super.key, this.classes});

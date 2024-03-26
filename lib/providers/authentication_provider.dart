@@ -11,6 +11,8 @@ part 'authentication_provider.freezed.dart';
 
 part 'authentication_provider.g.dart';
 
+/// This provider is used to store the current user's information.
+
 @freezed
 class CurrentUser with _$CurrentUser {
   factory CurrentUser({
@@ -29,6 +31,7 @@ class Authentication extends _$Authentication {
     return readFromStorage();
   }
 
+  // Login
   Future<void> login(
       {required final String email, required final String password}) async {
     state = const AsyncLoading();
@@ -40,6 +43,7 @@ class Authentication extends _$Authentication {
     state = AsyncData(currentUser);
   }
 
+  // Logout
   Future<void> logout() async {
     state = const AsyncLoading();
     await getApiService<AuthenticationService>().logout();
@@ -58,6 +62,7 @@ class Authentication extends _$Authentication {
     }
   }
 
+  // Read the current user from storage
   static Future<CurrentUser?> readFromStorage() async {
     final String? userString = await storage.read(key: "user");
     if (userString == null) {
@@ -68,6 +73,7 @@ class Authentication extends _$Authentication {
   }
 }
 
+// Checks if the current user is authenticated
 @riverpod
 AsyncValue<bool> isAuthenticated(final IsAuthenticatedRef ref) {
   final currentUser = ref.watch(authenticationProvider);

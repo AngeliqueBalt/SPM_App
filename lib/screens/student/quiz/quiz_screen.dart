@@ -88,9 +88,9 @@ class _QuizScreenState extends State<QuizScreen> {
                   const SizedBox(
                     height: 30,
                   ),
+
                   // Buttons for answer options
                   for (int i = 0;
-                      // i < widget.questions[index].answers.length;
                       i < widget.quiz.questions[index].answers.length;
                       i++)
                     Container(
@@ -131,7 +131,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // goes to next question
+                      // Goes to next question
                       // once reaches the end, redirects to result screen
                       OutlinedButton(
                         onPressed: isPressed

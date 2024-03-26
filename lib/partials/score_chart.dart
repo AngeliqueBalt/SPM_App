@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+/// This widget displays a pie chart that shows the scores of a student.
+
 class ScoreChart extends StatelessWidget {
   const ScoreChart({super.key});
 

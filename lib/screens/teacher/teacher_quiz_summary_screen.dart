@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:student_progress_monitor_app/components/score_chart.dart';
+import 'package:student_progress_monitor_app/partials/score_chart.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/data/mock/questions.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
+
+/// The screen that displays the summary of a quiz
+/// The summary includes the a summary of the scores archived by students and the questions and answers.
 
 class TeacherQuizSummaryScreen extends StatefulWidget {
   final Quiz quiz;

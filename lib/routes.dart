@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod/src/framework.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:student_progress_monitor_app/data/mock/classes.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
@@ -44,7 +42,7 @@ GoRouter router(final RouterRef ref) {
         },
       ),
 
-      // Authentication
+      // Login
       GoRoute(
         path: '/login',
         builder: (final BuildContext context, final GoRouterState state) {
@@ -123,9 +121,6 @@ GoRouter router(final RouterRef ref) {
                         final GoRouterState state) {
                       final quizId = state.pathParameters['quizId']!;
                       final classId = state.pathParameters['classId']!;
-
-                      // print(quizId);
-                      // print(classId);
 
                       if (isTeacher) {
                         return TeacherQuizSummaryScreen(

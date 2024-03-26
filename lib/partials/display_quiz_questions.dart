@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 
+/// This widget displays the questions of a quiz.
+
 class DisplayQuizQuestions extends ConsumerWidget {
   final Quiz quiz;
 
