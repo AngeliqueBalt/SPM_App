@@ -8,18 +8,11 @@ import 'package:student_progress_monitor_app/providers/class_provider.dart';
 /// Opening page/dashboard for both teachers and students.
 /// View all classes.
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  @override
   Widget build(final BuildContext context) {
-    final classes = ref.watch(classesProvider.future);
-
     return Scaffold(
       drawer: const NavBar(),
       appBar: AppBar(
@@ -34,14 +27,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         toolbarHeight: 50,
       ),
       body: SafeArea(
-        child: FutureBuilder(
-          future: classes,
-          builder: (final context, final snapshot) {
-            if (!snapshot.hasData) {
+        child: Consumer(
+          builder: (final context, final ref, final child) {
+            final classesState = ref.watch(classesProvider);
+
+            if (classesState.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            final classes = snapshot.data!;
+            final classes = classesState.requireValue;
 
             if (classes.isEmpty) {
               return const Center(

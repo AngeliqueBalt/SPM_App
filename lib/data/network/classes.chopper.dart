@@ -18,12 +18,28 @@ final class _$ClassesService extends ClassesService {
   final Type definitionType = ClassesService;
 
   @override
-  Future<Response<Map<String, dynamic>>> getClasses() {
-    final Uri $url = Uri.parse('/user/classes');
+  Future<Response<Map<String, dynamic>>> getQuizzes({required String classId}) {
+    final Uri $url = Uri.parse('/class/${classId}/quizzes');
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
+    );
+    return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
+  }
+
+  @override
+  Future<Response<Map<String, dynamic>>> setActiveQuiz({
+    required String classId,
+    required Map<String, dynamic> body,
+  }) {
+    final Uri $url = Uri.parse('/class/${classId}/activeQuiz');
+    final $body = body;
+    final Request $request = Request(
+      'PUT',
+      $url,
+      client.baseUrl,
+      body: $body,
     );
     return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
   }

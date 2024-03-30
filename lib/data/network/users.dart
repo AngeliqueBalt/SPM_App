@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:student_progress_monitor_app/models/api.dart';
 
 part 'users.chopper.dart';
 
@@ -13,4 +14,8 @@ abstract class UsersService extends ChopperService {
   // any user view their info on profile
   @Get()
   Future<Response<Map<String, dynamic>>> getCurrent();
+
+  // Get classes
+  @Get(path: '/classes')
+  Future<RawApiResponse> getClasses();
 }

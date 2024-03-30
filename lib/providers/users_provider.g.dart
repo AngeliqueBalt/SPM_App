@@ -8,7 +8,9 @@ part of 'users_provider.dart';
 
 String _$usersHash() => r'93fe852703a3fd5f7fe8ffa26cc575619a05cf93';
 
-/// See also [Users].
+/// Provider to deal with the state of the users
+///
+/// Copied from [Users].
 @ProviderFor(Users)
 final usersProvider =
     AutoDisposeAsyncNotifierProvider<Users, List<User>>.internal(

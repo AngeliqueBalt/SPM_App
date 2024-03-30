@@ -47,10 +47,11 @@ class _AllQuizzesScreenState extends ConsumerState<AllQuizzesScreen> {
 
             if (quizzes.isEmpty) {
               return const Center(
-                  child: Text(
-                "No Quizzes",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-              ));
+                child: Text(
+                  "No Quizzes",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                ),
+              );
             }
 
             return SingleChildScrollView(

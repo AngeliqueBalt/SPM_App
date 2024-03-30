@@ -6,7 +6,6 @@ import 'package:student_progress_monitor_app/screens/student/quiz/result_screen.
 /// The most recent quiz assigned to the student.
 /// Students answer questions and are given a score at the end.
 
-// TODO(A): Score should be saved to the database
 class QuizScreen extends StatefulWidget {
   final Quiz quiz;
 
@@ -82,7 +81,6 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   Text(
                     widget.quiz.questions[index].question,
-                    // widget.question[index].question,
                     style: const TextStyle(fontSize: 25),
                   ),
                   const SizedBox(

@@ -92,10 +92,10 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
                         OutlinedButton(
                           onPressed: () async {
                             await ref
-                                .read(quizzesProvider(widget.quiz.clazz.id)
+                                .read(quizzesProvider(widget.quiz.classId)
                                     .notifier)
                                 .addQuiz(body: {
-                              "name": _quizNameController.text,
+                              "name": _quizNameController.text.trim(),
                               "questions": widget.quiz.questions
                                   .map((final question) => question.toJson())
                                   .toList(),
@@ -103,7 +103,7 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
 
                             if (context.mounted) {
                               context.pushReplacement(
-                                  '/class/${widget.quiz.clazz.id}/manage-quizzes');
+                                  '/class/${widget.quiz.classId}/manage-quizzes');
                             }
                           },
                           child: const Text("Save"),

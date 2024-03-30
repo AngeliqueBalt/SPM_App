@@ -76,12 +76,7 @@ GoRouter router(final RouterRef ref) {
             builder: (final BuildContext context, final GoRouterState state) {
               final String classId = state.pathParameters['classId']!;
               if (isTeacher) {
-                return TeacherClassScreen(
-                    clazz: ref
-                        .read(classesProvider)
-                        .requireValue
-                        .where((final Class clazz) => clazz.id == classId)
-                        .first);
+                return TeacherClassScreen(classId: classId);
               } else {
                 return StudentClassScreen(
                     clazz: ref
@@ -114,32 +109,29 @@ GoRouter router(final RouterRef ref) {
                             .first);
                   }
                 },
-                routes: <RouteBase>[
-                  GoRoute(
-                    path: 'quiz/:quizId',
-                    builder: (final BuildContext context,
-                        final GoRouterState state) {
-                      final quizId = state.pathParameters['quizId']!;
-                      final classId = state.pathParameters['classId']!;
+              ),
 
-                      if (isTeacher) {
-                        return TeacherQuizSummaryScreen(
-                            quiz: ref
-                                .read(quizzesProvider(classId))
-                                .requireValue
-                                .where((final Quiz quiz) => quiz.id == quizId)
-                                .first);
-                      } else {
-                        return QuizSummaryScreen(
-                            quiz: ref
-                                .read(quizzesProvider(classId))
-                                .requireValue
-                                .where((final Quiz quiz) => quiz.id == quizId)
-                                .first);
-                      }
-                    },
-                  ),
-                ],
+              GoRoute(
+                path: 'quiz/:quizId',
+                builder:
+                    (final BuildContext context, final GoRouterState state) {
+                  final quizId = state.pathParameters['quizId']!;
+                  final classId = state.pathParameters['classId']!;
+
+                  if (isTeacher) {
+                    return TeacherQuizSummaryScreen(
+                      quizId: quizId,
+                      classId: classId,
+                    );
+                  } else {
+                    return QuizSummaryScreen(
+                        quiz: ref
+                            .read(quizzesProvider(classId))
+                            .requireValue
+                            .where((final Quiz quiz) => quiz.id == quizId)
+                            .first);
+                  }
+                },
               ),
 
               GoRoute(
@@ -147,12 +139,7 @@ GoRouter router(final RouterRef ref) {
                 builder:
                     (final BuildContext context, final GoRouterState state) {
                   final String classId = state.pathParameters['classId']!;
-                  return ManageQuizScreen(
-                      clazz: ref
-                          .read(classesProvider)
-                          .requireValue
-                          .where((final Class clazz) => clazz.id == classId)
-                          .first);
+                  return ManageQuizScreen(classId: classId);
                 },
               ),
             ],

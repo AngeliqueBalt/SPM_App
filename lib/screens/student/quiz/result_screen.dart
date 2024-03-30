@@ -51,6 +51,7 @@ class _ResultScreenState extends State<ResultScreen> {
               // Redirects to the list of all quizzes
               OutlinedButton(
                 onPressed: () {
+                  // TODO(A): PUSH SCORE TO DB
                   context.pushReplacement('/all-quizzes');
                 },
                 style: ButtonStyle(

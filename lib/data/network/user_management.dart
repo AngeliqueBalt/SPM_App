@@ -27,7 +27,7 @@ abstract class UserManagementService extends ChopperService {
     @Path() required final String id,
   });
 
-  // Update user
+  // Edit user
   @Patch(path: '/{id}')
   Future<RawApiResponse> editUser({
     @Path() required final String id,

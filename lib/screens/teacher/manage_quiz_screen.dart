@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
+import 'package:student_progress_monitor_app/providers/class_provider.dart';
 import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 import 'package:student_progress_monitor_app/screens/teacher/new_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
@@ -12,13 +14,14 @@ import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summar
 /// Teachers can add a new quiz, view the current quiz, or view all previous quizzes.
 
 class ManageQuizScreen extends ConsumerWidget {
-  final Class clazz;
+  final String classId;
 
-  const ManageQuizScreen({super.key, required this.clazz});
+  const ManageQuizScreen({super.key, required this.classId});
 
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
-    final quizzes = ref.watch(quizzesProvider(clazz.id).future);
+    final clazz = ref.watch(classInfoProvider(classId)).requireValue;
+    final quizzes = ref.watch(quizzesProvider(classId).future);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,22 +62,18 @@ class ManageQuizScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20),
                   // Redirects to view the most recently added quiz
-                  if (clazz.activeQuiz != null)
+                  if (clazz.activeQuiz != null) ...[
                     OptionCard(
                       label: "Current Quiz",
                       color: greenColor,
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (final context) =>
-                                TeacherQuizSummaryScreen(
-                                    quiz: clazz.activeQuiz!),
-                          ),
-                        );
+                        context.push(
+                            '/class/$classId/quiz/${clazz.activeQuiz!.id}');
                       },
                     ),
-                  const SizedBox(height: 20),
-                  // redirects to a list of all quizzes
+                    const SizedBox(height: 20),
+                  ],
+                  // Redirects to a list of all quizzes
                   OptionCard(
                     label: "All Quizzes",
                     color: greenColor,

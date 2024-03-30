@@ -12,7 +12,7 @@ _$QuizImpl _$$QuizImplFromJson(Map<String, dynamic> json) => _$QuizImpl(
       questions: (json['questions'] as List<dynamic>)
           .map((e) => Question.fromJson(e as Map<String, dynamic>))
           .toList(),
-      clazz: Class.fromJson(json['class'] as Map<String, dynamic>),
+      classId: json['class'] as String,
     );
 
 Map<String, dynamic> _$$QuizImplToJson(_$QuizImpl instance) =>
@@ -20,7 +20,7 @@ Map<String, dynamic> _$$QuizImplToJson(_$QuizImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'questions': instance.questions,
-      'class': instance.clazz,
+      'class': instance.classId,
     };
 
 _$QuestionImpl _$$QuestionImplFromJson(Map<String, dynamic> json) =>

@@ -4,8 +4,8 @@
 import 'package:student_progress_monitor_app/data/mock/classes.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 
-Quiz sampleQuiz =
-    Quiz(name: "SAMPLE QUIZ", questions: questions, id: '', clazz: classes[0]);
+Quiz sampleQuiz = Quiz(
+    name: "SAMPLE QUIZ", questions: questions, id: '', classId: classes[0].id);
 
 List<Question> questions = [
   const Question(

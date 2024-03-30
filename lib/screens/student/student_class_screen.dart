@@ -35,21 +35,22 @@ class StudentClassScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              OptionCard(
-                label: "Take Quiz",
-                color: greenColor,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (final context) => QuizScreen(
-                        // TODO(A): TO GET ACTIVE QUIZ FROM DB
-                        quiz: sampleQuiz,
+              if (clazz.activeQuiz != null) ...[
+                OptionCard(
+                  label: "Take Quiz",
+                  color: greenColor,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (final context) => QuizScreen(
+                          quiz: clazz.activeQuiz!,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+              ],
               // Quiz List
               OptionCard(
                 label: "All Quizzes",

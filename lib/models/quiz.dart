@@ -11,7 +11,7 @@ class Quiz with _$Quiz {
     required final String id,
     required final String name,
     required final List<Question> questions,
-    @JsonKey(name: "class") required final Class clazz,
+    @JsonKey(name: "class") required final String classId,
   }) = _Quiz;
 
   factory Quiz.fromJson(final Map<String, dynamic> json) =>

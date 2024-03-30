@@ -11,12 +11,6 @@ abstract class QuizzesService extends ChopperService {
   static QuizzesService create([final ChopperClient? client]) =>
       _$QuizzesService(client);
 
-  // Get all quizzes
-  @Get(path: '/class/{classId}/quiz')
-  Future<RawApiResponse> getQuizzes({
-    @Path('classId') required final String classId,
-  });
-
   // Add new quiz
   @Post(path: '/class/{classId}/quiz')
   Future<RawApiResponse> addQuiz({

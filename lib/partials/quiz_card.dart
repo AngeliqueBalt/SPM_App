@@ -15,8 +15,7 @@ class QuizCard extends StatelessWidget {
     return OptionCard(
       label: quiz.name,
       color: greenColor,
-      onTap: () =>
-          context.push('/class/${quiz.clazz.id}/all-quizzes/quiz/${quiz.id}'),
+      onTap: () => context.push('/class/${quiz.classId}/quiz/${quiz.id}'),
     );
   }
 }

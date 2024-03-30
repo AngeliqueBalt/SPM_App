@@ -24,7 +24,7 @@ mixin _$Quiz {
   String get name => throw _privateConstructorUsedError;
   List<Question> get questions => throw _privateConstructorUsedError;
   @JsonKey(name: "class")
-  Class get clazz => throw _privateConstructorUsedError;
+  String get classId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,9 +40,7 @@ abstract class $QuizCopyWith<$Res> {
       {String id,
       String name,
       List<Question> questions,
-      @JsonKey(name: "class") Class clazz});
-
-  $ClassCopyWith<$Res> get clazz;
+      @JsonKey(name: "class") String classId});
 }
 
 /// @nodoc
@@ -61,7 +59,7 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
     Object? id = null,
     Object? name = null,
     Object? questions = null,
-    Object? clazz = null,
+    Object? classId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -76,19 +74,11 @@ class _$QuizCopyWithImpl<$Res, $Val extends Quiz>
           ? _value.questions
           : questions // ignore: cast_nullable_to_non_nullable
               as List<Question>,
-      clazz: null == clazz
-          ? _value.clazz
-          : clazz // ignore: cast_nullable_to_non_nullable
-              as Class,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ClassCopyWith<$Res> get clazz {
-    return $ClassCopyWith<$Res>(_value.clazz, (value) {
-      return _then(_value.copyWith(clazz: value) as $Val);
-    });
   }
 }
 
@@ -103,10 +93,7 @@ abstract class _$$QuizImplCopyWith<$Res> implements $QuizCopyWith<$Res> {
       {String id,
       String name,
       List<Question> questions,
-      @JsonKey(name: "class") Class clazz});
-
-  @override
-  $ClassCopyWith<$Res> get clazz;
+      @JsonKey(name: "class") String classId});
 }
 
 /// @nodoc
@@ -122,7 +109,7 @@ class __$$QuizImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? questions = null,
-    Object? clazz = null,
+    Object? classId = null,
   }) {
     return _then(_$QuizImpl(
       id: null == id
@@ -137,10 +124,10 @@ class __$$QuizImplCopyWithImpl<$Res>
           ? _value._questions
           : questions // ignore: cast_nullable_to_non_nullable
               as List<Question>,
-      clazz: null == clazz
-          ? _value.clazz
-          : clazz // ignore: cast_nullable_to_non_nullable
-              as Class,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -152,7 +139,7 @@ class _$QuizImpl implements _Quiz {
       {required this.id,
       required this.name,
       required final List<Question> questions,
-      @JsonKey(name: "class") required this.clazz})
+      @JsonKey(name: "class") required this.classId})
       : _questions = questions;
 
   factory _$QuizImpl.fromJson(Map<String, dynamic> json) =>
@@ -172,11 +159,11 @@ class _$QuizImpl implements _Quiz {
 
   @override
   @JsonKey(name: "class")
-  final Class clazz;
+  final String classId;
 
   @override
   String toString() {
-    return 'Quiz(id: $id, name: $name, questions: $questions, clazz: $clazz)';
+    return 'Quiz(id: $id, name: $name, questions: $questions, classId: $classId)';
   }
 
   @override
@@ -188,13 +175,13 @@ class _$QuizImpl implements _Quiz {
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._questions, _questions) &&
-            (identical(other.clazz, clazz) || other.clazz == clazz));
+            (identical(other.classId, classId) || other.classId == classId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name,
-      const DeepCollectionEquality().hash(_questions), clazz);
+      const DeepCollectionEquality().hash(_questions), classId);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +202,7 @@ abstract class _Quiz implements Quiz {
       {required final String id,
       required final String name,
       required final List<Question> questions,
-      @JsonKey(name: "class") required final Class clazz}) = _$QuizImpl;
+      @JsonKey(name: "class") required final String classId}) = _$QuizImpl;
 
   factory _Quiz.fromJson(Map<String, dynamic> json) = _$QuizImpl.fromJson;
 
@@ -227,7 +214,7 @@ abstract class _Quiz implements Quiz {
   List<Question> get questions;
   @override
   @JsonKey(name: "class")
-  Class get clazz;
+  String get classId;
   @override
   @JsonKey(ignore: true)
   _$$QuizImplCopyWith<_$QuizImpl> get copyWith =>

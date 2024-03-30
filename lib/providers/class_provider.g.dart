@@ -6,9 +6,11 @@ part of 'class_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$classesHash() => r'c0cd451cb0b4161a13a80355145879dc1c7d8d99';
+String _$classesHash() => r'1c67273d95f9fbc63953aeedabb9510ebf03c93b';
 
-/// See also [classes].
+/// A provider that fetches a list of classes.
+///
+/// Copied from [classes].
 @ProviderFor(classes)
 final classesProvider = AutoDisposeFutureProvider<List<Class>>.internal(
   classes,

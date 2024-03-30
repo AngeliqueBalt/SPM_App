@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ScoreChart extends StatelessWidget {
   const ScoreChart({super.key});
 
-  // TODO(A): value will be replaced with scores as percentages
+// TODO(A): VALUE WILL BE REPLACED WITH SCORES AS PERCENTAGES
   @override
   Widget build(final BuildContext context) {
     return PieChart(
