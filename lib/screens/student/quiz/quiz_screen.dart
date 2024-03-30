@@ -139,7 +139,10 @@ class _QuizScreenState extends State<QuizScreen> {
                                       context,
                                       MaterialPageRoute<void>(
                                         builder: (final context) =>
-                                            ResultScreen(score: score),
+                                            ResultScreen(
+                                                score: score,
+                                                classId: widget.quiz.classId,
+                                                quizId: widget.quiz.id),
                                       ),
                                     );
                                   }

@@ -59,7 +59,6 @@ class _QuizSummaryScreenState extends State<QuizSummaryScreen> {
                 ),
                 const SizedBox(height: 20),
                 // TODO(A): GET THE SCORE FROM THE DATABASE
-                // TODO(A): IF NOT SCORE IS FOUND, DISPLAY A MESSAGE
                 const Center(
                   child: Text(
                     "100",

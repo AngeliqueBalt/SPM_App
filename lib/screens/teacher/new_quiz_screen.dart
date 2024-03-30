@@ -20,7 +20,7 @@ class NewQuizScreen extends StatefulWidget {
 }
 
 class _NewQuizScreenState extends State<NewQuizScreen> {
-  static const quizLength = 5;
+  static const quizLength = 10;
   static const answerCount = 4;
 
   final PageController _controller = PageController(initialPage: 0);

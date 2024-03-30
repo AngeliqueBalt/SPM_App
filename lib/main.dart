@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:student_progress_monitor_app/data/network/class_management.dart';
 import 'package:student_progress_monitor_app/data/network/classes.dart';
 import 'package:student_progress_monitor_app/data/network/quizzes.dart';
+import 'package:student_progress_monitor_app/data/network/submissions.dart';
 import 'package:student_progress_monitor_app/data/network/user_management.dart';
 import 'package:student_progress_monitor_app/data/network/authentication.dart';
 import 'package:student_progress_monitor_app/data/network/network.dart';
@@ -26,6 +27,7 @@ final _apiClient = setUpClient(
     ClassManagementService.create(),
     ClassesService.create(),
     QuizzesService.create(),
+    SubmissionsService.create(),
   ],
 );
 

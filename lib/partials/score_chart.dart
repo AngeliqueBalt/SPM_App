@@ -7,6 +7,7 @@ class ScoreChart extends StatelessWidget {
   const ScoreChart({super.key});
 
 // TODO(A): VALUE WILL BE REPLACED WITH SCORES AS PERCENTAGES
+  // TODO(A): IF NO OR LESS THAN 4 SCORES DO NOT SHOW ANYTHING
   @override
   Widget build(final BuildContext context) {
     return PieChart(

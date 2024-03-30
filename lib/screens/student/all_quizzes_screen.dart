@@ -9,6 +9,8 @@ import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 /// They can see the score they got on each quiz.
 /// They can see the questions and answers and with the answers.
 
+// TODO(A): CHANGE TO ONLY SHOW IF SUBMISSION HAS BEEN MADE
+
 class AllQuizzesScreen extends ConsumerStatefulWidget {
   final Class clazz;
 

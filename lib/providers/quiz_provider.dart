@@ -66,6 +66,7 @@ class Quizzes extends _$Quizzes {
   }
 }
 
+// Gets the quiz information from the database
 @riverpod
 Future<Quiz> quizInfo(
     final QuizInfoRef ref, final String classId, final String quizId) async {

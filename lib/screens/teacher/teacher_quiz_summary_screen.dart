@@ -83,7 +83,6 @@ class TeacherQuizSummaryScreen extends ConsumerWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // const SizedBox(height: 15),
                     Container(
                       color: greenColor,
                       height: 30,
@@ -99,7 +98,6 @@ class TeacherQuizSummaryScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    // TODO(A): GET SCORE SUMMARY FROM DB (WILL BE DONE WHEN SCORE CHART IS FIXED)
                     const Center(
                       child: SizedBox(
                         height: 250,
