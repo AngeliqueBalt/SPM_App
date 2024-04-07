@@ -3,7 +3,6 @@ import 'package:student_progress_monitor_app/data/network/class_management.dart'
 import 'package:student_progress_monitor_app/main.dart';
 import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/models/user.dart';
 
 part 'admin_class_provider.g.dart';
 
@@ -17,7 +16,7 @@ class AdminClasses extends _$AdminClasses {
   Future<List<Class>> build() async {
     final response =
         await getApiService<ClassManagementService>().getAllClasses();
-    return Api.unwrapList(Class.fromJson, response)!.payload;
+    return Api.unwrapList(Class.fromJson, response).payload;
   }
 
   Future<void> refresh() async {
@@ -32,9 +31,9 @@ class AdminClasses extends _$AdminClasses {
     final data =
         Api.unwrap<Map<String, dynamic>>((final data) => data, response);
 
-    if (data?.success ?? false) {
+    if (data.success) {
       final clazz =
-          Class.fromJson(data?.payload["class"] as Map<String, dynamic>);
+          Class.fromJson(data.payload["class"] as Map<String, dynamic>);
 
       if (state.isLoading || state.hasError) {
         throw StateError(
@@ -55,7 +54,7 @@ class AdminClasses extends _$AdminClasses {
     final data =
         Api.unwrap<Map<String, dynamic>>((final data) => data, response);
 
-    if (data?.success ?? false) {
+    if (data.success) {
       if (state.isLoading || state.hasError) {
         throw StateError(
             "Tried to update list of classes while it was being updated");

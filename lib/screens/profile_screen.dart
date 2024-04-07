@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/models/user.dart';
+import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 
 /// Allows the user to view their profile details.
 
-class ProfileScreen extends StatefulWidget {
-  final User user;
-
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({
     super.key,
-    required this.user,
   });
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   bool isObscurePassword = true;
 
   @override
   Widget build(final BuildContext context) {
+    final user = ref.watch(authenticationProvider).requireValue!.user;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -43,16 +43,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ListView(
               children: [
                 const SizedBox(height: 30),
-                buildTextField("Full Name", widget.user.name, false),
+                buildTextField("Full Name", user.name, false),
                 const SizedBox(height: 10),
-                buildTextField("Email", widget.user.email, false),
-                if (widget.user.idNumber != null) ...[
+                buildTextField("Email", user.email, false),
+                if (user.idNumber != null) ...[
                   const SizedBox(height: 10),
-                  buildTextField("ID Number", widget.user.idNumber!, false),
+                  buildTextField("ID Number", user.idNumber!, false),
                 ],
                 const SizedBox(height: 10),
-                buildTextField(
-                    "Account Type", widget.user.userType.label, false)
+                buildTextField("Account Type", user.userType.label, false)
               ],
             ),
           ),

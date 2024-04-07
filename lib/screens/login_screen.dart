@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
+import 'package:student_progress_monitor_app/domain/exception.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
+import 'package:student_progress_monitor_app/routes.dart';
 
 class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({super.key});
@@ -27,8 +29,8 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                 children: [
                   // logo
                   const Image(
-                    image: AssetImage("lib/assets/images/Logo.png"),
-                    height: 150,
+                    image: AssetImage("assets/icon.png"),
+                    height: 128,
                   ),
                   const SizedBox(height: 50),
 
@@ -92,11 +94,29 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                   const SizedBox(height: 30),
                   // Log in button
                   GestureDetector(
-                    onTap: () {
-                      ref.read(authenticationProvider.notifier).login(
-                            email: _email.text,
-                            password: _password.text,
+                    onTap: () async {
+                      try {
+                        await ref.read(authenticationProvider.notifier).login(
+                              email: _email.text,
+                              password: _password.text,
+                            );
+                      } on SPMException catch (ex) {
+                        if (routerKey.currentContext?.mounted ?? false) {
+                          await showDialog<String>(
+                            context: routerKey.currentContext!,
+                            builder: (final context) => AlertDialog(
+                              title: const Text("An error has occurred"),
+                              content: Text(ex.message),
+                              actions: [
+                                OutlinedButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Try Again"),
+                                ),
+                              ],
+                            ),
                           );
+                        }
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.all(25),

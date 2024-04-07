@@ -8,14 +8,18 @@ part of 'submission.dart';
 
 _$SubmissionImpl _$$SubmissionImplFromJson(Map<String, dynamic> json) =>
     _$SubmissionImpl(
-      quiz: Quiz.fromJson(json['quiz'] as Map<String, dynamic>),
-      student: User.fromJson(json['student'] as Map<String, dynamic>),
+      quizId: json['quiz'] as String,
+      classId: json['class'] as String,
+      studentId: json['student'] as String,
+      submitted: DateTime.parse(json['submitted'] as String),
       score: json['score'] as int,
     );
 
 Map<String, dynamic> _$$SubmissionImplToJson(_$SubmissionImpl instance) =>
     <String, dynamic>{
-      'quiz': instance.quiz,
-      'student': instance.student,
+      'quiz': instance.quizId,
+      'class': instance.classId,
+      'student': instance.studentId,
+      'submitted': instance.submitted.toIso8601String(),
       'score': instance.score,
     };

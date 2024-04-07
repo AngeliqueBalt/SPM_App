@@ -6,7 +6,7 @@ part of 'class_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$classesHash() => r'1c67273d95f9fbc63953aeedabb9510ebf03c93b';
+String _$classesHash() => r'fe8c5fd349ed1afe763fc08a646e9749f69110cf';
 
 /// A provider that fetches a list of classes.
 ///

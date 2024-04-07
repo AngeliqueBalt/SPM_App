@@ -18,23 +18,33 @@ class Api<T> with _$Api<T> {
           final T Function(Object?) payloadFactory) =>
       _$ApiFromJson(json, (final payload) => payloadFactory(payload));
 
-  static Api<T>? unwrap<T>(
+  static Api<T> unwrap<T>(
     final T Function(Map<String, dynamic>) factory,
     final Response<Map<String, dynamic>> response,
   ) {
-    if (response.body == null) return null;
+    if (null is T &&
+        response.body != null &&
+        response.body!['payload'] == null) {
+      return Api<T>(success: true, payload: null as T);
+    }
+
     return Api<T>.fromJson(
       response.body!,
       (final data) => factory(data as Map<String, dynamic>),
     );
   }
 
-  static Api<List<T>>? unwrapList<T>(
+  static Api<T?> unwrapNullable<T>(
     final T Function(Map<String, dynamic>) factory,
     final Response<Map<String, dynamic>> response,
   ) {
-    if (response.body == null) return null;
+    return unwrap(factory, response);
+  }
 
+  static Api<List<T>> unwrapList<T>(
+    final T Function(Map<String, dynamic>) factory,
+    final Response<Map<String, dynamic>> response,
+  ) {
     return Api<List<T>>.fromJson(
       response.body!,
       (final data) =>

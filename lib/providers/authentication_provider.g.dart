@@ -37,7 +37,7 @@ final isAuthenticatedProvider = AutoDisposeProvider<AsyncValue<bool>>.internal(
 );
 
 typedef IsAuthenticatedRef = AutoDisposeProviderRef<AsyncValue<bool>>;
-String _$authenticationHash() => r'de2e202b9d9fbbdfc9f0df0466b5fc5c22c8b00f';
+String _$authenticationHash() => r'c38fcd6b1c6998276c1a581730a60af6cfcb7e84';
 
 /// See also [Authentication].
 @ProviderFor(Authentication)

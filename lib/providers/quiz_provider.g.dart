@@ -171,7 +171,7 @@ class _QuizInfoProviderElement extends AutoDisposeFutureProviderElement<Quiz>
   String get quizId => (origin as QuizInfoProvider).quizId;
 }
 
-String _$quizzesHash() => r'85f97353de97ebb093e153cd9bd1cc1f79238fcb';
+String _$quizzesHash() => r'f10607f8df2eb41b4521a699134f034cf5be57a2';
 
 abstract class _$Quizzes extends BuildlessAutoDisposeAsyncNotifier<List<Quiz>> {
   late final String classId;

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/components/async_builder.dart';
 import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
-import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/students_list_screen.dart';
 
 /// This screen is shown when a teacher selects a class from the home screen.
@@ -34,7 +33,7 @@ class TeacherClassScreen extends ConsumerWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (final context) =>
-                            StudentListScreen(students: clazz.students!),
+                            StudentListScreen(students: clazz.students),
                       ),
                     );
                   },
@@ -44,12 +43,7 @@ class TeacherClassScreen extends ConsumerWidget {
                   label: "Manage Quizzes",
                   color: greenColor,
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (final context) =>
-                            ManageQuizScreen(classId: clazz.id),
-                      ),
-                    );
+                    context.push('/class/$classId/manage-quizzes');
                   },
                 ),
               ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/providers/submissions_provider.dart';
 
 /// Students can view the result from the quiz they have just taken.
@@ -56,14 +55,14 @@ class ResultScreen extends ConsumerWidget {
               // Redirects to the list of all quizzes
               OutlinedButton(
                 onPressed: () async {
-                  await ref
-                      .read(submissionsProvider(classId, quizId).notifier)
-                      .newSubmission(body: {
-                    "score": score,
-                  });
+                  await ref.read(submissionsProvider.notifier).newSubmission(
+                        classId: classId,
+                        quizId: quizId,
+                        score: score,
+                      );
 
                   if (context.mounted) {
-                    context.pushReplacement('/class/$classId/all-quizzes');
+                    context.pushReplacement('/class/$classId/quiz/$quizId');
                   }
                 },
                 style: ButtonStyle(

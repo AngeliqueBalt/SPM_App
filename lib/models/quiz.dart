@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 
 part 'quiz.freezed.dart';
 

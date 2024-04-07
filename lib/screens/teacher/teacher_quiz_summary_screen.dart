@@ -98,10 +98,10 @@ class TeacherQuizSummaryScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Center(
+                    Center(
                       child: SizedBox(
                         height: 250,
-                        child: ScoreChart(),
+                        child: ScoreChart(quizId: quizId),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -119,7 +119,10 @@ class TeacherQuizSummaryScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    DisplayQuizQuestions(quiz: quiz),
+                    DisplayQuizQuestions(
+                      quiz: quiz,
+                      shrinkWrap: true,
+                    ),
                   ],
                 ),
               ],

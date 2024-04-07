@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/partials/quiz_card.dart';
+import 'package:student_progress_monitor_app/partials/quiz_summary_card.dart';
 import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 
 /// Teachers can view a list of all previously created/assigned quizzes.
 /// Each quiz can then be further viewed to see a result summary and the question and answers.
 
-class TeacherAllQuizzesScreen extends ConsumerStatefulWidget {
-  final Class clazz;
+class TeacherAllQuizzesScreen extends ConsumerWidget {
+  final String classId;
 
-  const TeacherAllQuizzesScreen({super.key, required this.clazz});
+  const TeacherAllQuizzesScreen({
+    super.key,
+    required this.classId,
+  });
 
   @override
-  ConsumerState<TeacherAllQuizzesScreen> createState() =>
-      _TeacherAllQuizzesScreenState();
-}
-
-class _TeacherAllQuizzesScreenState
-    extends ConsumerState<TeacherAllQuizzesScreen> {
-  @override
-  Widget build(final BuildContext context) {
-    final quizzes = ref.watch(quizzesProvider(widget.clazz.id).future);
+  Widget build(final BuildContext context, final WidgetRef ref) {
+    final quizzes = ref.watch(quizzesProvider(classId).future);
 
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +59,10 @@ class _TeacherAllQuizzesScreenState
                     children: [
                       const SizedBox(height: 20),
                       for (final theQuiz in quizzes) ...[
-                        QuizCard(quiz: theQuiz),
+                        QuizSummaryCard(
+                          classId: theQuiz.classId,
+                          quizId: theQuiz.id,
+                        ),
                         const SizedBox(height: 20),
                       ],
                     ],

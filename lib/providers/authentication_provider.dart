@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/data/network/authentication.dart';
+import 'package:student_progress_monitor_app/domain/exception.dart';
 import 'package:student_progress_monitor_app/main.dart';
 import 'package:student_progress_monitor_app/models/api.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
@@ -38,9 +39,21 @@ class Authentication extends _$Authentication {
     final response = await getApiService<AuthenticationService>()
         .login(email: email, password: password);
 
-    final currentUser = Api.unwrap(CurrentUser.fromJson, response)!.payload;
-    await writeToStorage(currentUser);
-    state = AsyncData(currentUser);
+    if (response.isSuccessful) {
+      final currentUser = Api.unwrap(CurrentUser.fromJson, response).payload;
+      await writeToStorage(currentUser);
+      state = AsyncData(currentUser);
+    } else {
+      final ex = SPMException(
+        (response.error as Map<String, dynamic>)['message'] as String? ??
+            'There was an unexpected problem logging you in.',
+      );
+      state = AsyncError(
+        ex,
+        StackTrace.current,
+      );
+      throw ex;
+    }
   }
 
   // Logout

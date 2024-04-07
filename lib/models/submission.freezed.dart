@@ -20,8 +20,13 @@ Submission _$SubmissionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Submission {
-  Quiz get quiz => throw _privateConstructorUsedError;
-  User get student => throw _privateConstructorUsedError;
+  @JsonKey(name: 'quiz')
+  String get quizId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'class')
+  String get classId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'student')
+  String get studentId => throw _privateConstructorUsedError;
+  DateTime get submitted => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,10 +41,12 @@ abstract class $SubmissionCopyWith<$Res> {
           Submission value, $Res Function(Submission) then) =
       _$SubmissionCopyWithImpl<$Res, Submission>;
   @useResult
-  $Res call({Quiz quiz, User student, int score});
-
-  $QuizCopyWith<$Res> get quiz;
-  $UserCopyWith<$Res> get student;
+  $Res call(
+      {@JsonKey(name: 'quiz') String quizId,
+      @JsonKey(name: 'class') String classId,
+      @JsonKey(name: 'student') String studentId,
+      DateTime submitted,
+      int score});
 }
 
 /// @nodoc
@@ -55,40 +62,34 @@ class _$SubmissionCopyWithImpl<$Res, $Val extends Submission>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quiz = null,
-    Object? student = null,
+    Object? quizId = null,
+    Object? classId = null,
+    Object? studentId = null,
+    Object? submitted = null,
     Object? score = null,
   }) {
     return _then(_value.copyWith(
-      quiz: null == quiz
-          ? _value.quiz
-          : quiz // ignore: cast_nullable_to_non_nullable
-              as Quiz,
-      student: null == student
-          ? _value.student
-          : student // ignore: cast_nullable_to_non_nullable
-              as User,
+      quizId: null == quizId
+          ? _value.quizId
+          : quizId // ignore: cast_nullable_to_non_nullable
+              as String,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
+              as String,
+      studentId: null == studentId
+          ? _value.studentId
+          : studentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      submitted: null == submitted
+          ? _value.submitted
+          : submitted // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuizCopyWith<$Res> get quiz {
-    return $QuizCopyWith<$Res>(_value.quiz, (value) {
-      return _then(_value.copyWith(quiz: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get student {
-    return $UserCopyWith<$Res>(_value.student, (value) {
-      return _then(_value.copyWith(student: value) as $Val);
-    });
   }
 }
 
@@ -100,12 +101,12 @@ abstract class _$$SubmissionImplCopyWith<$Res>
       __$$SubmissionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Quiz quiz, User student, int score});
-
-  @override
-  $QuizCopyWith<$Res> get quiz;
-  @override
-  $UserCopyWith<$Res> get student;
+  $Res call(
+      {@JsonKey(name: 'quiz') String quizId,
+      @JsonKey(name: 'class') String classId,
+      @JsonKey(name: 'student') String studentId,
+      DateTime submitted,
+      int score});
 }
 
 /// @nodoc
@@ -119,19 +120,29 @@ class __$$SubmissionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quiz = null,
-    Object? student = null,
+    Object? quizId = null,
+    Object? classId = null,
+    Object? studentId = null,
+    Object? submitted = null,
     Object? score = null,
   }) {
     return _then(_$SubmissionImpl(
-      quiz: null == quiz
-          ? _value.quiz
-          : quiz // ignore: cast_nullable_to_non_nullable
-              as Quiz,
-      student: null == student
-          ? _value.student
-          : student // ignore: cast_nullable_to_non_nullable
-              as User,
+      quizId: null == quizId
+          ? _value.quizId
+          : quizId // ignore: cast_nullable_to_non_nullable
+              as String,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
+              as String,
+      studentId: null == studentId
+          ? _value.studentId
+          : studentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      submitted: null == submitted
+          ? _value.submitted
+          : submitted // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -144,21 +155,32 @@ class __$$SubmissionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SubmissionImpl implements _Submission {
   const _$SubmissionImpl(
-      {required this.quiz, required this.student, required this.score});
+      {@JsonKey(name: 'quiz') required this.quizId,
+      @JsonKey(name: 'class') required this.classId,
+      @JsonKey(name: 'student') required this.studentId,
+      required this.submitted,
+      required this.score});
 
   factory _$SubmissionImpl.fromJson(Map<String, dynamic> json) =>
       _$$SubmissionImplFromJson(json);
 
   @override
-  final Quiz quiz;
+  @JsonKey(name: 'quiz')
+  final String quizId;
   @override
-  final User student;
+  @JsonKey(name: 'class')
+  final String classId;
+  @override
+  @JsonKey(name: 'student')
+  final String studentId;
+  @override
+  final DateTime submitted;
   @override
   final int score;
 
   @override
   String toString() {
-    return 'Submission(quiz: $quiz, student: $student, score: $score)';
+    return 'Submission(quizId: $quizId, classId: $classId, studentId: $studentId, submitted: $submitted, score: $score)';
   }
 
   @override
@@ -166,14 +188,19 @@ class _$SubmissionImpl implements _Submission {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SubmissionImpl &&
-            (identical(other.quiz, quiz) || other.quiz == quiz) &&
-            (identical(other.student, student) || other.student == student) &&
+            (identical(other.quizId, quizId) || other.quizId == quizId) &&
+            (identical(other.classId, classId) || other.classId == classId) &&
+            (identical(other.studentId, studentId) ||
+                other.studentId == studentId) &&
+            (identical(other.submitted, submitted) ||
+                other.submitted == submitted) &&
             (identical(other.score, score) || other.score == score));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, quiz, student, score);
+  int get hashCode =>
+      Object.hash(runtimeType, quizId, classId, studentId, submitted, score);
 
   @JsonKey(ignore: true)
   @override
@@ -191,17 +218,26 @@ class _$SubmissionImpl implements _Submission {
 
 abstract class _Submission implements Submission {
   const factory _Submission(
-      {required final Quiz quiz,
-      required final User student,
+      {@JsonKey(name: 'quiz') required final String quizId,
+      @JsonKey(name: 'class') required final String classId,
+      @JsonKey(name: 'student') required final String studentId,
+      required final DateTime submitted,
       required final int score}) = _$SubmissionImpl;
 
   factory _Submission.fromJson(Map<String, dynamic> json) =
       _$SubmissionImpl.fromJson;
 
   @override
-  Quiz get quiz;
+  @JsonKey(name: 'quiz')
+  String get quizId;
   @override
-  User get student;
+  @JsonKey(name: 'class')
+  String get classId;
+  @override
+  @JsonKey(name: 'student')
+  String get studentId;
+  @override
+  DateTime get submitted;
   @override
   int get score;
   @override

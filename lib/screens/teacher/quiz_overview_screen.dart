@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/mock/questions.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/partials/display_quiz_questions.dart';
 import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
-import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
 
 /// The screen that displays the quiz overview.
 /// This screen allows the teacher to preview the quiz before saving it.
@@ -59,7 +54,10 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  DisplayQuizQuestions(quiz: widget.quiz),
+                  DisplayQuizQuestions(
+                    quiz: widget.quiz,
+                    shrinkWrap: true,
+                  ),
                 ],
               ),
             ),
@@ -110,7 +108,8 @@ class _QuizOverviewScreenState extends ConsumerState<QuizOverviewScreen> {
                         ),
                         OutlinedButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            context.pop(context);
+                            // Navigator.pop(context);
                           },
                           child: const Text("Cancel"),
                         ),

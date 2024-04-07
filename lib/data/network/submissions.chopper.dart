@@ -35,11 +35,8 @@ final class _$SubmissionsService extends SubmissionsService {
   }
 
   @override
-  Future<Response<Map<String, dynamic>>> getSubmission({
-    required String classId,
-    required String quizId,
-  }) {
-    final Uri $url = Uri.parse('/class/${classId}/quiz/${quizId}/submission');
+  Future<Response<Map<String, dynamic>>> getSubmissions() {
+    final Uri $url = Uri.parse('/user/submissions');
     final Request $request = Request(
       'GET',
       $url,

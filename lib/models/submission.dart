@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:student_progress_monitor_app/models/quiz.dart';
-import 'package:student_progress_monitor_app/models/user.dart';
 
 part 'submission.g.dart';
 
@@ -9,8 +7,10 @@ part 'submission.freezed.dart';
 @freezed
 class Submission with _$Submission {
   const factory Submission({
-    required final Quiz quiz,
-    required final User student,
+    @JsonKey(name: 'quiz') required final String quizId,
+    @JsonKey(name: 'class') required final String classId,
+    @JsonKey(name: 'student') required final String studentId,
+    required final DateTime submitted,
     required final int score,
   }) = _Submission;
 

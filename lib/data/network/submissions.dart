@@ -22,9 +22,6 @@ abstract class SubmissionsService extends ChopperService {
   });
 
   // Get submission
-  @Get(path: '/class/{classId}/quiz/{quizId}/submission')
-  Future<RawApiResponse> getSubmission({
-    @Path('classId') required final String classId,
-    @Path('quizId') required final String quizId,
-  });
+  @Get(path: '/user/submissions')
+  Future<RawApiResponse> getSubmissions();
 }

@@ -2,23 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/models/quiz.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
-import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
 import 'package:student_progress_monitor_app/screens/admin/admin_dashboard.dart';
 import 'package:student_progress_monitor_app/screens/login_screen.dart';
-import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
+import 'package:student_progress_monitor_app/screens/profile_screen.dart';
+import 'package:student_progress_monitor_app/screens/student/submissions_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz_summary_screen.dart';
 import 'package:student_progress_monitor_app/screens/student/student_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/manage_quiz_screen.dart';
+import 'package:student_progress_monitor_app/screens/teacher/new_quiz_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_class_screen.dart';
 import 'package:student_progress_monitor_app/screens/home_screen.dart';
 import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summary_screen.dart';
 
 part 'routes.g.dart';
+
+final GlobalKey<NavigatorState> _routerKey = GlobalKey<NavigatorState>();
+
+GlobalKey<NavigatorState> get routerKey => _routerKey;
 
 @riverpod
 GoRouter router(final RouterRef ref) {
@@ -29,6 +33,7 @@ GoRouter router(final RouterRef ref) {
   final isAdmin = [UserType.admin].contains(currentUser?.user.userType);
 
   return GoRouter(
+    navigatorKey: _routerKey,
     routes: <RouteBase>[
       // Loading
       GoRoute(
@@ -50,27 +55,23 @@ GoRouter router(final RouterRef ref) {
         },
       ),
 
-      // Admin dashboard
-      GoRoute(
-        path: '/admin',
-        builder: (final BuildContext context, final GoRouterState state) {
-          return const AdminDashboard();
-        },
-        redirect: (final BuildContext context, final GoRouterState state) {
-          if (!isAdmin) {
-            return '/login';
-          }
-          return null;
-        },
-      ),
-
       // Dashboard
       GoRoute(
         path: '/',
         builder: (final BuildContext context, final GoRouterState state) {
+          if (isAdmin) {
+            return const AdminDashboard();
+          }
+
           return const HomeScreen();
         },
         routes: <RouteBase>[
+          GoRoute(
+            path: 'profile',
+            builder: (final BuildContext context, final GoRouterState state) {
+              return const ProfileScreen();
+            },
+          ),
           GoRoute(
             path: 'class/:classId',
             builder: (final BuildContext context, final GoRouterState state) {
@@ -94,19 +95,9 @@ GoRouter router(final RouterRef ref) {
                     (final BuildContext context, final GoRouterState state) {
                   final String classId = state.pathParameters['classId']!;
                   if (isTeacher) {
-                    return TeacherAllQuizzesScreen(
-                        clazz: ref
-                            .read(classesProvider)
-                            .requireValue
-                            .where((final Class clazz) => clazz.id == classId)
-                            .first);
+                    return TeacherAllQuizzesScreen(classId: classId);
                   } else {
-                    return AllQuizzesScreen(
-                        clazz: ref
-                            .read(classesProvider)
-                            .requireValue
-                            .where((final Class clazz) => clazz.id == classId)
-                            .first);
+                    return SubmissionsScreen(classId: classId);
                   }
                 },
               ),
@@ -125,23 +116,30 @@ GoRouter router(final RouterRef ref) {
                     );
                   } else {
                     return QuizSummaryScreen(
-                        quiz: ref
-                            .read(quizzesProvider(classId))
-                            .requireValue
-                            .where((final Quiz quiz) => quiz.id == quizId)
-                            .first);
+                      classId: classId,
+                      quizId: quizId,
+                    );
                   }
                 },
               ),
 
               GoRoute(
-                path: 'manage-quizzes',
-                builder:
-                    (final BuildContext context, final GoRouterState state) {
-                  final String classId = state.pathParameters['classId']!;
-                  return ManageQuizScreen(classId: classId);
-                },
-              ),
+                  path: 'manage-quizzes',
+                  builder:
+                      (final BuildContext context, final GoRouterState state) {
+                    final String classId = state.pathParameters['classId']!;
+                    return ManageQuizScreen(classId: classId);
+                  },
+                  routes: [
+                    GoRoute(
+                        path: 'new-quiz',
+                        builder: (final BuildContext context,
+                            final GoRouterState state) {
+                          final String classId =
+                              state.pathParameters['classId']!;
+                          return NewQuizScreen(classId: classId);
+                        })
+                  ]),
             ],
           ),
         ],
@@ -155,14 +153,8 @@ GoRouter router(final RouterRef ref) {
       final bool requiresAuth = routerState.fullPath! != '/login';
       final bool isAuthenticated = isAuthenticatedState.requireValue;
 
-      if (isAuthenticated || isTeacher && isAuthenticated) {
+      if (isAuthenticated) {
         if (requiresAuth != isAuthenticated) return '/';
-      } else {
-        if (requiresAuth != isAuthenticated) return '/login';
-      }
-
-      if (isAdmin && isAuthenticated) {
-        if (requiresAuth == isAuthenticated) return '/admin';
       } else {
         if (requiresAuth != isAuthenticated) return '/login';
       }

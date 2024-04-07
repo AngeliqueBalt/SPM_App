@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/components/async_builder.dart';
 import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/data/mock/questions.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
-import 'package:student_progress_monitor_app/screens/student/all_quizzes_screen.dart';
+import 'package:student_progress_monitor_app/providers/submissions_provider.dart';
 import 'package:student_progress_monitor_app/screens/student/quiz/quiz_screen.dart';
 
 /// Students can view each of their classes.
@@ -35,33 +35,40 @@ class StudentClassScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              if (clazz.activeQuiz != null) ...[
-                OptionCard(
-                  label: "Take Quiz",
-                  color: greenColor,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (final context) => QuizScreen(
-                          quiz: clazz.activeQuiz!,
-                        ),
-                      ),
+              AsyncBuilder(
+                  selector: (final ref) =>
+                      ref.watch(classActiveQuizSubmissionProvider(clazz.id)),
+                  builder: (final context, final activeQuizSubmission) {
+                    final bool completedActiveQuiz =
+                        activeQuizSubmission != null;
+                    return Column(
+                      children: [
+                        if (clazz.activeQuiz != null &&
+                            !completedActiveQuiz) ...[
+                          OptionCard(
+                            label: "Take Quiz",
+                            color: greenColor,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (final context) => QuizScreen(
+                                    quiz: clazz.activeQuiz!,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                        ]
+                      ],
                     );
-                  },
-                ),
-                const SizedBox(height: 20),
-              ],
+                  }),
               // Quiz List
               OptionCard(
-                label: "All Quizzes",
+                label: "Past Quizzes",
                 color: greenColor,
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (final context) =>
-                          AllQuizzesScreen(clazz: clazz),
-                    ),
-                  );
+                  context.push('/class/${clazz.id}/all-quizzes');
                 },
               ),
             ],

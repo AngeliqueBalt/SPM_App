@@ -17,7 +17,7 @@ class Quizzes extends _$Quizzes {
   Future<List<Quiz>> build(final String classId) async {
     final response =
         await getApiService<ClassesService>().getQuizzes(classId: classId);
-    return Api.unwrapList(Quiz.fromJson, response)!.payload;
+    return Api.unwrapList(Quiz.fromJson, response).payload;
   }
 
   Future<void> refresh() async {
@@ -32,8 +32,8 @@ class Quizzes extends _$Quizzes {
     final data =
         Api.unwrap<Map<String, dynamic>>((final data) => data, response);
 
-    if (data?.success ?? false) {
-      final quiz = Quiz.fromJson(data?.payload["quiz"] as Map<String, dynamic>);
+    if (data.success) {
+      final quiz = Quiz.fromJson(data.payload["quiz"] as Map<String, dynamic>);
 
       if (state.isLoading || state.hasError) {
         throw StateError(
@@ -54,7 +54,7 @@ class Quizzes extends _$Quizzes {
     final data =
         Api.unwrap<Map<String, dynamic>>((final data) => data, response);
 
-    if (data?.success ?? false) {
+    if (data.success) {
       if (state.isLoading || state.hasError) {
         throw StateError(
             "Tried to update the active quiz while it was being updated");

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/components/async_builder.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
@@ -18,37 +19,21 @@ class UserList extends ConsumerStatefulWidget {
 }
 
 class _UserListState extends ConsumerState<UserList> {
-  late final TextEditingController _nameController;
-  late final TextEditingController _emailController;
-  late final TextEditingController _idController;
-
-  late final String _domain;
-
   bool _loading = false;
 
   @override
   void initState() {
-    _nameController = TextEditingController();
-    _emailController = TextEditingController();
-    _idController = TextEditingController();
-    final currentUser = ref.read(authenticationProvider).value!;
-    _domain =
-        RegExp(r'[^@]+(@.+)').firstMatch(currentUser.user.email)!.group(1)!;
-
     super.initState();
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _idController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(final BuildContext context) {
-    final users = ref.watch(usersProvider).requireValue;
+    final users = ref.watch(usersProvider);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -61,116 +46,129 @@ class _UserListState extends ConsumerState<UserList> {
         elevation: 0,
         toolbarHeight: 50,
       ),
-      body: RefreshIndicator(
-        onRefresh: ref.read(usersProvider.notifier).refresh,
-        child: SafeArea(
-          child: Scrollbar(
-            child: CustomScrollView(
-              slivers: [
-                SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      for (final user in users.where((final user) =>
-                          user.userType == widget.userType)) ...[
-                        const Divider(
-                          color: Colors.grey,
-                          height: 0,
-                          thickness: 1,
-                          indent: 20,
-                          endIndent: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  const SizedBox(height: 15),
-                                  Text(
-                                    "Full Name: ${user.name}",
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    "Email: ${user.email}",
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                  if (user.idNumber != null) ...[
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      "ID Number: ${user.idNumber}",
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                  const SizedBox(height: 15),
-                                ],
+      body: AsyncBuilder(
+          selector: (final ref) => ref.watch(usersProvider),
+          builder: (final context, final users) {
+            return RefreshIndicator(
+              onRefresh: ref.read(usersProvider.notifier).refresh,
+              child: SafeArea(
+                child: Scrollbar(
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            for (final user in users.where((final user) =>
+                                user.userType == widget.userType)) ...[
+                              const Divider(
+                                color: Colors.grey,
+                                height: 0,
+                                thickness: 1,
+                                indent: 20,
+                                endIndent: 20,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(right: 30.0),
-                                child: Column(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    if (_loading)
-                                      const Padding(
-                                        padding: EdgeInsets.all(20.0),
-                                        child: Center(
-                                            child: CircularProgressIndicator()),
-                                      )
-                                    else
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: IconButton(
-                                          onPressed: () async {
-                                            await showEditUserDialog(
-                                                user: user);
-                                          },
-                                          icon: const Icon(Icons.edit),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        const SizedBox(height: 15),
+                                        Text(
+                                          "Full Name: ${user.name}",
+                                          style: const TextStyle(fontSize: 15),
                                         ),
-                                      ),
-                                    if (_loading)
-                                      const Padding(
-                                        padding: EdgeInsets.all(20.0),
-                                        child: Center(
-                                            child: CircularProgressIndicator()),
-                                      )
-                                    else
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: IconButton(
-                                          onPressed: () async {
-                                            setState(() {
-                                              _loading = true;
-                                            });
-
-                                            await ref
-                                                .read(usersProvider.notifier)
-                                                .removeUser(id: user.id);
-
-                                            if (context.mounted) {
-                                              context.pop();
-                                            }
-                                          },
-                                          icon: const Icon(Icons.delete),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          "Email: ${user.email}",
+                                          style: const TextStyle(fontSize: 12),
                                         ),
+                                        if (user.idNumber != null) ...[
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            "ID Number: ${user.idNumber}",
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                        ],
+                                        const SizedBox(height: 15),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 30.0),
+                                      child: Column(
+                                        children: [
+                                          if (_loading)
+                                            const Padding(
+                                              padding: EdgeInsets.all(20.0),
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator()),
+                                            )
+                                          else
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: IconButton(
+                                                onPressed: () async {
+                                                  await showEditUserDialog(
+                                                      user: user);
+                                                },
+                                                icon: const Icon(Icons.edit),
+                                              ),
+                                            ),
+                                          if (_loading)
+                                            const Padding(
+                                              padding: EdgeInsets.all(20.0),
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator()),
+                                            )
+                                          else
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: IconButton(
+                                                onPressed: () async {
+                                                  setState(() {
+                                                    _loading = true;
+                                                  });
+
+                                                  await ref
+                                                      .read(usersProvider
+                                                          .notifier)
+                                                      .removeUser(id: user.id);
+
+                                                  if (context.mounted) {
+                                                    context.pop();
+                                                  }
+                                                },
+                                                icon: const Icon(Icons.delete),
+                                              ),
+                                            ),
+                                        ],
                                       ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ],
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            );
+          }),
     );
   }
 

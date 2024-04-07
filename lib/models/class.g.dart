@@ -10,15 +10,13 @@ _$ClassImpl _$$ClassImplFromJson(Map<String, dynamic> json) => _$ClassImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       teacher: User.fromJson(json['teacher'] as Map<String, dynamic>),
-      students: (json['students'] as List<dynamic>?)
-          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+      students: (json['students'] as List<dynamic>)
+          .map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList(),
-      quizzes: (json['quizzes'] as List<dynamic>?)
-          ?.map((e) => Quiz.fromJson(e as Map<String, dynamic>))
+      quizzes: (json['quizzes'] as List<dynamic>)
+          .map((e) => Quiz.fromJson(e as Map<String, dynamic>))
           .toList(),
-      activeQuiz: json['activeQuiz'] == null
-          ? null
-          : Quiz.fromJson(json['activeQuiz'] as Map<String, dynamic>),
+      activeQuizId: json['activeQuiz'] as String?,
     );
 
 Map<String, dynamic> _$$ClassImplToJson(_$ClassImpl instance) =>
@@ -28,5 +26,5 @@ Map<String, dynamic> _$$ClassImplToJson(_$ClassImpl instance) =>
       'teacher': instance.teacher,
       'students': instance.students,
       'quizzes': instance.quizzes,
-      'activeQuiz': instance.activeQuiz,
+      'activeQuiz': instance.activeQuizId,
     };

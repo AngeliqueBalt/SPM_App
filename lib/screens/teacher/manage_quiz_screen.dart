@@ -3,12 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/partials/option_card.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
-import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
 import 'package:student_progress_monitor_app/providers/quiz_provider.dart';
-import 'package:student_progress_monitor_app/screens/teacher/new_quiz_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_all_quizzes_screen.dart';
-import 'package:student_progress_monitor_app/screens/teacher/teacher_quiz_summary_screen.dart';
 
 /// Where teachers can manage quizzes for the class previously selected.
 /// Teachers can add a new quiz, view the current quiz, or view all previous quizzes.
@@ -52,12 +48,7 @@ class ManageQuizScreen extends ConsumerWidget {
                     label: "Add New Quiz",
                     color: greenColor,
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (final context) =>
-                              NewQuizScreen(clazz: clazz),
-                        ),
-                      );
+                      context.push('/class/$classId/manage-quizzes/new-quiz');
                     },
                   ),
                   const SizedBox(height: 20),
@@ -78,12 +69,7 @@ class ManageQuizScreen extends ConsumerWidget {
                     label: "All Quizzes",
                     color: greenColor,
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (final context) =>
-                              TeacherAllQuizzesScreen(clazz: clazz),
-                        ),
-                      );
+                      context.push('/class/$classId/all-quizzes');
                     },
                   ),
                 ],

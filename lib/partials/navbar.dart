@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/class.dart';
 import 'package:student_progress_monitor_app/providers/authentication_provider.dart';
-import 'package:student_progress_monitor_app/screens/profile_screen.dart';
 
 /// The navigation bar that appears on the left side of the screen.
 /// This widget allows the user to navigate to different parts of the app,
@@ -18,7 +18,15 @@ class NavBar extends ConsumerWidget {
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
     final currentUser = ref.watch(authenticationProvider);
-    final user = currentUser.requireValue!.user;
+    final user = currentUser.requireValue?.user;
+
+    if (user == null) {
+      return const Drawer(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return Drawer(
       child: ListView(
@@ -43,11 +51,7 @@ class NavBar extends ConsumerWidget {
             leading: const Icon(Icons.person),
             title: const Text("Profile"),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (final context) => ProfileScreen(user: user),
-                ),
-              );
+              context.push('/profile');
             },
           ),
           ListTile(
