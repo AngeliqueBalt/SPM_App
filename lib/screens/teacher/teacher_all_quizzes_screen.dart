@@ -45,7 +45,7 @@ class TeacherAllQuizzesScreen extends ConsumerWidget {
               return const Center(
                 child: Text(
                   "No Quizzes",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
               );
             }

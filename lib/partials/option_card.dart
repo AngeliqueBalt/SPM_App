@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const kOptionCardHeight = 165.0;
 
@@ -34,7 +34,11 @@ class OptionCard extends StatelessWidget {
             child: Text(
               label,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

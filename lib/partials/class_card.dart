@@ -15,10 +15,9 @@ class ClassCard extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return OptionCard(
-      // label: name,
       label: lesson.name,
       color: greenColor,
-      onTap: () => context.go('/class/${lesson.name}'),
+      onTap: () => context.go('/class/${lesson.id}'),
     );
   }
 }

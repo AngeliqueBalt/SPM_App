@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:student_progress_monitor_app/partials/class_card.dart';
 import 'package:student_progress_monitor_app/partials/navbar.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/providers/class_provider.dart';
@@ -54,32 +55,34 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20),
                       for (final clazz in classes) ...[
-                        GestureDetector(
-                          onTap: () => context.go('/class/${clazz.id}'),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: Container(
-                              height: 165.0,
-                              decoration: BoxDecoration(
-                                color: greenColor,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                                horizontal: 15,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  clazz.name,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        ClassCard(lesson: clazz),
+                        // GestureDetector(
+                        //   onTap: () => context.go('/class/${clazz.id}'),
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.symmetric(horizontal: 40),
+                        //     child: Container(
+                        //       height: 165.0,
+                        //       decoration: BoxDecoration(
+                        //         color: greenColor,
+                        //         borderRadius: BorderRadius.circular(15),
+                        //       ),
+                        //       padding: const EdgeInsets.symmetric(
+                        //         vertical: 15,
+                        //         horizontal: 15,
+                        //       ),
+                        //       child: Center(
+                        //         child: Text(
+                        //           clazz.name,
+                        //           textAlign: TextAlign.center,
+                        //           style: const TextStyle(
+                        //             fontWeight: FontWeight.bold,
+                        //             fontSize: 16,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(height: 20),
                       ],
                     ],

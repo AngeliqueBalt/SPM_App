@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/models/quiz.dart';
 
 /// This widget displays the questions of a quiz.
@@ -26,29 +27,31 @@ class DisplayQuizQuestions extends ConsumerWidget {
               shrinkWrap: shrinkWrap,
               itemCount: quiz.questions.length,
               itemBuilder: (final context, final index) {
+                final question = quiz.questions[index];
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Question ${index + 1}/${quiz.questions.length}",
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      quiz.questions[index].question,
-                      style: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    for (int i = 0; i < quiz.questions[i].answers.length; i++)
+                    Text(
+                      question.question,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    for (final answer in question.answers)
                       Text(
-                        quiz.questions[index].answers[i].answer,
+                        answer.answer,
                         style: TextStyle(
                           fontSize: 15,
-                          color: quiz.questions[index].answers[i].isCorrect
-                              ? Colors.green
-                              : Colors.black,
+                          fontWeight: FontWeight.bold,
+                          color: answer.isCorrect ? greenColor : Colors.black,
                         ),
                       ),
                     const Divider(
