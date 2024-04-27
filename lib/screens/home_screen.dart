@@ -56,33 +56,6 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       for (final clazz in classes) ...[
                         ClassCard(lesson: clazz),
-                        // GestureDetector(
-                        //   onTap: () => context.go('/class/${clazz.id}'),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.symmetric(horizontal: 40),
-                        //     child: Container(
-                        //       height: 165.0,
-                        //       decoration: BoxDecoration(
-                        //         color: greenColor,
-                        //         borderRadius: BorderRadius.circular(15),
-                        //       ),
-                        //       padding: const EdgeInsets.symmetric(
-                        //         vertical: 15,
-                        //         horizontal: 15,
-                        //       ),
-                        //       child: Center(
-                        //         child: Text(
-                        //           clazz.name,
-                        //           textAlign: TextAlign.center,
-                        //           style: const TextStyle(
-                        //             fontWeight: FontWeight.bold,
-                        //             fontSize: 16,
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                         const SizedBox(height: 20),
                       ],
                     ],
