@@ -1,5 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:student_progress_monitor_app/domain/exception.dart';
 
 part 'api.freezed.dart';
 
@@ -22,6 +23,13 @@ class Api<T> with _$Api<T> {
     final T Function(Map<String, dynamic>) factory,
     final Response<Map<String, dynamic>> response,
   ) {
+    if (!response.isSuccessful) {
+      throw SPMException(
+        (response.error as Map<String, dynamic>)['message'] as String? ??
+            'There was an unexpected problem.',
+      );
+    }
+
     if (null is T &&
         response.body != null &&
         response.body!['payload'] == null) {

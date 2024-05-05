@@ -16,6 +16,8 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
+  bool _loading = false;
+
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
@@ -93,50 +95,74 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
 
                   const SizedBox(height: 30),
                   // Log in button
-                  GestureDetector(
-                    onTap: () async {
-                      try {
-                        await ref.read(authenticationProvider.notifier).login(
-                              email: _email.text,
-                              password: _password.text,
-                            );
-                      } on SPMException catch (ex) {
-                        if (routerKey.currentContext?.mounted ?? false) {
-                          await showDialog<String>(
-                            context: routerKey.currentContext!,
-                            builder: (final context) => AlertDialog(
-                              title: const Text("An error has occurred"),
-                              content: Text(ex.message),
-                              actions: [
-                                OutlinedButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text("Try Again"),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(25),
-                      margin: const EdgeInsets.symmetric(horizontal: 25),
-                      decoration: BoxDecoration(
-                        color: greenColor,
-                        borderRadius: BorderRadius.circular(8),
+                  if (_loading)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 36.0),
+                      child: Center(
+                        child: CircularProgressIndicator(),
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                    )
+                  else
+                    GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          _loading = true;
+                        });
+                        try {
+                          await ref.read(authenticationProvider.notifier).login(
+                                email: _email.text,
+                                password: _password.text,
+                              );
+                          setState(() {
+                            _loading = false;
+                          });
+                        } on SPMException catch (ex) {
+                          if (routerKey.currentContext?.mounted ?? false) {
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((final _) async {
+                              setState(() {
+                                _loading = false;
+                              });
+                              await showDialog<String>(
+                                context: routerKey.currentContext!,
+                                builder: (final context) => AlertDialog(
+                                  title: const Text("An error has occurred"),
+                                  content: Text(ex.message),
+                                  actions: [
+                                    OutlinedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text("Try Again"),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                          } else {
+                            setState(() {
+                              _loading = true;
+                            });
+                          }
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(25),
+                        margin: const EdgeInsets.symmetric(horizontal: 25),
+                        decoration: BoxDecoration(
+                          color: greenColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),

@@ -33,12 +33,12 @@ class Users extends _$Users {
     if (data.success) {
       final user = User.fromJson(data.payload["user"] as Map<String, dynamic>);
 
+      final List<User> current;
       if (state.isLoading || state.hasError) {
-        throw StateError(
-            "Tried to update list of users while it was being updated");
+        current = (await AsyncValue.guard(build)).requireValue;
+      } else {
+        current = state.requireValue;
       }
-
-      final current = state.requireValue;
 
       state = AsyncData([...current, user]);
     } else {

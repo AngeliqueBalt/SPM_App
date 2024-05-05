@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_progress_monitor_app/const/design.dart';
 import 'package:student_progress_monitor_app/domain/exception.dart';
 import 'package:student_progress_monitor_app/models/user.dart';
@@ -312,11 +313,13 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                                 ),
                               );
                             }
+
+                            return;
                           }
 
-                          // if (context.mounted) {
-                          //   context.pop();
-                          // }
+                          if (context.mounted) {
+                            context.pop();
+                          }
                         },
                         child: const Text("Create new user"),
                       ),
