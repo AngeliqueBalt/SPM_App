@@ -203,6 +203,7 @@ class NewQuizScreenQuestion extends StatefulWidget {
 }
 
 class _NewQuizScreenQuestionState extends State<NewQuizScreenQuestion> {
+  final ScrollController _scrollController = ScrollController();
   late final TextEditingController _questionController;
 
   @override
@@ -228,7 +229,9 @@ class _NewQuizScreenQuestionState extends State<NewQuizScreenQuestion> {
     return Form(
       key: widget.formKey,
       child: Scrollbar(
+        controller: _scrollController,
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(

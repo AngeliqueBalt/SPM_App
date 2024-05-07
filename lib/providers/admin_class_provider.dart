@@ -35,12 +35,12 @@ class AdminClasses extends _$AdminClasses {
       final clazz =
           Class.fromJson(data.payload["class"] as Map<String, dynamic>);
 
+      final List<Class> current;
       if (state.isLoading || state.hasError) {
-        throw StateError(
-            "Tried to update list of classes while it was being updated");
+        current = (await AsyncValue.guard(build)).requireValue;
+      } else {
+        current = state.requireValue;
       }
-
-      final current = state.requireValue;
 
       state = AsyncData([...current, clazz]);
     }

@@ -120,7 +120,7 @@ class __$$CurrentUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CurrentUserImpl implements _CurrentUser {
+class _$CurrentUserImpl with DiagnosticableTreeMixin implements _CurrentUser {
   _$CurrentUserImpl({required this.user, required this.sessionToken});
 
   factory _$CurrentUserImpl.fromJson(Map<String, dynamic> json) =>
@@ -132,8 +132,17 @@ class _$CurrentUserImpl implements _CurrentUser {
   final String sessionToken;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CurrentUser(user: $user, sessionToken: $sessionToken)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CurrentUser'))
+      ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('sessionToken', sessionToken));
   }
 
   @override

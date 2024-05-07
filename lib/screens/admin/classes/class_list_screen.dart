@@ -116,6 +116,7 @@ class _AdminClassListState extends ConsumerState<ClassList> {
                                                   }
                                                 },
                                                 icon: const Icon(Icons.delete),
+                                                tooltip: "Delete",
                                               ),
                                             ),
                                         ],

@@ -22,6 +22,9 @@ enum UserType {
         .where((final userType) => userType.value == value)
         .firstOrNull;
   }
+
+  @override
+  toString() => label;
 }
 
 @freezed

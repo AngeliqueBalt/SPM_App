@@ -33,7 +33,6 @@ class _UserListState extends ConsumerState<UserList> {
 
   @override
   Widget build(final BuildContext context) {
-    final users = ref.watch(usersProvider);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -122,6 +121,7 @@ class _UserListState extends ConsumerState<UserList> {
                                                       user: user);
                                                 },
                                                 icon: const Icon(Icons.edit),
+                                                tooltip: "Edit",
                                               ),
                                             ),
                                           if (_loading)
@@ -151,6 +151,7 @@ class _UserListState extends ConsumerState<UserList> {
                                                   }
                                                 },
                                                 icon: const Icon(Icons.delete),
+                                                tooltip: "Delete",
                                               ),
                                             ),
                                         ],
@@ -226,56 +227,58 @@ class _EditUserDialogState extends ConsumerState<EditUserDialog> {
       title: const Text("Edit user"),
       content: Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextFormField(
-              controller: _nameController,
-              enabled: !_loading,
-              decoration: const InputDecoration(
-                label: Text("Full Name"),
-                border: UnderlineInputBorder(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: _nameController,
+                enabled: !_loading,
+                decoration: const InputDecoration(
+                  label: Text("Full Name"),
+                  border: UnderlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              enabled: !_loading,
-              controller: _emailController,
-              validator: (final value) {
-                if (value?.trim().isEmpty ?? true) {
-                  return "You need to enter valid email";
-                }
+              const SizedBox(height: 20),
+              TextFormField(
+                enabled: !_loading,
+                controller: _emailController,
+                validator: (final value) {
+                  if (value?.trim().isEmpty ?? true) {
+                    return "You need to enter valid email";
+                  }
 
-                if (value!.contains("@")) {
-                  return "Don't include the domain";
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                labelText: "Email",
-                border: const UnderlineInputBorder(),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.only(left: 5, right: 15),
-                  child: Align(
-                    alignment: Alignment.center,
-                    widthFactor: 1.0,
-                    heightFactor: 1.0,
-                    child: Text(_domain),
+                  if (value!.contains("@")) {
+                    return "Don't include the domain";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: "Email",
+                  border: const UnderlineInputBorder(),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 15),
+                    child: Align(
+                      alignment: Alignment.center,
+                      widthFactor: 1.0,
+                      heightFactor: 1.0,
+                      child: Text(_domain),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _idController,
-              enabled: !_loading,
-              decoration: const InputDecoration(
-                label: Text("ID Number"),
-                border: UnderlineInputBorder(),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _idController,
+                enabled: !_loading,
+                decoration: const InputDecoration(
+                  label: Text("ID Number"),
+                  border: UnderlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
       actions: [

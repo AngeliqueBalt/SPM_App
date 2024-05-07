@@ -98,14 +98,10 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                       onSelected: (final value) {
                         _userType = value;
                       },
-                      dropdownMenuEntries: const <DropdownMenuEntry<UserType>>[
-                        DropdownMenuEntry(
-                            value: UserType.admin, label: "Admin"),
-                        DropdownMenuEntry(
-                            value: UserType.teacher, label: "Teacher"),
-                        DropdownMenuEntry(
-                            value: UserType.student, label: "Student"),
-                      ],
+                      dropdownMenuEntries: UserType.values.map((final type) {
+                        return DropdownMenuEntry(
+                            value: type, label: type.label);
+                      }).toList(),
                     ),
                   ),
 
@@ -165,9 +161,11 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                     child: TextFormField(
                       enabled: !_loading,
                       controller: _idController,
-                      validator: (final value) => value?.trim().isEmpty ?? true
-                          ? "You need to enter an ID"
-                          : null,
+                      validator: (final value) =>
+                          (value?.trim().isEmpty ?? true) &&
+                                  (_userType != UserType.admin)
+                              ? "You need to enter an ID"
+                              : null,
                       decoration: const InputDecoration(
                         labelText: "ID Number",
                         border: OutlineInputBorder(),
@@ -283,15 +281,21 @@ class _RegisterNewUserState extends ConsumerState<AddNewUser> {
                             setState(() {
                               _loading = true;
                             });
+
+                            final user = {
+                              "email": "${_emailController.text}$_domain",
+                              "name": _nameController.text,
+                              "userType": _userType!.value,
+                            };
+
+                            if (_userType != UserType.admin) {
+                              user["idNumber"] = _idController.text;
+                            }
+
                             await ref
                                 .read(usersProvider.notifier)
                                 .addUser(body: {
-                              "user": {
-                                "email": "${_emailController.text}$_domain",
-                                "name": _nameController.text,
-                                "userType": _userType!.value,
-                                "idNumber": _idController.text,
-                              },
+                              "user": user,
                               "password": _passwordController.text,
                             });
                           } on SPMException catch (ex) {

@@ -20,6 +20,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   multi_dropdown: ^2.1.4
+  get_it: ^7.7.0
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +37,9 @@ dev_dependencies:
   json_serializable: ^6.7.1
 
   flutter_launcher_icons: ^0.13.1
+
+  integration_test:
+    sdk: flutter
 
 flutter:
   uses-material-design: true

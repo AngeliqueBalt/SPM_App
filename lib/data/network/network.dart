@@ -3,9 +3,12 @@ import 'package:student_progress_monitor_app/providers/authentication_provider.d
 
 /// Sets up the Chopper client with the given services.
 
-ChopperClient setUpClient({required final Iterable<ChopperService> services}) {
+ChopperClient setUpClient({
+  required final Iterable<ChopperService> services,
+  required final Uri baseUrl,
+}) {
   return ChopperClient(
-    baseUrl: Uri.parse('http://localhost:51548/'),
+    baseUrl: baseUrl,
     services: services,
     converter: const JsonConverter(),
     errorConverter: const JsonConverter(),

@@ -113,9 +113,11 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                                 email: _email.text,
                                 password: _password.text,
                               );
-                          setState(() {
-                            _loading = false;
-                          });
+                          if (context.mounted) {
+                            setState(() {
+                              _loading = false;
+                            });
+                          }
                         } on SPMException catch (ex) {
                           if (routerKey.currentContext?.mounted ?? false) {
                             WidgetsBinding.instance
